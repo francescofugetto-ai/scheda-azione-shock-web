@@ -1,0 +1,1405 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Azione shock">
+<meta name="theme-color" content="#FAF9F7">
+<script data-iphone="sentinella">
+(function(){
+var h=document.documentElement, msg="";
+function ha(c){ return (" "+h.className+" ").indexOf(" "+c+" ")>=0; }
+// L'errore puo' arrivare prima che l'avviso esista — uno script in <head> che
+// non si lascia leggere —: il messaggio si tiene da parte e si scrive quando
+// la pagina c'e'.
+function scrivi(){
+  var e=document.getElementById("nmerr");
+  if(e&&msg) e.textContent="Errore del motore: "+msg;
+}
+function ko(m){
+  if(m&&!msg) msg=m;
+  if(!ha("motore-ko")) h.className+=" motore-ko";
+  scrivi();
+}
+h.className+=" js";
+window.onerror=function(m,src,riga,col){
+  m=String(m);
+  if(/^Script error\.?$/.test(m)) m="il browser non ne mostra il dettaglio (\u00abScript error.\u00bb)";
+  ko(m+(riga?" (riga "+riga+(col?", colonna "+col:"")+")":""));
+};
+document.addEventListener("DOMContentLoaded",function(){
+  if(!ha("motore-ok")) ko(msg||"il motore non ha completato l'avvio"); else scrivi();
+});
+})();
+</script>
+<title>Shock in UTIC — scheda d'azione</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#FAF9F7; --surface:#FFFFFF; --surface-alt:#F3F2EF;
+    --border:rgba(11,11,11,0.10); --border-strong:rgba(11,11,11,0.18);
+    --text-primary:#0B0B0B; --text-secondary:#52514E; --text-muted:#898781;
+    --accent-blue:#2A78D6;   --accent-blue-bg:#E6F1FB;   --accent-blue-border:#B5D4F4;
+    --accent-amber:#BA7517;  --accent-amber-bg:#FAEEDA;  --accent-amber-border:#FAC775;
+    --accent-red:#A32D2D;    --accent-red-bg:#FCEBEB;    --accent-red-border:#F7C1C1;
+    --accent-green:#3B6D11;  --accent-green-bg:#EAF3DE;  --accent-green-border:#C0DD97;
+    --accent-teal:#0E7C86;   --accent-teal-bg:#E2F4F5;   --accent-teal-border:#A7DBDE;
+    --accent-purple:#534AB7; --accent-purple-bg:#EEEDFE; --accent-purple-border:#CECBF6;
+    --pill-gray-bg:#F1EFE8;  --pill-gray-fg:#444441;
+    --cor-1:#3B8E5A;   --cor-2a:#E0A82E;  --cor-2b:#DE7E3C;  --cor-3nb:#CE6D86;  --cor-3h:#B33A3A;
+    --cat-A:#E6EC97; --cat-B:#F4C64E; --cat-C:#EF9C63; --cat-D:#EE7361; --cat-E:#E86A99;
+    --radius-sm:6px; --radius-md:10px; --radius-lg:14px;
+    --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  body { font-family:var(--font); background:var(--bg); color:var(--text-primary); font-size:14px; line-height:1.7; -webkit-font-smoothing:antialiased; }
+  .page { max-width:900px; margin:0 auto; padding:2.4rem 2rem 5rem; }
+  .proto { background:var(--accent-purple-bg); border:.5px solid var(--accent-purple-border); color:var(--accent-purple); font-size:11.5px; font-weight:600; border-radius:var(--radius-sm); padding:8px 12px; margin-bottom:1.5rem; }
+
+  .kicker { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; }
+  .headline { font-size:27px; font-weight:600; line-height:1.22; margin-bottom:12px; }
+  .meta-row { display:flex; flex-wrap:wrap; gap:6px 8px; margin-bottom:.5rem; font-size:12px; }
+  .meta-chip { background:var(--surface); border:.5px solid var(--border-strong); border-radius:99px; padding:3px 11px; color:var(--text-secondary); }
+  .meta-chip strong { color:var(--text-primary); font-weight:600; }
+  .section-label { font-size:11px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--text-muted); margin:2.8rem 0 10px; }
+  .subsection-label { font-size:16px; font-weight:600; color:var(--text-primary); margin:2.4rem 0 .4rem; padding-bottom:6px; border-bottom:2px solid var(--border-strong); }
+  h2 { font-size:17px; font-weight:600; margin:2rem 0 .5rem; }
+  p { font-size:14px; line-height:1.75; margin-bottom:1rem; }
+  p:last-child { margin-bottom:0; }
+  strong { font-weight:600; }
+  .prov { display:inline-block; font-size:10px; font-weight:600; letter-spacing:.04em; padding:1px 7px; border-radius:99px; margin-right:6px; vertical-align:middle; }
+  .prov-fonte { background:var(--pill-gray-bg); color:var(--pill-gray-fg); }
+  .prov-integr { background:var(--accent-blue-bg); color:#0C447C; }
+  .prov-sintesi { background:var(--accent-purple-bg); color:var(--accent-purple); }
+
+  .glossary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px; margin:1.2rem 0; }
+  .g-card { background:var(--surface); border:.5px solid var(--border-strong); border-radius:var(--radius-md); padding:12px 14px; }
+  .g-term { font-size:12px; font-weight:600; color:var(--accent-blue); margin-bottom:4px; }
+  .g-def { font-size:12px; color:var(--text-secondary); line-height:1.6; }
+
+  .box { padding:14px 16px; margin:1.2rem 0; font-size:13px; line-height:1.65; border-left:3px solid; border-radius:0 var(--radius-sm) var(--radius-sm) 0; }
+  .box ul { list-style:none; padding:0; margin:.3rem 0 0; }
+  .box li { padding:3px 0 3px 16px; position:relative; }
+  .box li::before { content:'–'; position:absolute; left:0; color:var(--text-muted); }
+  .box-accent  { background:var(--accent-blue-bg);  border-color:var(--accent-blue-border); }
+  .box-accent strong  { color:var(--accent-blue); }
+  .box-warn    { background:var(--accent-amber-bg); border-color:var(--accent-amber-border); }
+  .box-warn strong    { color:var(--accent-amber); }
+
+  /* COR/LOE tabella raccomandazioni */
+  .rec-wrap { background:var(--surface); border:.5px solid var(--border-strong); border-radius:var(--radius-lg); padding:1.1rem 1.2rem 1.3rem; margin:1.3rem 0; }
+  .rec-hd { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:.8rem; }
+  .rec-hd .rec-t { font-size:12px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); }
+  .cor-legend { display:flex; flex-wrap:wrap; gap:5px 10px; }
+  .cor-legend span { display:inline-flex; align-items:center; gap:5px; font-size:10.5px; color:var(--text-secondary); }
+  .cor-legend i { width:11px; height:11px; border-radius:3px; display:inline-block; }
+  table.rec { width:100%; border-collapse:collapse; }
+  table.rec td { padding:9px 6px; border-bottom:.5px solid var(--border); vertical-align:top; font-size:13px; line-height:1.55; }
+  table.rec tr:last-child td { border-bottom:none; }
+  td.c-cor { width:52px; } td.c-loe { width:60px; white-space:nowrap; }
+  .cor { display:inline-flex; align-items:center; justify-content:center; min-width:40px; padding:4px 7px; border-radius:6px; font-weight:700; font-size:12px; color:#fff; }
+  .cor-1{background:var(--cor-1);} .cor-2a{background:var(--cor-2a);color:#3A2D00;} .cor-2b{background:var(--cor-2b);} .cor-3nb{background:var(--cor-3nb);} .cor-3h{background:var(--cor-3h);}
+  .loe { display:inline-block; padding:3px 8px; border-radius:99px; font-size:11px; font-weight:600; background:var(--pill-gray-bg); color:var(--pill-gray-fg); border:.5px solid var(--border-strong); }
+
+  /* ═══ CARTELLONE ACTION-PLAN (gantt) ═══ */
+  .gantt-scroll { overflow-x:auto; margin:1.1rem 0; padding-bottom:4px; }
+  .gantt { min-width:820px; }
+  .gantt-head { display:grid; grid-template-columns:repeat(9,1fr); gap:4px; margin-bottom:5px; }
+  .cat { border-radius:6px; padding:8px 6px; font-size:10.5px; font-weight:700; line-height:1.15; color:#2a2200; }
+  .cat small { display:block; font-weight:400; font-size:8.5px; margin-top:3px; color:rgba(0,0,0,.6); }
+  .cat-A{background:var(--cat-A);} .cat-B{background:var(--cat-B);} .cat-C{background:var(--cat-C);}
+  .cat-D{background:var(--cat-D);color:#fff;} .cat-D small{color:rgba(255,255,255,.85);}
+  .cat-E{background:var(--cat-E);color:#fff;} .cat-E small{color:rgba(255,255,255,.85);}
+  .gantt-body { display:grid; grid-template-columns:repeat(9,1fr); grid-template-rows:repeat(8,minmax(34px,auto)); gap:4px; }
+  .act { background:#EDEDEA; border:1.5px solid; border-radius:5px; padding:6px 22px 6px 8px; font-size:10.5px; line-height:1.2; position:relative; display:flex; align-items:center; }
+  .act .cb { position:absolute; top:3px; right:5px; font-size:9.5px; font-weight:700; }
+  .act-1{border-color:var(--cor-1);} .act-1 .cb{color:var(--cor-1);}
+  .act-2a{border-color:var(--cor-2a);} .act-2a .cb{color:#B9880F;}
+  .act-2b{border-color:var(--cor-2b);} .act-2b .cb{color:var(--cor-2b);}
+  .flash { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:8px; margin-top:.8rem; }
+  .flash-item { background:var(--surface); border:.5px solid var(--border-strong); border-radius:var(--radius-sm); padding:8px 11px; font-size:11.5px; line-height:1.5; }
+  .flash-item .fl-drug { font-weight:700; font-size:10.5px; color:var(--accent-teal); display:block; margin-bottom:2px; text-transform:uppercase; letter-spacing:.02em; }
+
+  /* ═══ TABELLONE terapia avanzata ═══ */
+  table.adv { width:100%; border-collapse:separate; border-spacing:0; font-size:12.5px; border-radius:var(--radius-md); overflow:hidden; border:.5px solid var(--border-strong); margin:1.1rem 0; }
+  table.adv th { background:var(--surface-alt); padding:9px 8px; font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--text-secondary); font-weight:600; text-align:center; }
+  table.adv th:first-child { text-align:left; }
+  table.adv td { padding:8px; border-top:.5px solid var(--border); text-align:center; }
+  table.adv td:first-child { text-align:left; font-weight:600; white-space:nowrap; }
+  .na { color:var(--text-muted); font-size:11px; font-style:italic; }
+
+  /* mappa colonna singola */
+  .glance { width:100%; border-collapse:separate; border-spacing:0; margin:1.1rem 0; font-size:13px; border-radius:var(--radius-md); overflow:hidden; border:.5px solid var(--border-strong); }
+  .glance th { background:var(--surface-alt); text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--text-secondary); font-weight:600; padding:9px 12px; }
+  .glance td { padding:9px 12px; border-top:.5px solid var(--border); }
+  .glance .g-cat { font-weight:600; white-space:nowrap; }
+  .glance .g-do { font-size:12.5px; color:var(--text-secondary); }
+
+  /* ═══ DOSE CARD estesa (bolo + infusione) ═══ */
+  .dose-card { border:1px solid var(--accent-teal-border); border-radius:var(--radius-md); margin:1.3rem 0; overflow:hidden; background:var(--surface); }
+  .dose-hd { background:var(--accent-teal); color:#fff; font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:8px 14px; }
+  .dose-body { padding:6px 14px 12px; }
+  .dose-th, .dose-row { display:grid; grid-template-columns:1.5fr 1fr 1.4fr; gap:10px; }
+  .dose-th { font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--text-muted); font-weight:600; padding:8px 0 6px; border-bottom:1px solid var(--border-strong); }
+  .dose-row { padding:10px 0; border-bottom:.5px solid var(--border); align-items:start; }
+  .dose-row:last-child { border-bottom:none; }
+  .dose-drug { font-weight:600; font-size:13px; }
+  .dose-cell { font-size:12.5px; line-height:1.45; }
+  .dose-cell b { color:var(--accent-teal); font-weight:700; }
+  .dose-cell .dash { color:var(--text-muted); }
+  .dose-note { grid-column:1/-1; font-size:11px; color:var(--text-muted); margin-top:4px; padding-top:4px; }
+  @media (max-width:600px){ .dose-th{display:none;} .dose-row{grid-template-columns:1fr;gap:2px;} .dose-cell::before{content:attr(data-l)': ';font-weight:600;color:var(--text-muted);font-size:10px;} }
+
+  /* ═══ BOX EVIDENZE arricchito ═══ */
+  .evi-wrap { border:.5px solid var(--border-strong); border-radius:var(--radius-lg); overflow:hidden; margin:1.3rem 0; }
+  .evi-hd { background:var(--accent-purple-bg); color:var(--accent-purple); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:9px 14px; border-bottom:.5px solid var(--accent-purple-border); }
+  table.evi { width:100%; border-collapse:collapse; font-size:12.5px; background:var(--surface); }
+  table.evi th { text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--text-muted); font-weight:600; padding:8px 12px; border-bottom:1px solid var(--border-strong); }
+  table.evi td { padding:9px 12px; border-bottom:.5px solid var(--border); vertical-align:top; line-height:1.5; }
+  table.evi tr:last-child td { border-bottom:none; }
+  .evi-name { font-weight:600; color:var(--accent-purple); white-space:nowrap; }
+  .evi-name small { display:block; font-weight:400; color:var(--text-muted); font-size:10.5px; }
+  .evi-res b { color:var(--text-primary); font-weight:600; }
+  .evi-lim { display:block; margin-top:5px; font-size:11px; font-style:italic; color:var(--text-muted); }
+  .evi-lim::before { content:'Limiti: '; font-style:normal; font-weight:600; }
+
+  /* ═══ BOX TRAPPOLE ═══ */
+  .pitfall { border-left:3px solid var(--accent-amber); background:var(--accent-amber-bg); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:12px 16px; margin:1.3rem 0; }
+  .pf-title { font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--accent-amber); margin-bottom:8px; }
+  .pf-item { padding:7px 0; border-bottom:.5px dashed var(--accent-amber-border); font-size:12.5px; line-height:1.55; }
+  .pf-item:last-child { border-bottom:none; }
+  .pf-tag { display:inline-block; font-size:9px; font-weight:700; padding:2px 7px; border-radius:99px; margin-right:7px; text-transform:uppercase; letter-spacing:.03em; color:#fff; vertical-align:middle; }
+  .pf-esame{background:var(--accent-purple);} .pf-clin{background:var(--accent-teal);} .pf-dose{background:var(--cor-2b);} .pf-dx{background:var(--accent-blue);}
+
+  /* ═══ KEY POINTS ═══ */
+  .key-points { background:var(--surface); border:.5px solid var(--border-strong); border-radius:var(--radius-lg); padding:1.1rem 1.3rem; margin:1.4rem 0; }
+  .key-points .kp-title { font-size:12px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); margin-bottom:.6rem; }
+  .key-points ul { list-style:none; }
+  .key-points li { font-size:13.5px; line-height:1.6; padding:5px 0 5px 20px; position:relative; }
+  .key-points li::before { content:'▸'; position:absolute; left:0; color:var(--accent-blue); font-weight:600; }
+
+  /* ═══ CASI CLINICI ═══ */
+  .case { background:var(--surface); border:.5px solid var(--border-strong); border-left:3px solid var(--accent-purple); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:14px 16px; margin:1.2rem 0; }
+  .case-hd { font-size:12px; font-weight:600; color:var(--accent-purple); text-transform:uppercase; letter-spacing:.04em; margin-bottom:9px; }
+  .case-pres { font-size:13px; margin-bottom:11px; line-height:1.6; }
+  .case-steps { list-style:none; }
+  .case-steps li { font-size:12.5px; padding:7px 0; border-bottom:.5px dashed var(--border); line-height:1.55; }
+  .case-steps li:last-child { border-bottom:none; }
+  .st-lbl { display:inline-block; min-width:96px; font-weight:600; color:var(--accent-teal); font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; vertical-align:top; }
+  .case-th { background:var(--accent-purple-bg); border-radius:var(--radius-sm); padding:9px 12px; font-size:12.5px; margin-top:10px; line-height:1.55; }
+  .case-th strong { color:var(--accent-purple); }
+
+  .footer-note { margin-top:3rem; padding-top:1.2rem; border-top:.5px solid var(--border-strong); font-size:11.5px; color:var(--text-muted); line-height:1.7; }
+  .footer-note strong { color:var(--text-secondary); }
+
+  /* ═══ INDICE STICKY (LG intera) ═══ */
+  .toc { position:-webkit-sticky;position:sticky; top:0; background:rgba(250,249,247,.94); border-bottom:.5px solid var(--border-strong); padding:10px 0; margin:0 0 1.4rem; z-index:20; display:flex; flex-wrap:wrap; gap:6px; }
+  .toc a { font-size:11px; padding:4px 10px; border-radius:99px; background:var(--surface); border:.5px solid var(--border-strong); color:var(--text-secondary); text-decoration:none; }
+  .toc a:hover { border-color:var(--accent-blue); color:var(--accent-blue); }
+
+  /* ═══ FLOWCHART (ricreata da fonte) ═══ */
+  /* Grammatica: ogni bivio ha uno stelo che scende dal riquadro-domanda, una barra
+     orizzontale che distribuisce, una discesa per ramo con l'etichetta appoggiata sopra.
+     I rami restano SEMPRE affiancati: se non ci stanno, scorre il singolo diagramma. */
+  .flow {
+    --fl:1.5px; --fl-color:#A5A199; --fl-gap:18px;
+    --fl-stem:16px; --fl-hop:15px; --fl-min:186px;
+    display:grid; grid-template-columns:minmax(min-content,1fr);
+    overflow-x:auto; margin:1.5rem 0; padding-bottom:2px;
+  }
+  .flow-node { background:var(--surface); border:1.5px solid var(--border-strong); border-radius:var(--radius-md); padding:10px 30px 10px 14px; font-size:12.5px; max-width:540px; margin:0 auto; text-align:center; line-height:1.4; position:relative; }
+  .flow-node.start { border-color:var(--accent-blue); background:var(--accent-blue-bg); font-weight:600; }
+  .flow-node.decision { border-color:var(--accent-amber); background:var(--accent-amber-bg); font-weight:600; }
+  .flow-node.end-ok { border-color:var(--cor-1); background:var(--accent-green-bg); }
+  .flow-node.end-stop { border-color:var(--cor-3h); background:var(--accent-red-bg); }
+  .flow-node .flow-cor { position:absolute; top:5px; right:7px; font-size:10px; font-weight:700; }
+
+  /* connettore del tronco */
+  .flow-arrow { position:relative; width:var(--fl); height:24px; background:var(--fl-color); margin:0 auto; justify-self:center; }
+  .flow-arrow::after { content:''; position:absolute; left:50%; bottom:-1px; transform:translateX(-50%); border-left:4.5px solid transparent; border-right:4.5px solid transparent; border-top:6px solid var(--fl-color); }
+
+  /* ── BIVIO: rami affiancati e agganciati al riquadro-domanda ── */
+  .flow-branches { position:relative; display:flex; flex-wrap:nowrap; gap:var(--fl-gap); justify-content:center; align-items:stretch; margin:0; }
+  .flow-branches::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:var(--fl); height:var(--fl-stem); background:var(--fl-color); }
+  .flow-branch { position:relative; flex:1 1 0; min-width:var(--fl-min); padding-top:calc(var(--fl-stem) + var(--fl-hop)); display:flex; flex-direction:column; }
+  /* barra di distribuzione: i segmenti dei rami si saldano in un'unica linea continua */
+  .flow-branch::before { content:''; position:absolute; top:var(--fl-stem); height:var(--fl); background:var(--fl-color); left:calc(var(--fl-gap) / -2); right:calc(var(--fl-gap) / -2); }
+  .flow-branch:first-child::before { left:50%; }
+  .flow-branch:last-child::before { right:50%; }
+  .flow-branch:only-child::before { display:none; }
+  /* discesa dalla barra all'etichetta (o direttamente al riquadro, se etichetta assente) */
+  .flow-branch::after { content:''; position:absolute; top:var(--fl-stem); left:50%; transform:translateX(-50%); width:var(--fl); height:var(--fl-hop); background:var(--fl-color); }
+  .flow-branch > .flow-node { max-width:none; margin:0; }
+  .flow-branch > .flow-node ~ .flow-node { margin-top:8px; }
+
+  /* etichetta del ramo: chip in linea sul connettore, si allarga se il testo è lungo */
+  .flow-chip, .flow-branch-lbl { font-size:11px; font-weight:600; line-height:1.4; text-align:center; text-transform:none; letter-spacing:0; padding:3px 10px; border-radius:99px; background:var(--surface); border:1px solid var(--border-strong); color:var(--text-secondary); }
+  .flow-branch-lbl { position:relative; display:block; width:fit-content; max-width:100%; margin:0 auto var(--fl-hop); }
+  .flow-branch-lbl::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); width:var(--fl); height:var(--fl-hop); background:var(--fl-color); }
+  .flow-branch-lbl::before { content:''; position:absolute; top:calc(100% + var(--fl-hop) - 5px); left:50%; transform:translateX(-50%); border-left:4.5px solid transparent; border-right:4.5px solid transparent; border-top:6px solid var(--fl-color); }
+  .flow-branch-lbl.yes { background:var(--accent-green-bg); border-color:var(--cor-1); color:var(--accent-green); font-weight:700; }
+  .flow-branch-lbl.no  { background:var(--accent-red-bg);   border-color:var(--cor-3h); color:var(--accent-red);   font-weight:700; }
+  .flow-chip.yes { background:var(--accent-green-bg); border-color:var(--cor-1); color:var(--accent-green); font-weight:700; }
+  .flow-chip.no  { background:var(--accent-red-bg);   border-color:var(--cor-3h); color:var(--accent-red);   font-weight:700; }
+
+  /* ramo che si chiude qui: tappo a T sotto l'ultimo riquadro */
+  .flow-branch.term { padding-bottom:20px; }
+  .flow-branch.term > .flow-node:last-child::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); width:var(--fl); height:12px; background:var(--fl-color); }
+  .flow-branch.term > .flow-node:last-child::before { content:''; position:absolute; top:calc(100% + 12px); left:50%; transform:translateX(-50%); width:22px; height:3px; border-radius:2px; background:var(--fl-color); }
+
+  /* rami che CONVERGONO: barra di raccolta sotto i riquadri, poi il tronco riprende */
+  .flow-branches.merge > .flow-branch { padding-bottom:calc(var(--fl-hop) + 2px); }
+  .flow-branches.merge > .flow-branch > .flow-node:last-child { margin-top:auto; }
+  .flow-branches.merge > .flow-branch > .flow-node:last-child::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); width:var(--fl); height:var(--fl-hop); background:var(--fl-color); }
+  .flow-branches.merge > .flow-branch > .flow-node:last-child::before { content:''; position:absolute; top:calc(100% + var(--fl-hop)); height:var(--fl); background:var(--fl-color); left:calc(var(--fl-gap) / -2); right:calc(var(--fl-gap) / -2); }
+  .flow-branches.merge > .flow-branch:first-child > .flow-node:last-child::before { left:50%; }
+  .flow-branches.merge > .flow-branch:last-child  > .flow-node:last-child::before { right:50%; }
+  .flow-branches.merge > .flow-branch:only-child  > .flow-node:last-child::before { display:none; }
+
+  /* i rami proseguono COLONNA PER COLONNA nel bivio sottostante */
+  .flow-chain { display:flex; flex-wrap:nowrap; gap:var(--fl-gap); margin:0; }
+  .flow-chain > i { position:relative; flex:1 1 0; min-width:var(--fl-min); height:26px; }
+  .flow-chain > i::before { content:''; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%); width:var(--fl); background:var(--fl-color); }
+  .flow-chain > i::after { content:''; position:absolute; left:50%; bottom:-1px; transform:translateX(-50%); border-left:4.5px solid transparent; border-right:4.5px solid transparent; border-top:6px solid var(--fl-color); }
+
+  /* bivio che RICEVE una catena: i connettori arrivano già incolonnati */
+  .flow-branches.chained::before { display:none; }
+  .flow-branches.chained > .flow-branch { padding-top:0; }
+  .flow-branches.chained > .flow-branch::before,
+  .flow-branches.chained > .flow-branch::after { display:none; }
+
+  /* riga di rami che continua quella sopra: nessuno stelo, etichetta di raccordo sulla barra */
+  .flow-branches.sub { margin-top:16px; }
+  .flow-branches.sub::before { display:none; }
+  .flow-branches.sub::after { content:attr(data-tag); position:absolute; top:0; left:50%; transform:translateX(-50%); z-index:2; font-size:10px; font-weight:600; line-height:1.5; color:var(--text-muted); background:var(--bg); padding:0 8px; white-space:nowrap; }
+
+  /* ripresa del tronco: dichiara da QUALE ramo prosegue il flusso */
+  .flow-resume { position:relative; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:5px; margin:0; padding:18px 0 24px; font-size:11px; color:var(--text-muted); }
+  .flow-resume::before { content:''; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%); width:var(--fl); background:var(--fl-color); }
+  .flow-resume::after { content:''; position:absolute; left:50%; bottom:-1px; transform:translateX(-50%); border-left:4.5px solid transparent; border-right:4.5px solid transparent; border-top:6px solid var(--fl-color); }
+  .flow-resume > * { position:relative; z-index:1; }
+  .flow-resume > span { background:var(--bg); padding:0 6px; }
+
+  /* affordance di scorrimento quando il diagramma è più largo della colonna */
+  .flow { scrollbar-width:thin; scrollbar-color:var(--border-strong) transparent; }
+  .flow::-webkit-scrollbar { height:7px; }
+  .flow::-webkit-scrollbar-thumb { background:var(--border-strong); border-radius:99px; }
+  .flow::-webkit-scrollbar-track { background:transparent; }
+  @media print { .flow { overflow:visible; } .flow-branch { break-inside:avoid; } }
+
+  /* ═══ /FLOWCHART ═══ */
+
+  /* ═══ CONTENUTI LARGHI — la pagina non scorre mai lateralmente ═══ */
+  /* Stessa regola della flowchart: ciò che è più largo della colonna scorre
+     dentro di sé invece di trascinare la pagina. Vale a ogni larghezza —
+     una tabella fitta sborda anche su desktop — e si disattiva in stampa. */
+  table { display:block; max-width:100%; overflow:auto; }
+  .fx { overflow-x:auto; }   /* formule lunghe: scorrono nel loro riquadro */
+  @media print { table { display:table; overflow:visible; } }
+
+
+  /* ═══ PRONTUARIO TERAPIE (file separato, stesso look) ═══ */
+  .rx-group { font-size:13px; font-weight:600; color:var(--text-primary); margin:1.6rem 0 .5rem; padding-left:10px; border-left:3px solid var(--accent-teal); }
+  table.rx { width:100%; border-collapse:collapse; font-size:12.5px; background:var(--surface); border:.5px solid var(--border-strong); border-radius:var(--radius-md); overflow:hidden; margin:.6rem 0 1rem; }
+  table.rx th { background:var(--surface-alt); text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--text-secondary); font-weight:600; padding:9px 12px; }
+  table.rx td { padding:10px 12px; border-top:.5px solid var(--border); vertical-align:top; line-height:1.5; }
+  .rx-mol { font-weight:600; color:var(--accent-teal); white-space:nowrap; }
+  .rx-dose b { color:var(--text-primary); font-weight:700; }
+  .rx-ind { color:var(--text-secondary); }
+  .rx-trial { color:var(--accent-purple); font-size:11.5px; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     V2 — ESTENSIONE CARDIOLOGIA PEDIATRICA
+     Palette e componenti del sistema LG invariati. Qui: sfondo bianco,
+     colori emodinamici, forza dell'evidenza senza COR, componenti nuovi.
+     ═══════════════════════════════════════════════════════════════ */
+  :root {
+    --bg:#FFFFFF; --surface:#FFFFFF; --surface-alt:#F7F7F5;
+    --sat-art:#C0392B;   --sat-art-bg:#FBEAE8;
+    --sat-ven:#2A6BB5;   --sat-ven-bg:#E7F0FA;
+    --sat-mix:#7D4B9E;   --sat-mix-bg:#F2EAF8;
+    --sat-flow:#0E7C86;
+    --gantt-cols:9;
+  }
+  body { background:var(--bg); }
+  .toc { background:rgba(255,255,255,.95); }
+  .tw { overflow-x:auto; margin:1.2rem 0; }
+
+  /* ═══ FORZA DELL'EVIDENZA (quando non c'è COR/LOE) ═══
+     Forma quadrata + bordo: mai confondibile con le pill COR arrotondate. */
+  .fz { display:inline-block; font-size:9.5px; font-weight:700; letter-spacing:.05em;
+        text-transform:uppercase; padding:2px 7px; border-radius:3px; border:1px solid;
+        margin-right:6px; white-space:nowrap; vertical-align:middle; }
+  .fz-lg     { background:var(--accent-green-bg);  border-color:var(--accent-green-border);  color:var(--accent-green); }
+  .fz-st     { background:var(--accent-blue-bg);   border-color:var(--accent-blue-border);   color:#0C447C; }
+  .fz-cons   { background:var(--accent-teal-bg);   border-color:var(--accent-teal-border);   color:var(--accent-teal); }
+  .fz-prat   { background:var(--pill-gray-bg);     border-color:var(--border-strong);        color:var(--pill-gray-fg); }
+  .fz-fis    { background:var(--accent-purple-bg); border-color:var(--accent-purple-border); color:var(--accent-purple); }
+  .fz-contr  { background:var(--accent-amber-bg);  border-color:var(--accent-amber-border);  color:var(--accent-amber); }
+  .fz-extra  { background:#FFF; border-color:var(--border-strong); color:var(--text-secondary); }
+  .fz-centro { background:#FFF; border:1px dashed var(--accent-red-border); color:var(--accent-red); }
+  .fz-legend { display:flex; flex-wrap:wrap; gap:6px 10px; font-size:11px; color:var(--text-secondary);
+               background:var(--surface-alt); border:.5px solid var(--border); border-radius:10px;
+               padding:10px 12px; margin:1rem 0; line-height:1.5; }
+
+  /* ═══ SCHEDA A COLPO D'OCCHIO ═══ */
+  .snap { border:1px solid var(--border-strong); border-radius:var(--radius-lg); overflow:hidden; margin:1.4rem 0; }
+  .snap-hd { background:var(--text-primary); color:#fff; font-size:11px; font-weight:600;
+             letter-spacing:.08em; text-transform:uppercase; padding:9px 14px; }
+  .snap-lead { background:var(--surface); padding:13px 14px; font-size:13.5px; line-height:1.6;
+               border-bottom:.5px solid var(--border); }
+  .snap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
+  .snap-cell { background:var(--surface); padding:11px 14px; }
+  .snap-k { font-size:9.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+            color:var(--text-muted); margin-bottom:6px; }
+  .snap-cell ul { margin:0; padding-left:15px; }
+  .snap-cell li { font-size:12.5px; line-height:1.5; margin-bottom:4px; }
+  .snap-cell li::marker { color:var(--text-muted); }
+  .snap-red .snap-k { color:var(--accent-red); }
+
+  /* ═══ CATENA «IL PERCHÉ»: fisiopatologia → bersaglio → manovra ═══ */
+  .why { border:.5px solid var(--accent-teal-border); border-left:3px solid var(--accent-teal);
+         border-radius:0 var(--radius-md) var(--radius-md) 0; overflow:hidden; margin:1.3rem 0; }
+  .why-hd { background:var(--accent-teal-bg); color:var(--accent-teal); font-size:11px; font-weight:600;
+            letter-spacing:.06em; text-transform:uppercase; padding:9px 14px; }
+  .why-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; padding:10px 14px;
+             border-bottom:.5px dashed var(--border-strong); font-size:12.5px; line-height:1.5; align-items:start; }
+  .why-row:last-child { border-bottom:none; }
+  .why-row > div::before { content:attr(data-l); display:block; font-size:9px; font-weight:700;
+             letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); margin-bottom:3px; }
+  .why-do { font-weight:600; color:var(--accent-teal); }
+
+  /* ═══ TIMELINE storia naturale / timing ═══ */
+  .tl { position:relative; margin:1.4rem 0; padding-left:26px; border-left:2px solid var(--border-strong); }
+  .tl-item { position:relative; padding:0 0 15px 4px; }
+  .tl-item::before { content:''; position:absolute; left:-33px; top:5px; width:10px; height:10px;
+            border-radius:50%; background:var(--accent-blue); box-shadow:0 0 0 3px #fff, 0 0 0 4.5px var(--accent-blue); }
+  .tl-item.crit::before { background:var(--accent-red); box-shadow:0 0 0 3px #fff, 0 0 0 4.5px var(--accent-red); }
+  .tl-item.ok::before   { background:var(--cor-1);      box-shadow:0 0 0 3px #fff, 0 0 0 4.5px var(--cor-1); }
+  .tl-age { font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-blue); }
+  .tl-item.crit .tl-age { color:var(--accent-red); }
+  .tl-item.ok .tl-age   { color:var(--cor-1); }
+  .tl-t { font-size:13px; font-weight:600; margin:1px 0 2px; }
+  .tl-d { font-size:12.5px; color:var(--text-secondary); line-height:1.55; }
+
+  /* ═══ FIGURA SVG originale ═══ */
+  .fig { border:.5px solid var(--border-strong); border-radius:var(--radius-lg); background:var(--surface);
+         padding:14px; margin:1.4rem 0; }
+  .fig svg { width:100%; height:auto; display:block; }
+  .fig-legend { display:flex; flex-wrap:wrap; gap:6px 14px; font-size:11px; color:var(--text-secondary);
+                margin-top:10px; padding-top:9px; border-top:.5px solid var(--border); }
+  .fig-legend i { width:10px; height:10px; border-radius:3px; display:inline-block; margin-right:5px; vertical-align:-1px; }
+  .fig-cap { font-size:11.5px; color:var(--text-muted); margin-top:8px; line-height:1.55; }
+
+  /* ═══ APPROFONDIMENTO richiudibile ═══ */
+  details.deep { border:.5px solid var(--border-strong); border-radius:var(--radius-md);
+                 background:var(--surface-alt); margin:1.1rem 0; }
+  details.deep > summary { cursor:pointer; padding:10px 14px; font-size:12px; font-weight:600;
+                 color:var(--accent-blue); list-style:none; }
+  details.deep > summary::-webkit-details-marker { display:none; }
+  details.deep > summary::before { content:'▸  '; }
+  details.deep[open] > summary::before { content:'▾  '; }
+  details.deep .deep-body { padding:0 14px 13px; font-size:13px; line-height:1.65; }
+  details.deep .deep-body ul { margin:0 0 0 1.1em; }
+  details.deep .deep-body li { margin-bottom:5px; }
+
+  /* ═══ TABELLA generica (classificazioni, DD, valori normali) ═══ */
+  table.grid { width:100%; border-collapse:collapse; font-size:12.5px; background:var(--surface);
+               border:.5px solid var(--border-strong); border-radius:var(--radius-md); overflow:hidden; }
+  table.grid caption { caption-side:top; text-align:left; font-size:11px; font-weight:600; letter-spacing:.05em;
+               text-transform:uppercase; color:var(--text-muted); padding:0 0 7px; }
+  table.grid th { text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.04em;
+               color:var(--text-muted); font-weight:600; padding:8px 11px; background:var(--surface-alt);
+               border-bottom:1px solid var(--border-strong); }
+  table.grid td { padding:8px 11px; border-bottom:.5px solid var(--border); vertical-align:top; line-height:1.5; }
+  table.grid tr:last-child td { border-bottom:none; }
+  table.grid td.k { font-weight:600; color:var(--text-primary); }
+  table.grid .art { color:var(--sat-art); font-weight:600; }
+  table.grid .ven { color:var(--sat-ven); font-weight:600; }
+
+  /* ═══ GANTT parametrizzato (riuso per scenari: fase × manovra) ═══ */
+  .gantt-head, .gantt-body { grid-template-columns:repeat(var(--gantt-cols),1fr); }
+  .act-n    { border-color:var(--border-strong); }
+  .act-fis  { border-color:var(--accent-teal); }
+  .act-stop { border-color:var(--accent-red); }
+
+  /* ═══ MOBILE ═══ */
+  @media (max-width:600px) {
+    .page { padding:1.4rem 1rem 3rem; }
+    .headline { font-size:22px; }
+    .snap-grid { grid-template-columns:1fr; }
+    .why-row { grid-template-columns:1fr; gap:8px; }
+    table.grid { font-size:12px; }
+    table.grid th, table.grid td { padding:7px 8px; }
+  }
+
+  /* ═══ STAMPA (il materiale deve poter diventare manuale) ═══ */
+  @media print {
+    :root { --bg:#FFF; }
+    body { font-size:10.5pt; }
+    .page { max-width:none; padding:0; }
+    .toc { display:none; }
+    details.deep { background:#fff; border-color:#bbb; }
+    details.deep .deep-body { display:block !important; }
+    .fig, .snap, .why, .rec-wrap, .evi-wrap, .pitfall, .key-points, .case, .dose-card, .tl-item {
+      break-inside:avoid; page-break-inside:avoid; }
+    .subsection-label { break-after:avoid; page-break-after:avoid; }
+    a { color:inherit; text-decoration:none; }
+  }
+  /* ═══════════════════════════════════════════════════════════════
+     SKIN SCENARIO — scheda tempo-ordinata, mobile-first, un A4
+     ═══════════════════════════════════════════════════════════════ */
+  .phase { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:2rem 0 .7rem; }
+  .phase-t { font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#fff;
+             background:var(--text-primary); padding:5px 13px; border-radius:99px; }
+  .phase-s { font-size:12px; color:var(--text-secondary); }
+  .phase.p-now .phase-t { background:var(--accent-red); }
+  .phase.p-2h  .phase-t { background:var(--accent-blue); }
+  .phase.p-esc .phase-t { background:var(--accent-amber); }
+  .step { display:grid; grid-template-columns:30px 1fr; gap:12px; align-items:start;
+          border:.5px solid var(--border-strong); border-radius:var(--radius-md);
+          padding:12px 14px; margin:8px 0; background:var(--surface); }
+  .step-n { width:28px; height:28px; border-radius:50%; background:var(--text-primary); color:#fff;
+            font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .step-t { font-size:14px; font-weight:600; margin-bottom:3px; line-height:1.35; }
+  .step-d { font-size:12.5px; color:var(--text-secondary); line-height:1.55; }
+  .step-dose { margin-top:7px; font-size:12.5px; background:var(--surface-alt);
+               border-left:3px solid var(--accent-teal); padding:6px 10px; border-radius:0 6px 6px 0; }
+  .step-dose b { color:var(--text-primary); }
+  .step.esc .step-n { background:var(--accent-amber); }
+  .step.stop { border-color:var(--accent-red-border); background:var(--accent-red-bg); }
+  .step.stop .step-n { background:var(--accent-red); }
+  .recog { border:1px solid var(--accent-red-border); background:var(--accent-red-bg);
+           border-radius:var(--radius-lg); padding:13px 16px; margin:1.3rem 0; }
+  .recog-t { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+             color:var(--accent-red); margin-bottom:7px; }
+  .recog ul { margin:0; padding-left:16px; }
+  .recog li { font-size:13px; line-height:1.55; margin-bottom:4px; }
+  .oneline { border-left:3px solid var(--accent-teal); background:var(--accent-teal-bg);
+             padding:11px 14px; border-radius:0 var(--radius-md) var(--radius-md) 0;
+             font-size:13.5px; line-height:1.6; margin:1.2rem 0; }
+  .xref { font-size:12px; color:var(--text-secondary); background:var(--surface-alt);
+          border:.5px dashed var(--border-strong); border-radius:var(--radius-md);
+          padding:10px 13px; margin:1.2rem 0; line-height:1.6; }
+  @media (max-width:600px) {
+    .step { grid-template-columns:26px 1fr; gap:10px; padding:10px 11px; }
+    .step-n { width:24px; height:24px; font-size:12px; }
+    .step-t { font-size:13.5px; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     ESTENSIONE SHOCK ADULTO — quadrante, coupling, target
+     ═══════════════════════════════════════════════════════════════ */
+  .quad-wrap { border:1px solid var(--border-strong); border-radius:var(--radius-lg); overflow:hidden; margin:1.5rem 0; background:var(--surface); }
+  .quad-hd { background:var(--text-primary); color:#fff; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:10px 14px; }
+  .quad-axes { display:grid; grid-template-columns:34px 1fr 1fr; gap:1px; background:var(--border); }
+  .ax-lbl { font-size:10px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--text-muted); text-align:center; padding:8px 4px; background:var(--surface-alt); }
+  .ax-corner { background:var(--surface-alt); }
+  .ax-side { display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--text-muted); background:var(--surface-alt); writing-mode:vertical-rl; transform:rotate(180deg); padding:10px 0; }
+  .qc { background:var(--surface); padding:13px 14px; display:block; text-decoration:none; color:inherit; border-top:3px solid; }
+  .qc:hover { background:var(--surface-alt); }
+  .qc-t { font-size:13.5px; font-weight:700; margin-bottom:2px; }
+  .qc-sub { font-size:10.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); margin-bottom:7px; }
+  .qc ul { margin:0; padding-left:15px; }
+  .qc li { font-size:12px; line-height:1.5; margin-bottom:3px; color:var(--text-secondary); }
+  .qc .qc-do { color:var(--text-primary); font-weight:600; }
+  .q-a { border-top-color:var(--cor-1); } .q-a .qc-t { color:var(--accent-green); }
+  .q-b { border-top-color:var(--accent-blue); } .q-b .qc-t { color:var(--accent-blue); }
+  .q-c { border-top-color:var(--accent-red); } .q-c .qc-t { color:var(--accent-red); }
+  .q-l { border-top-color:var(--accent-amber); } .q-l .qc-t { color:var(--accent-amber); }
+
+  .fx { background:var(--surface-alt); border:.5px solid var(--border-strong); border-radius:var(--radius-md); padding:11px 14px; margin:1rem 0; font-size:13px; line-height:1.9; }
+  .fx code, code.f { font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace; font-size:12.5px; background:#fff; border:.5px solid var(--border); border-radius:4px; padding:2px 6px; white-space:nowrap; display:inline-block; }
+  .fx .fx-n { font-size:11px; color:var(--text-muted); display:block; margin-top:4px; line-height:1.5; }
+
+  .tgt { display:grid; grid-template-columns:repeat(auto-fit,minmax(155px,1fr)); gap:8px; margin:1.1rem 0; }
+  .tgt-i { background:var(--surface); border:.5px solid var(--border-strong); border-left:3px solid var(--accent-green); border-radius:0 var(--radius-sm) var(--radius-sm) 0; padding:9px 12px; }
+  .tgt-i .t-k { font-size:9.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); display:block; }
+  .tgt-i .t-v { font-size:14px; font-weight:700; color:var(--accent-green); }
+  .tgt-i .t-n { font-size:11px; color:var(--text-secondary); display:block; line-height:1.45; margin-top:2px; }
+  .tgt-i.bad { border-left-color:var(--accent-red); } .tgt-i.bad .t-v { color:var(--accent-red); }
+
+  .split { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:1.2rem 0; }
+  .sp-card { background:var(--surface); border:.5px solid var(--border-strong); border-radius:var(--radius-md); padding:12px 14px; }
+  .sp-hd { font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; margin-bottom:7px; }
+  .sp-card ul { margin:0; padding-left:15px; } .sp-card li { font-size:12.5px; line-height:1.55; margin-bottom:4px; }
+  @media (max-width:600px){ .split{grid-template-columns:1fr;} .quad-axes{grid-template-columns:0 1fr 1fr;} .ax-side{display:none;} }
+
+  .now { background:var(--accent-green-bg); border:.5px solid var(--accent-green-border); color:var(--accent-green); font-size:11px; font-weight:700; border-radius:3px; padding:2px 7px; text-transform:uppercase; letter-spacing:.04em; }
+  .soon { background:var(--accent-purple-bg); border:.5px solid var(--accent-purple-border); color:var(--accent-purple); font-size:11px; font-weight:700; border-radius:3px; padding:2px 7px; text-transform:uppercase; letter-spacing:.04em; }
+
+  .tw table.grid caption { padding-left:6px; }
+
+  /* ═══ SCHEDA D'AZIONE — componenti ═══ */
+  body { font-size:14.5px; }
+  .bar { position:-webkit-sticky;position:sticky; top:0; z-index:40; background:rgba(255,255,255,.97);
+         border-bottom:1px solid var(--border-strong); padding:10px 0; margin-bottom:1.2rem;
+         display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; }
+  .bar label { font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); }
+  .bar input[type=number] { width:78px; font:600 15px var(--font); padding:6px 8px; border:1px solid var(--border-strong);
+         border-radius:8px; text-align:center; background:var(--surface); }
+  .bar .peso-eco { font-size:12px; color:var(--accent-teal); font-weight:600; }
+  .sp { flex:1 1 auto; }
+  .btn { font:600 12px var(--font); padding:7px 13px; border-radius:99px; border:1px solid var(--border-strong);
+         background:var(--surface); color:var(--text-secondary); cursor:pointer; }
+  .btn:hover { border-color:var(--accent-blue); color:var(--accent-blue); }
+  .btn.on { background:var(--text-primary); color:#fff; border-color:var(--text-primary); }
+
+  .ask { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:1.1rem 0; }
+  .ask-c { border:.5px solid var(--border-strong); border-radius:var(--radius-md); padding:11px 14px; background:var(--surface); }
+  .ask-q { font-size:13.5px; font-weight:700; margin-bottom:6px; }
+  .ask-c ul { margin:0; padding-left:15px; } .ask-c li { font-size:12.5px; line-height:1.5; margin-bottom:2px; color:var(--text-secondary); }
+  .ask-c b { color:var(--text-primary); }
+
+  .qsel { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:1rem 0; }
+  .qbtn { text-align:left; border:2px solid var(--border-strong); border-radius:var(--radius-md); background:var(--surface);
+          padding:13px 15px; cursor:pointer; font:inherit; transition:.12s; }
+  .qbtn:hover { transform:translateY(-1px); box-shadow:0 3px 10px rgba(0,0,0,.07); }
+  .qbtn .qh { font-size:15px; font-weight:700; margin-bottom:2px; }
+  .qbtn .qs { font-size:11.5px; color:var(--text-secondary); line-height:1.45; }
+  .qbtn.a { border-color:var(--cor-1); } .qbtn.a .qh { color:var(--accent-green); }
+  .qbtn.b { border-color:var(--accent-blue); } .qbtn.b .qh { color:var(--accent-blue); }
+  .qbtn.l { border-color:var(--accent-amber); } .qbtn.l .qh { color:var(--accent-amber); }
+  .qbtn.c { border-color:var(--accent-red); } .qbtn.c .qh { color:var(--accent-red); }
+  .qbtn.sel { box-shadow:0 0 0 3px var(--text-primary) inset; }
+  .qbtn.dim { opacity:.35; }
+
+  .panel { display:none; }
+  .panel.on { display:block; animation:fade .18s ease-out; }
+  @keyframes fade { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+
+  .stage { display:flex; align-items:center; gap:10px; margin:2.1rem 0 .6rem; }
+  .stage-n { width:30px; height:30px; border-radius:50%; background:var(--text-primary); color:#fff;
+             font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .stage-t { font-size:17px; font-weight:700; }
+  .stage-w { font-size:11.5px; color:var(--text-muted); background:var(--surface-alt); border-radius:99px; padding:3px 10px; }
+
+  .calc { border:1px solid var(--accent-teal-border); border-radius:var(--radius-md); background:var(--accent-teal-bg);
+          padding:12px 14px; margin:1.1rem 0; }
+  .calc-hd { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-teal); margin-bottom:9px; }
+  .calc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:8px; }
+  .cf { display:flex; flex-direction:column; gap:3px; }
+  .cf span { font-size:10px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--text-muted); }
+  .cf input { font:600 14px var(--font); padding:6px 8px; border:1px solid var(--border-strong); border-radius:7px;
+              background:#fff; width:100%; }
+  .out { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:8px; margin-top:11px; }
+  .oc { background:#fff; border:.5px solid var(--border-strong); border-left:3px solid var(--accent-teal);
+        border-radius:0 7px 7px 0; padding:7px 11px; }
+  .oc .ok-k { font-size:9.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); display:block; }
+  .oc .ok-v { font-size:16px; font-weight:700; color:var(--accent-teal); }
+  .oc .ok-n { font-size:11px; color:var(--text-secondary); display:block; line-height:1.4; }
+  .oc.bad { border-left-color:var(--accent-red); } .oc.bad .ok-v { color:var(--accent-red); }
+  .oc.good { border-left-color:var(--cor-1); } .oc.good .ok-v { color:var(--accent-green); }
+  .oc.warn { border-left-color:var(--cor-2b); } .oc.warn .ok-v { color:var(--cor-2b); }
+
+  tr.hl > td { background:var(--accent-amber-bg) !important; box-shadow:inset 3px 0 0 var(--accent-amber); }
+  .dose-live { font-weight:700; color:var(--accent-teal); white-space:nowrap; }
+  .nodo { border:1px solid var(--accent-red-border); background:var(--accent-red-bg); border-radius:var(--radius-md);
+          padding:11px 15px; margin:1rem 0; }
+  .nodo-t { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-red); margin-bottom:6px; }
+  .nodo ul { margin:0; padding-left:16px; } .nodo li { font-size:13px; line-height:1.55; margin-bottom:3px; }
+
+  .foot { position:-webkit-sticky;position:sticky; bottom:0; background:rgba(255,255,255,.97);
+          border-top:1px solid var(--border-strong); padding:9px 0; margin-top:2rem; font-size:12px;
+          display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; z-index:30; }
+  .foot b { color:var(--accent-red); }
+
+  @media (max-width:640px){ .ask,.qsel{grid-template-columns:1fr;} .bar{gap:8px;} }
+  @media print {
+    .bar,.foot,.btn { display:none !important; }
+    .panel { display:block !important; page-break-before:always; }
+    .qbtn.dim { opacity:1; }
+  }
+
+
+  /* ═══ ANCORAGGIO — il salto si ferma sull'intestazione, non sotto la barra ═══ */
+  :root { --sticky-h:0px; --sticky-gap:12px; }
+  html { scroll-behavior:smooth; scroll-padding-top:calc(var(--sticky-h) + var(--sticky-gap)); }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+  @media print { html { scroll-padding-top:0; } }
+</style>
+<style data-iphone="stile">
+/* L'avviso e' visibile per costruzione: lo nasconde solo la classe che la
+   sentinella mette quando JavaScript esiste, e lo rimostra quando il motore
+   muore. Nell'anteprima dell'iPhone nessuna delle due arriva. */
+#nomotore{background:#FCEBEB;border:1.5px solid #A32D2D;border-radius:10px;
+ padding:12px 15px;margin:0 0 1.1rem;font-size:13.5px;line-height:1.6;color:#0B0B0B;
+ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+#nomotore strong{display:block;color:#A32D2D;font-size:15px;margin-bottom:4px}
+#nomotore p{margin:6px 0 0}
+#nomotore a{color:#A32D2D}
+#nomotore .nmurl{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.92em;word-break:break-all}
+#nomotore .nmerr{display:block;font-family:'SFMono-Regular',Consolas,Menlo,monospace;
+ font-size:11.5px;color:#A32D2D;margin-top:6px;word-break:break-word}
+#nomotore .nmerr:empty{display:none}
+html.js #nomotore{display:none}
+html.js.motore-ko #nomotore{display:block}
+</style>
+</head>
+<body>
+<div class="nomotore" id="nomotore" role="alert">
+ <strong>Motore di calcolo non attivo</strong>
+ <p>I calcoli, i filtri e i comandi di questa pagina <b>non funzionano</b>: dove leggi «—» non c'è un
+ valore. Il testo resta leggibile, i numeri che dipendono dai tuoi dati no. Non usare questa pagina
+ per decidere una dose.</p>
+ <p>Su iPhone e iPad succede sempre con un file salvato sul telefono: si apre nell'<b>anteprima</b> —
+ dall'app File, da Mail, da WhatsApp —, che mostra la pagina ma non esegue il motore, e Apple non
+ permette di aprirlo in Safari. Sull'iPhone il tool funziona aperto da questo indirizzo, in Safari: <a class="nmurl" href="https://francescofugetto-ai.github.io/scheda-azione-shock-web/">https://francescofugetto-ai.github.io/scheda-azione-shock-web/</a> — poi Condividi, «Aggiungi alla schermata Home». Dopo la prima apertura funziona anche senza rete. Su computer e Android basta aprire il file.</p>
+ <span class="nmerr" id="nmerr"></span>
+</div>
+<div class="page">
+
+  <div class="kicker">Scheda d'azione · Terapia intensiva cardiologica</div>
+  <div class="headline">Shock — dal quadrante alla terapia, in ordine di tempo</div>
+
+  <div class="bar">
+    <label for="peso">Peso</label>
+    <input type="number" id="peso" value="75" min="30" max="200" step="1" inputmode="decimal">
+    <span class="peso-eco" id="pesoEco">tutte le velocità sono calcolate per 75 kg</span>
+    <span class="sp"></span>
+    <button class="btn" id="btnAll" type="button">Mostra tutti i quadranti</button>
+    <button class="btn" id="btnReset" type="button">Azzera</button>
+  </div>
+
+  <div class="oneline"><strong>Come si usa.</strong> Rispondi alle due domande, clicca la casella, e leggi solo quel percorso.
+  Le dosi sono già convertite in mL/h per il peso indicato sopra. Il coupling e gli indici emodinamici arrivano dopo:
+  servono a <em>confermare o correggere</em> quello che hai già impostato, non a farti aspettare.</div>
+
+  <!-- ══════════ STEP 1 ══════════ -->
+  <div class="stage"><div class="stage-n">1</div><div><div class="stage-t">Due domande</div></div><span class="stage-w">30 secondi · mani e sonda</span></div>
+
+  <div class="ask">
+    <div class="ask-c">
+      <div class="ask-q">1 · Perfonde? &nbsp;<b>COLD</b> se almeno due fra:</div>
+      <ul>
+        <li>cute fredda, <b>marezzatura</b> (score ≥2), refill <b>&gt;3 s</b></li>
+        <li>diuresi <b>&lt;0,5 mL/kg/h</b>, sensorio alterato</li>
+        <li>lattato <b>&gt;2 mmol/L</b>, ScvO₂ <b>&lt;65%</b>, ΔpCO₂ <b>&gt;6 mmHg</b></li>
+        <li>VTI aortico <b>&lt;15 cm</b>, pressione differenziale proporzionale <b>&lt;25%</b></li>
+      </ul>
+    </div>
+    <div class="ask-c">
+      <div class="ask-q">2 · È congesto? &nbsp;<b>WET</b> se almeno due fra:</div>
+      <ul>
+        <li>giugulari turgide, rantoli, ortopnea, edemi</li>
+        <li><b>≥3 linee B</b> per campo in ≥2 spazi bilaterali</li>
+        <li>VCI <b>&gt;21 mm</b> poco collassabile, VExUS <b>≥2</b></li>
+        <li>E/e' <b>&gt;14</b>; se disponibili: PCWP <b>&gt;15</b>, PVC <b>&gt;12 mmHg</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qsel">
+    <button class="qbtn a" data-q="a" type="button">
+      <div class="qh">A · WARM–DRY</div>
+      <div class="qs">Perfuso, non congesto — distributivo precoce o ipovolemia iniziale</div>
+    </button>
+    <button class="qbtn b" data-q="b" type="button">
+      <div class="qh">B · WARM–WET</div>
+      <div class="qs">Perfuso ma congesto — edema polmonare ipertensivo</div>
+    </button>
+    <button class="qbtn l" data-q="l" type="button">
+      <div class="qh">L · COLD–DRY</div>
+      <div class="qs">Ipoperfuso, non congesto — ipovolemico, emorragico, ventricolo destro</div>
+    </button>
+    <button class="qbtn c" data-q="c" type="button">
+      <div class="qh">C · COLD–WET</div>
+      <div class="qs">Ipoperfuso e congesto — shock cardiogeno classico</div>
+    </button>
+  </div>
+
+  <div class="box box-warn" style="margin-top:.4rem"><span class="prov prov-sintesi">SE NON TORNA</span>
+    Indizi discordanti (caldo ma con lattato alto, giugulari piene con polmoni asciutti) o due quadri sovrapposti:
+    <strong>pensa a shock misto o a prevalenza destra</strong>. Giugulari piene + polmoni asciutti = guarda a destra
+    (VD, tamponamento, embolia, pneumotorace). Caldo + lattato che non scende = cerca la sepsi anche nel cardiopatico.
+    Nel dubbio parti dal percorso più prudente (COLD–WET) e rivaluta con l'eco entro 15 minuti.
+  </div>
+
+  <!-- ══════════ STEP 2 · A ══════════ -->
+  <div class="panel" data-p="a">
+    <div class="stage"><div class="stage-n">2</div><div><div class="stage-t">Adesso — WARM–DRY</div></div><span class="stage-w">primi 15 minuti</span></div>
+
+    <div class="step"><div class="step-n">1</div><div>
+      <div class="step-t">Fluidi, ma guidati</div>
+      <div class="step-d">Cristalloide bilanciato (Ringer lattato o Plasma-Lyte). Misura il VTI aortico prima e dopo: se non guadagna ≥10%, smetti. Fermati comunque se compaiono linee B.</div>
+      <div class="step-dose"><b>250–500 mL in 10–15 min</b>, ripetibile · in alternativa <b>leg raising passivo</b> (reversibile, positivo se VTI o CO +≥10%)</div></div></div>
+
+    <div class="step"><div class="step-n">2</div><div>
+      <div class="step-t">Noradrenalina precoce — non aspettare il fallimento dei fluidi</div>
+      <div class="step-d">Target MAP ≥65 mmHg. Avviabile in periferica (vena ≥20 G, avambraccio o braccio, controllo orario) mentre posizioni il CVC.</div>
+      <div class="step-dose"><b>0,05–0,5 µg/kg/min</b> — con 8 mg in 50 mL: <span class="dose-live" data-drug="noradrenalina" data-dose="0.05-0.5"></span></div></div></div>
+
+    <div class="step"><div class="step-n">3</div><div>
+      <div class="step-t">Se il fabbisogno sale: seconda linea</div>
+      <div class="step-d">Quando la noradrenalina supera ~0,25–0,3 µg/kg/min, aggiungi vasopressina a dose fissa invece di continuare a salire con la catecolamina.</div>
+      <div class="step-dose">Vasopressina <b>0,03 U/min</b> fissa — con 20 U in 50 mL: <span class="dose-live" data-drug="vasopressina" data-dose="0.03"></span></div></div></div>
+
+    <div class="step"><div class="step-n">4</div><div>
+      <div class="step-t">La causa, nella stessa ora</div>
+      <div class="step-d"><strong>Sepsi</strong>: 2 emocolture poi antibiotico entro 1 ora, source control appena possibile. <strong>Anafilassi</strong>: adrenalina IM subito, ripetibile ogni 5–15 min. <strong>Crisi surrenalica</strong>: preleva il cortisolo e tratta senza aspettare. <strong>Neurogeno</strong>: vasopressore e target pressorio dedicato.</div>
+      <div class="step-dose">Adrenalina <b>0,5 mg IM</b> (0,01 mg/kg, max 0,5 mg) coscia antero-laterale · Idrocortisone <b>100 mg EV</b> poi <b>50 mg ogni 6 h</b></div></div></div>
+
+    <div class="nodo"><div class="nodo-t">✗ Non fare</div><ul>
+      <li>Inotropi senza disfunzione ventricolare documentata all'eco</li>
+      <li>Inseguire una MAP &gt;65 mmHg senza una ragione specifica (lesione midollare, ipertensione cronica severa)</li>
+      <li>«Finire i 30 mL/kg» per protocollo in un paziente con FE 25%: dopo i primi 500–1000 mL guida ogni bolo con un test</li>
+    </ul></div>
+  </div>
+
+  <!-- ══════════ STEP 2 · B ══════════ -->
+  <div class="panel" data-p="b">
+    <div class="stage"><div class="stage-n">2</div><div><div class="stage-t">Adesso — WARM–WET</div></div><span class="stage-w">primi 15 minuti</span></div>
+
+    <div class="box box-accent"><span class="prov prov-sintesi">PRIMA DI TUTTO</span>
+      Con perfusione conservata <strong>questo non è shock</strong>: è congestione. L'obiettivo è scaricare, non spingere.
+      Se compaiono marezzatura, oliguria o lattato in salita, sei passato a COLD–WET: cambia percorso.
+    </div>
+
+    <div class="step"><div class="step-n">1</div><div>
+      <div class="step-t">Pressione positiva subito</div>
+      <div class="step-d">Riduce precarico e post-carico del VS e toglie lavoro ai muscoli respiratori. Rivaluta a 1 ora: se non migliora, intuba senza insistere.</div>
+      <div class="step-dose">CPAP <b>7,5–10 cmH₂O</b>, FiO₂ titolata su SpO₂ <b>92–96%</b> (88–92% nel ritentore)</div></div></div>
+
+    <div class="step"><div class="step-n">2</div><div>
+      <div class="step-t">Vasodilatatore — è la leva principale</div>
+      <div class="step-d">Qui il problema non è il volume totale ma la ridistribuzione con Ea altissima. Mantieni PAS &gt;100 mmHg. Controindicata con inibitori della PDE-5 nelle 24–48 h, nell'IMA destro e nella stenosi aortica severa.</div>
+      <div class="step-dose">Nitroglicerina <b>10–20 µg/min</b>, incrementi di 10–20 µg/min ogni 3–5 min fino a <b>200 µg/min</b> — con 50 mg in 50 mL: <span class="dose-live" data-drug="nitroglicerina" data-dose="10-200"></span></div></div></div>
+
+    <div class="step"><div class="step-n">3</div><div>
+      <div class="step-t">Diuretico dell'ansa</div>
+      <div class="step-d">Verifica la risposta con il <strong>sodio urinario a 2 ore</strong>: sotto 50–70 mEq/L la dose è insufficiente, raddoppiala. Se serve, aggiungi acetazolamide 500 mg EV o metolazone 2,5–5 mg.</div>
+      <div class="step-dose">Furosemide <b>20–40 mg EV</b> se naive · <b>1–2,5 volte la dose orale abituale</b> se già in terapia · infusione <b>5–20 mg/h</b></div></div></div>
+
+    <div class="nodo"><div class="nodo-t">✗ Non fare</div><ul>
+      <li>Inotropi: la perfusione è conservata, aggiungerebbero solo consumo di ossigeno e aritmie</li>
+      <li>Fluidi</li>
+      <li>Morfina di routine</li>
+      <li>Fermare la decongestione perché è salita la creatinina, se la diuresi è abbondante e la congestione si sta risolvendo</li>
+    </ul></div>
+  </div>
+
+  <!-- ══════════ STEP 2 · L ══════════ -->
+  <div class="panel" data-p="l">
+    <div class="stage"><div class="stage-n">2</div><div><div class="stage-t">Adesso — COLD–DRY</div></div><span class="stage-w">primi 15 minuti</span></div>
+
+    <div class="step"><div class="step-n">1</div><div>
+      <div class="step-t">Riempi — è l'unico quadrante in cui il volume è la prima leva</div>
+      <div class="step-d">Testa prima e dopo ogni bolo. Fermati quando il guadagno di VTI scende sotto il 10% o compaiono linee B.</div>
+      <div class="step-dose"><b>250–500 mL</b> di cristalloide bilanciato in 10–15 min, ripetibile</div></div></div>
+
+    <div class="step"><div class="step-n">2</div><div>
+      <div class="step-t">Vasopressore come ponte, mentre riempi</div>
+      <div class="step-d">Non sostituisce il volume: serve a non lasciare il paziente ipoteso durante la rianimazione volemica.</div>
+      <div class="step-dose">Noradrenalina <b>0,05–0,5 µg/kg/min</b> — con 8 mg in 50 mL: <span class="dose-live" data-drug="noradrenalina" data-dose="0.05-0.5"></span></div></div></div>
+
+    <div class="step stop"><div class="step-n">!</div><div>
+      <div class="step-t">Se emorragico: l'emostasi viene prima di tutto</div>
+      <div class="step-d">Due accessi ≥18 G o introduttore. Rapporto 1:1:1 (plasma : piastrine : emazie) o guidato da tromboelastografia. Minimizza i cristalloidi. Ipotensione permissiva fino al controllo della fonte, salvo trauma cranico. Nel cardiopatico ischemico soglia trasfusionale più alta (orientativamente 8–10 g/dL).</div>
+      <div class="step-dose">Acido tranexamico <b>1 g EV in 10 min, poi 1 g in 8 h</b> · Calcio <b>1 g CaCl₂</b> o <b>3 g calcio gluconato</b> ogni 3–4 unità</div></div></div>
+
+    <div class="step esc"><div class="step-n">3</div><div>
+      <div class="step-t">PVC alta con polmoni asciutti? Non è ipovolemia: è il ventricolo destro</div>
+      <div class="step-d">Cambia strategia: bolo di prova massimo 250 mL, poi supporto destro. Mantieni la sincronia atrioventricolare, riduci le resistenze polmonari (ossigeno, niente ipercapnia, PEEP minima efficace). Vasopressina preferita alla noradrenalina perché non aumenta le resistenze polmonari.</div>
+      <div class="step-dose">Dobutamina <b>2–20 µg/kg/min</b>: <span class="dose-live" data-drug="dobutamina" data-dose="2-20"></span> · Vasopressina <b>0,03 U/min</b>: <span class="dose-live" data-drug="vasopressina" data-dose="0.03"></span></div></div></div>
+
+    <div class="nodo"><div class="nodo-t">✗ Non fare</div><ul>
+      <li>Diuretici e vasodilatatori</li>
+      <li>Escludere un'emorragia perché l'emoglobina è normale nella prima ora: la perdita acuta è iso-osmolare</li>
+      <li>Riempire oltre i 250 mL se PVC &gt;15 mmHg con PCWP bassa o PAPi &lt;1,0</li>
+      <li>Dimenticare il retroperitoneo dopo un accesso femorale</li>
+    </ul></div>
+  </div>
+
+  <!-- ══════════ STEP 2 · C ══════════ -->
+  <div class="panel" data-p="c">
+    <div class="stage"><div class="stage-n">2</div><div><div class="stage-t">Adesso — COLD–WET</div></div><span class="stage-w">primi 15 minuti</span></div>
+
+    <div class="step stop"><div class="step-n">✗</div><div>
+      <div class="step-t">Niente boli di fluidi</div>
+      <div class="step-d">Il ventricolo è già sulla parte piatta della curva di Frank-Starling: ogni mL aggiunge congestione e pressione venosa renale senza aggiungere gittata.</div></div></div>
+
+    <div class="step"><div class="step-n">1</div><div>
+      <div class="step-t">Una pressione di perfusione minima, poi fermati</div>
+      <div class="step-d">Noradrenalina di scelta: meno aritmie della dopamina e meno shock refrattario dell'adrenalina. Oltre MAP 65–70 mmHg stai comprando post-carico, non perfusione: verifica sempre il VTI dopo ogni incremento.</div>
+      <div class="step-dose"><b>0,05–0,5 µg/kg/min</b> — con 8 mg in 50 mL: <span class="dose-live" data-drug="noradrenalina" data-dose="0.05-0.5"></span></div></div></div>
+
+    <div class="step"><div class="step-n">2</div><div>
+      <div class="step-t">Inotropo — dose minima efficace, tempo minimo</div>
+      <div class="step-d">Dobutamina di prima scelta; titola sul VTI, non sulla pressione. Levosimendan o milrinone se il paziente è betabloccato o se serve inodilatazione, senza bolo se ipoteso (il milrinone si riduce se il filtrato è basso).</div>
+      <div class="step-dose">Dobutamina <b>2–20 µg/kg/min</b>: <span class="dose-live" data-drug="dobutamina" data-dose="2-20"></span><br>
+        Levosimendan <b>0,05–0,2 µg/kg/min per 24 h</b>: <span class="dose-live" data-drug="levosimendan" data-dose="0.05-0.2"></span><br>
+        Milrinone <b>0,125–0,75 µg/kg/min</b>: <span class="dose-live" data-drug="milrinone" data-dose="0.125-0.75"></span></div></div></div>
+
+    <div class="step"><div class="step-n">3</div><div>
+      <div class="step-t">Rimuovi la causa, nella stessa ora</div>
+      <div class="step-d">Coronarografia immediata se genesi ischemica, con PCI della <strong>sola lesione colpevole</strong>. Cardioversione se l'aritmia è il motore. Chirurgia se complicanza meccanica (soffio nuovo, edema polmonare fulminante, tamponamento). Pericardiocentesi se tamponamento.</div></div></div>
+
+    <div class="step esc"><div class="step-n">4</div><div>
+      <div class="step-t">Decongestiona appena la perfusione lo permette</div>
+      <div class="step-d">La congestione venosa è ciò che uccide rene e fegato: la pressione di perfusione renale è MAP − PVC. Ridurre la PVC di 5 mmHg può valere più di 5 µg/kg/min di dobutamina.</div>
+      <div class="step-dose">Furosemide <b>20–40 mg EV</b> (naive) o <b>1–2,5× la dose orale</b> · infusione <b>5–20 mg/h</b> · sodio urinario a 2 h</div></div></div>
+
+    <div class="step esc"><div class="step-n">5</div><div>
+      <div class="step-t">Se non risponde: è stadio SCAI D</div>
+      <div class="step-d">CPO &lt;0,6 W dopo ottimizzazione, lattato che non scende, due vasoattivi in aumento. Attiva lo shock team e — se Impella ed ECMO non sono in sede — <strong>contatta l'hub adesso</strong>: in stadio E il trasporto è spesso già impraticabile.</div></div></div>
+
+    <div class="nodo"><div class="nodo-t">✗ Non fare</div><ul>
+      <li>Boli di fluidi</li>
+      <li>Fenilefrina (Ea ↑↑ e Ees ↓: peggiora sempre il coupling)</li>
+      <li>Salire sulla noradrenalina oltre MAP 70 mmHg «perché è appena sufficiente»</li>
+      <li>Trattare tutte le lesioni coronariche in acuto</li>
+      <li>Aspettare lo stadio E per chiamare l'hub</li>
+    </ul></div>
+  </div>
+
+  <!-- ══════════ STEP 3 · COUPLING ══════════ -->
+  <div class="panel pcommon">
+    <div class="stage"><div class="stage-n">3</div><div><div class="stage-t">Coupling ventricolo-arterioso</div></div><span class="stage-w">5–15 minuti · eco + linea arteriosa</span></div>
+
+    <div class="oneline"><strong>A che serve adesso.</strong> Hai già impostato la terapia sul quadrante. Il coupling dice se stai
+    spingendo la leva giusta: <strong>Ea</strong> è il carico che il ventricolo ha davanti, <strong>Ees</strong> è quanto riesce a
+    spingere. Se il rapporto è alto perché <em>Ea è alta</em> → scarica. Se è alto perché <em>Ees è bassa</em> → sostieni la pompa.
+    Non è la stessa terapia.</div>
+
+    <div class="calc">
+      <div class="calc-hd">Calcolatore — metodo single-beat di Chen (lo stesso di iElastance)</div>
+      <div class="calc-grid">
+        <label class="cf"><span>PAS mmHg</span><input type="number" id="cPas" placeholder="—" inputmode="decimal"></label>
+        <label class="cf"><span>PAD mmHg</span><input type="number" id="cPad" placeholder="—" inputmode="decimal"></label>
+        <label class="cf"><span>LVOT mm</span><input type="number" id="cLvot" placeholder="—" step="0.5" inputmode="decimal"></label>
+        <label class="cf"><span>VTI cm</span><input type="number" id="cVti" placeholder="—" step="0.1" inputmode="decimal"></label>
+        <label class="cf"><span>FE %</span><input type="number" id="cFe" placeholder="—" inputmode="decimal"></label>
+        <label class="cf"><span>PEP ms</span><input type="number" id="cPep" placeholder="—" inputmode="decimal"></label>
+        <label class="cf"><span>TSP ms</span><input type="number" id="cTsp" placeholder="—" inputmode="decimal"></label>
+        <label class="cf"><span>FC bpm</span><input type="number" id="cFc" placeholder="—" inputmode="decimal"></label>
+      </div>
+      <div class="out" id="outCoupling"></div>
+      <div style="font-size:11.5px;color:var(--text-secondary);margin-top:9px;line-height:1.5">
+        <strong>PEP</strong> = dall'inizio del QRS all'inizio del flusso aortico · <strong>TSP</strong> = dall'inizio del QRS
+        alla fine del flusso aortico, sullo stesso tracciato Doppler con ECG a 100 mm/s.
+        <strong>LVOT</strong> in parasternale asse lungo, zoom, mesosistole, 3–5 mm sotto l'anulus: entra al quadrato, 1 mm di
+        errore su 20 vale circa il 10% sulla gittata. <strong>VTI</strong> in apicale 5 camere, stesso punto del diametro,
+        angolo &lt;20°; in fibrillazione media 5–10 cicli.
+      </div>
+    </div>
+
+    <div class="tw">
+    <table class="grid" id="tabCoupling">
+      <caption>Che cosa cambio in base alle due elastanze</caption>
+      <thead><tr><th style="width:11%">Ea</th><th style="width:12%">Ees</th><th style="width:32%">Quadro</th><th>Manovra sulla terapia già impostata</th></tr></thead>
+      <tbody>
+        <tr data-row="alta-normale"><td class="k">alta</td><td class="k">normale</td><td>Precarico-dipendenza, pressione elevata, tachicardia</td><td>Espansione volemica se responsivo · vasodilatatore · controllo della frequenza</td></tr>
+        <tr data-row="alta-bassa"><td class="k">alta</td><td class="k">bassa</td><td>Bassa inotropia con carico elevato e congestione</td><td><strong>Inodilatatore</strong> (dobutamina, levosimendan, milrinone) · vasodilatatore · diuretico · betabloccante solo se la tachicardia è il motore</td></tr>
+        <tr data-row="bassa-normale"><td class="k">bassa</td><td class="k">normale o alta</td><td>Pressione bassa da vasoplegia pura</td><td><strong>Vasopressore</strong> — non aggiungere inotropo</td></tr>
+        <tr data-row="bassa-bassa"><td class="k">bassa</td><td class="k">bassa</td><td>Bassa inotropia e bassa pressione</td><td><strong>Vasopressore + inotropo</strong> · cerca una componente vasoplegica (sepsi, surrene, farmaci)</td></tr>
+        <tr data-row="media-bassa"><td class="k">intermedia</td><td class="k">bassa</td><td>Il fattore limitante è la pompa, non il carico</td><td>Inodilatatore · <strong>non</strong> alzare il vasopressore oltre MAP 65–70 mmHg: Ea salirebbe senza che Ees possa seguirla</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="box box-accent"><span class="prov prov-sintesi">IL TEST CHE CONTA</span>
+      Ogni volta che modifichi il vasopressore, <strong>rimisura il VTI</strong>. Se alzi la noradrenalina e il VTI scende,
+      hai comprato un numero sul monitor pagandolo con il flusso: torna indietro. Se lo riduci e il VTI sale con la MAP che
+      tiene, il paziente era sovra-vasocostretto.
+    </div>
+
+    <div class="box box-warn"><span class="prov prov-sintesi">LIMITI</span>
+      Ea/Ees misura <strong>efficienza, non adeguatezza</strong>: un cuore che spinge poco contro un carico basso può
+      risultare accoppiato ed essere comunque in shock — leggilo con CI, lattato e ScvO₂. Il metodo è meno affidabile con
+      <strong>PAS &lt;90 mmHg</strong> e con <strong>FC &gt;130 bpm</strong>. I diversi metodi single-beat non sono
+      intercambiabili: per confrontare due momenti usa sempre lo stesso.
+    </div>
+  </div>
+
+  <!-- ══════════ STEP 4 · EGA ══════════ -->
+  <div class="panel pcommon">
+    <div class="stage"><div class="stage-n">4</div><div><div class="stage-t">EGA arterioso e venoso centrale</div></div><span class="stage-w">subito, poi a 2 e 6 ore</span></div>
+
+    <div class="oneline"><strong>Prelievo doppio, sempre.</strong> Arterioso e venoso centrale nello stesso momento: la coppia
+    distingue in tre minuti un problema di <em>portata</em> da un problema di <em>distribuzione</em>, e lo fa prima che arrivi
+    qualunque catetere.</div>
+
+    <div class="calc">
+      <div class="calc-hd">Calcolatore — perfusione tissutale</div>
+      <div class="calc-grid">
+        <label class="cf"><span>Lattato ora</span><input type="number" id="gLat" placeholder="—" step="0.1" inputmode="decimal"></label>
+        <label class="cf"><span>Lattato prec.</span><input type="number" id="gLatPre" placeholder="—" step="0.1" inputmode="decimal"></label>
+        <label class="cf"><span>ScvO₂ %</span><input type="number" id="gScvo2" placeholder="—" inputmode="decimal"></label>
+        <label class="cf"><span>pCO₂ art</span><input type="number" id="gPcoA" placeholder="—" step="0.1" inputmode="decimal"></label>
+        <label class="cf"><span>pCO₂ ven</span><input type="number" id="gPcoV" placeholder="—" step="0.1" inputmode="decimal"></label>
+        <label class="cf"><span>pH</span><input type="number" id="gPh" placeholder="—" step="0.01" inputmode="decimal"></label>
+      </div>
+      <div class="out" id="outEga"></div>
+    </div>
+
+    <div class="tw">
+    <table class="grid">
+      <caption>Come si legge la coppia</caption>
+      <thead><tr><th style="width:22%">Combinazione</th><th style="width:30%">Significato</th><th>Che cosa faccio</th></tr></thead>
+      <tbody>
+        <tr><td class="k">ScvO₂ bassa (&lt;65%) + ΔpCO₂ alto (&gt;6)</td><td>Flusso insufficiente: l'estrazione è già massimale</td><td>Aumenta il DO₂: inotropo, precarico se responsivo, emoglobina, ossigeno. È il pattern del <strong>cold–wet</strong></td></tr>
+        <tr><td class="k">ScvO₂ alta (&gt;75%) + lattato alto</td><td>Shunt periferico e mancata estrazione</td><td><strong>Non è rassicurante</strong>: pattern distributivo o disfunzione mitocondriale. Vasopressore e controllo della fonte, non inotropo</td></tr>
+        <tr><td class="k">ScvO₂ normale + ΔpCO₂ alto</td><td>Flusso comunque inadeguato, mascherato</td><td>Il ΔpCO₂ è più sensibile: comportati come se la portata fosse bassa</td></tr>
+        <tr><td class="k">Lattato che non scende a 2 ore</td><td>La strategia non sta funzionando</td><td>Rivaluta la <strong>diagnosi</strong>, non solo la dose. Cerca una seconda causa: sepsi occulta, emorragia, tamponamento tardivo, ischemia intestinale, surrene, tossico</td></tr>
+        <tr><td class="k">pH &lt;7,2 · deficit di basi &gt;10</td><td>Criterio di SCAI E</td><td>Le catecolamine perdono efficacia: correggi la causa, valuta il supporto meccanico. Bicarbonato solo con pH ≤7,15</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="box box-warn"><span class="prov prov-sintesi">DA CORREGGERE PRIMA DI SALIRE CON LE AMINE</span>
+      <strong>Calcio ionizzato &lt;1,10 mmol/L</strong> (riduce inotropismo e risposta ai vasopressori) · acidosi severa ·
+      ipossiemia · ipovolemia non riconosciuta · tamponamento. Salire con il vasopressore su una di queste è tempo perso.
+    </div>
+  </div>
+
+  <!-- ══════════ STEP 5 · INDICI ══════════ -->
+  <div class="panel pcommon">
+    <div class="stage"><div class="stage-n">5</div><div><div class="stage-t">Indici emodinamici — la conferma che arriva dopo</div></div><span class="stage-w">15–60 minuti e oltre</span></div>
+
+    <div class="oneline"><strong>Servono a confermare o smentire</strong> la casella che hai già scelto, e a decidere
+    l'escalation. Non aspettarli per trattare: nessuno di questi numeri cambia le prime tre mosse.</div>
+
+    <div class="calc">
+      <div class="calc-hd">Calcolatore — indici derivati e invasivi</div>
+      <div class="calc-grid">
+        <label class="cf"><span>Altezza cm</span><input type="number" id="hAlt" placeholder="—" inputmode="decimal"></label>
+        <label class="cf"><span>CO L/min</span><input type="number" id="hCo" placeholder="da eco o TD" step="0.1" inputmode="decimal"></label>
+        <label class="cf"><span>PVC mmHg</span><input type="number" id="hPvc" placeholder="—" inputmode="decimal"></label>
+        <label class="cf"><span>PCWP mmHg</span><input type="number" id="hPcwp" placeholder="—" inputmode="decimal"></label>
+        <label class="cf"><span>PAP sist</span><input type="number" id="hPaps" placeholder="—" inputmode="decimal"></label>
+        <label class="cf"><span>PAP diast</span><input type="number" id="hPapd" placeholder="—" inputmode="decimal"></label>
+      </div>
+      <div class="out" id="outEmo"></div>
+      <div style="font-size:11.5px;color:var(--text-secondary);margin-top:9px;line-height:1.5">
+        Se non hai la termodiluizione, la portata si calcola dall'eco: viene presa dai campi LVOT, VTI e FC dello step 3.
+        MAP e peso vengono da PAS/PAD e dalla barra in alto.
+      </div>
+    </div>
+
+    <div class="tw">
+    <table class="grid">
+      <caption>Le soglie che fanno cambiare qualcosa</caption>
+      <thead><tr><th style="width:20%">Indice</th><th style="width:18%">Soglia</th><th>Decisione</th></tr></thead>
+      <tbody>
+        <tr><td class="k">CPO</td><td>&lt;0,6 W</td><td>Il predittore emodinamico più forte di mortalità nello shock cardiogeno. Se persiste dopo ottimizzazione: shock team, supporto meccanico, contatto con l'hub</td></tr>
+        <tr><td class="k">Indice cardiaco</td><td>&lt;2,2 (con supporto)<br>&lt;1,8 (senza)</td><td>Conferma emodinamica dello shock cardiogeno</td></tr>
+        <tr><td class="k">PCWP</td><td>&gt;15 (&gt;18 franca)</td><td>Conferma il <em>wet</em>: decongestiona, non riempire</td></tr>
+        <tr><td class="k">PAPi</td><td>&lt;1,0</td><td>Disfunzione destra severa: non caricare volume, inotropo destro, riduci le resistenze polmonari, considera supporto destro</td></tr>
+        <tr><td class="k">RAP/PCWP</td><td>&gt;0,63</td><td>La quota destra è prevalente: ragiona sul VD prima che sul VS</td></tr>
+        <tr><td class="k">SVR</td><td>&gt;1400 · &lt;800</td><td>Vasocostrizione (riduci il post-carico) · vasoplegia con CI basso = <strong>sospetta shock misto</strong>, cerca l'infezione</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="box box-accent"><span class="prov prov-sintesi">QUANDO GLI INDICI SMENTISCONO IL QUADRANTE</span>
+      <strong>PVC alta con PCWP bassa</strong> → non è cardiogeno sinistro: pensa a destra o a un ostacolo (embolia, tamponamento, pneumotorace).
+      <strong>SVR basse con CI basso</strong> → shock misto: il vasopressore sale mentre la pompa migliora.
+      <strong>CI normale con lattato alto e ScvO₂ alta</strong> → il problema è la distribuzione, non la portata.
+      In tutti e tre i casi la casella va rifatta, non forzata.
+    </div>
+  </div>
+
+  <!-- ══════════ RIVALUTAZIONE ══════════ -->
+  <div class="panel pcommon">
+    <div class="stage"><div class="stage-n">6</div><div><div class="stage-t">Ricontrolla</div></div><span class="stage-w">1 h · 6 h · 24 h</span></div>
+    <div class="tgt">
+      <div class="tgt-i"><span class="t-k">MAP</span><span class="t-v">≥65 mmHg</span><span class="t-n">stabile senza incrementi del vasopressore</span></div>
+      <div class="tgt-i"><span class="t-k">Lattato</span><span class="t-v">↓ ≥10–20% / 2 h</span><span class="t-n">normale entro 24 h</span></div>
+      <div class="tgt-i"><span class="t-k">Diuresi</span><span class="t-v">&gt;0,5 mL/kg/h</span><span class="t-n">il primo organo che risponde</span></div>
+      <div class="tgt-i"><span class="t-k">Refill</span><span class="t-v">&lt;3 s</span><span class="t-n">e marezzatura in riduzione</span></div>
+      <div class="tgt-i"><span class="t-k">ScvO₂ · ΔpCO₂</span><span class="t-v">65–75% · ≤6</span><span class="t-n">letti insieme</span></div>
+      <div class="tgt-i"><span class="t-k">VTI aortico</span><span class="t-v">in salita</span><span class="t-n">stessa finestra, stesso operatore</span></div>
+      <div class="tgt-i"><span class="t-k">CPO</span><span class="t-v">&gt;0,6 W</span><span class="t-n">meglio verso 0,8–1,0</span></div>
+      <div class="tgt-i"><span class="t-k">Ea/Ees</span><span class="t-v">verso 0,5–1,0</span><span class="t-n">migliora prima della clinica</span></div>
+    </div>
+
+    <div class="recog">
+      <div class="recog-t">⚠ Ferma tutto e ricomincia dalla diagnosi se</div>
+      <ul>
+        <li>il lattato non scende dopo <strong>6 ore</strong> di terapia apparentemente corretta</li>
+        <li>il fabbisogno di vasopressore <strong>sale mentre l'indice cardiaco migliora</strong></li>
+        <li>compaiono febbre, ipotermia o procalcitonina in salita in un cardiogeno</li>
+        <li>l'emoglobina cala, o compare dolore lombare o addominale</li>
+        <li>peggioramento acuto dopo una procedura (accesso vascolare, pacing, intubazione)</li>
+        <li>il quadro emodinamico non corrisponde all'eco</li>
+      </ul>
+    </div>
+
+    <div class="xref"><strong>Dove sta cosa.</strong> Questa scheda contiene la sequenza operativa e le dosi.
+    Fisiopatologia, criteri SCAI completi, ecocardiografia dettagliata, catetere in arteria polmonare, assistenze
+    meccaniche, depurazione extracorporea, terapia ancillare, trappole per fenotipo e casi clinici stanno nella
+    <em>monografia Shock in UTIC</em>, che resta la fonte di verità. Le dosi qui riportate coincidono alla lettera con quelle
+    della monografia e del calcolatore della skill.</div>
+  </div>
+
+  <div class="footer-note">
+    <strong>Scheda d'azione · Shock in UTIC — v1.0, agosto 2026.</strong> Le diluizioni usate per il calcolo sono
+    indicate accanto a ogni farmaco e vanno <strong>verificate sul protocollo del proprio reparto</strong>.
+    Materiale di consultazione personale: non sostituisce il giudizio clinico, i protocolli di reparto né le linee guida.
+  </div>
+
+  <div class="foot">
+    <span><b>Chiama l'hub</b> in SCAI C che non risponde, non in E</span>
+    <span>·</span>
+    <span>CPO &lt;0,6 W · PAPi &lt;1,0 · lattato in salita = escalation</span>
+    <span class="sp"></span>
+    <span id="footPeso">75 kg</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ── diluizioni di riferimento (coincidono con la monografia e con la skill) ──
+  var DIL = {
+    adrenalina: { conc: 100, ponderale: true, ora: false, desc: "5 mg (5 fiale da 1 mg) in 50 mL" },
+    amiodarone: { conc: 1.8, ponderale: false, ora: false, desc: "900 mg in 500 mL" },
+    argatroban: { conc: 1000, ponderale: true, ora: false, desc: "250 mg in 250 mL" },
+    bivalirudina: { conc: 1, ponderale: true, ora: true, desc: "250 mg in 250 mL" },
+    dexmedetomidina: { conc: 4, ponderale: true, ora: true, desc: "200 mcg in 50 mL" },
+    dobutamina: { conc: 5000, ponderale: true, ora: false, desc: "250 mg in 50 mL" },
+    dopamina: { conc: 4000, ponderale: true, ora: false, desc: "200 mg in 50 mL" },
+    enoximone: { conc: 2000, ponderale: true, ora: false, desc: "100 mg in 50 mL" },
+    eparina: { conc: 100, ponderale: true, ora: true, desc: "25.000 U in 250 mL" },
+    esmololo: { conc: 10000, ponderale: true, ora: false, desc: "2,5 g in 250 mL = 10 mg/mL" },
+    fenilefrina: { conc: 100, ponderale: false, ora: false, desc: "10 mg in 100 mL" },
+    fentanyl: { conc: 20, ponderale: true, ora: true, desc: "1000 mcg (20 mL) in 30 mL" },
+    furosemide: { conc: 5, ponderale: false, ora: true, desc: "250 mg in 50 mL" },
+    levosimendan: { conc: 50, ponderale: true, ora: false, desc: "12,5 mg (1 flacone da 5 mL) in 250 mL" },
+    lidocaina: { conc: 8, ponderale: false, ora: false, desc: "2 g in 250 mL" },
+    midazolam: { conc: 1, ponderale: true, ora: true, desc: "50 mg in 50 mL" },
+    milrinone: { conc: 200, ponderale: true, ora: false, desc: "10 mg in 50 mL" },
+    nitroglicerina: { conc: 1000, ponderale: false, ora: false, desc: "50 mg in 50 mL" },
+    nitroprussiato: { conc: 200, ponderale: true, ora: false, desc: "50 mg in 250 mL" },
+    noradrenalina: { conc: 160, ponderale: true, ora: false, desc: "8 mg (8 fiale da 1 mg/mL, oppure 2 fiale da 4 mg) in 50 mL" },
+    potassio: { conc: 0.4, ponderale: false, ora: true, desc: "20 mEq in 50 mL" },
+    propofol: { conc: 10, ponderale: true, ora: true, desc: "Preparazione pronta all'1% (10 mg/mL) o al 2% (20 mg/mL)" },
+    vasopressina: { conc: 0.4, ponderale: false, ora: false, desc: "20 U in 50 mL" }
+  };
+
+  function nf(v, d) {
+    if (v === null || v === undefined || !isFinite(v)) return "—";
+    var s = v.toFixed(d === undefined ? 1 : d);
+    s = s.replace(/\.?0+$/, "");
+    return s.replace(".", ",");
+  }
+  function val(id) {
+    var el = document.getElementById(id);
+    if (!el || el.value === "") return null;
+    var v = parseFloat(String(el.value).replace(",", "."));
+    return isFinite(v) ? v : null;
+  }
+  function peso() { return val("peso") || 75; }
+
+  function mlh(drug, dose) {
+    var d = DIL[drug];
+    if (!d) return null;
+    // dosi per ora (mg/kg/h, U/kg/h...) non vanno moltiplicate per 60
+    var fattore = d.ora ? 1 : 60;
+    return dose * (d.ponderale ? peso() : 1) * fattore / d.conc;
+  }
+
+  function updateDoses() {
+    var p = peso();
+    document.getElementById("pesoEco").textContent =
+      "tutte le velocità sono calcolate per " + nf(p, 0) + " kg";
+    document.getElementById("footPeso").textContent = nf(p, 0) + " kg";
+    var nodes = document.querySelectorAll("[data-drug]");
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i], drug = n.getAttribute("data-drug"),
+          raw = n.getAttribute("data-dose"), parts = raw.split("-");
+      if (parts.length === 2) {
+        n.textContent = nf(mlh(drug, parseFloat(parts[0]))) + "–" +
+                        nf(mlh(drug, parseFloat(parts[1]))) + " mL/h";
+      } else {
+        n.textContent = nf(mlh(drug, parseFloat(parts[0]))) + " mL/h";
+      }
+    }
+    calcEmo();
+  }
+
+  // ── selezione del quadrante ──
+  var sel = null, mostraTutti = false;
+  function applica() {
+    var btns = document.querySelectorAll(".qbtn");
+    for (var i = 0; i < btns.length; i++) {
+      var q = btns[i].getAttribute("data-q");
+      btns[i].classList.toggle("sel", !mostraTutti && q === sel);
+      btns[i].classList.toggle("dim", !mostraTutti && sel !== null && q !== sel);
+    }
+    var pans = document.querySelectorAll(".panel[data-p]");
+    for (var j = 0; j < pans.length; j++) {
+      pans[j].classList.toggle("on", mostraTutti || pans[j].getAttribute("data-p") === sel);
+    }
+    var comuni = document.querySelectorAll(".panel.pcommon");
+    for (var k = 0; k < comuni.length; k++) {
+      comuni[k].classList.toggle("on", mostraTutti || sel !== null);
+    }
+    document.getElementById("btnAll").classList.toggle("on", mostraTutti);
+  }
+
+  var qbtns = document.querySelectorAll(".qbtn");
+  for (var b = 0; b < qbtns.length; b++) {
+    qbtns[b].addEventListener("click", function () {
+      mostraTutti = false;
+      sel = this.getAttribute("data-q");
+      applica();
+      var p = document.querySelector('.panel[data-p="' + sel + '"]');
+      if (p) p.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+  document.getElementById("btnAll").addEventListener("click", function () {
+    mostraTutti = !mostraTutti; applica();
+  });
+  document.getElementById("btnReset").addEventListener("click", function () {
+    sel = null; mostraTutti = false; applica();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // ── coupling ventricolo-arterioso (Chen, JACC 2001) ──
+  var CHEN = [0.35695, -7.2266, 74.249, -307.39, 684.54, -856.92, 571.95, -159.1];
+  function endAvg(t) {
+    var s = 0;
+    for (var i = 0; i < CHEN.length; i++) s += CHEN[i] * Math.pow(t, i);
+    return s;
+  }
+  function svEco() {
+    var d = val("cLvot"), vti = val("cVti");
+    if (d === null || vti === null) return null;
+    var r = d / 20;                       // mm -> cm, poi raggio
+    return Math.PI * r * r * vti;
+  }
+  function oc(k, v, n, cls) {
+    return '<div class="oc ' + (cls || "") + '"><span class="ok-k">' + k +
+           '</span><span class="ok-v">' + v + '</span><span class="ok-n">' + (n || "") + "</span></div>";
+  }
+
+  function calcCoupling() {
+    var box = document.getElementById("outCoupling");
+    var pas = val("cPas"), pad = val("cPad"), fe = val("cFe"),
+        pep = val("cPep"), tsp = val("cTsp"), sv = svEco();
+    var html = "", avvisi = [];
+
+    if (sv !== null) html += oc("Gittata sistolica", nf(sv, 1) + " mL",
+      "SVI e portata nello step 5", sv < 40 ? "bad" : "");
+
+    if (pas === null || sv === null) {
+      box.innerHTML = html + oc("Ea", "—", "servono PAS, diametro LVOT e VTI");
+      highlightRow(null); return;
+    }
+    var pes = 0.9 * pas, ea = pes / sv;
+    html += oc("Ea", nf(ea, 2), "mmHg/mL · v.n. 1,5–2,5", ea > 2.5 ? "warn" : "");
+
+    var ees = null;
+    if (pad !== null && fe !== null && pep !== null && tsp !== null && tsp > 0 && fe > 0 && fe <= 100) {
+      var tnd = pep / tsp;
+      var endEst = 0.0275 - 0.165 * (fe / 100) + 0.3656 * (pad / pes) + 0.515 * endAvg(tnd);
+      if (endEst > 0) {
+        ees = (pad - endEst * pes) / (endEst * sv);
+        if (tnd < 0.05 || tnd > 0.6) avvisi.push("tNd = " + nf(tnd, 3) + ", fuori dall'intervallo abituale 0,05–0,60: ricontrolla PEP e TSP.");
+      }
+    }
+    if (ees === null || ees <= 0) {
+      box.innerHTML = html + oc("Ees", "—", "servono anche PAD, FE, PEP e TSP");
+      highlightRow(null); return;
+    }
+    html += oc("Ees", nf(ees, 2), "mmHg/mL · v.n. 2–3", ees < 2 ? "warn" : "");
+
+    var r = ea / ees, cls, nota;
+    if (r < 0.5) { cls = "warn"; nota = "iper-accoppiato: carico molto basso, spesso vasoplegia"; }
+    else if (r <= 1.0) { cls = "good"; nota = "accoppiato — non è qui il problema principale"; }
+    else if (r <= 1.36) { cls = "warn"; nota = "zona grigia: sorveglia dopo ogni modifica"; }
+    else { cls = "bad"; nota = "DISACCOPPIATO (soglia 1,36)"; }
+    html += oc("Ea/Ees", nf(r, 2), nota, cls);
+
+    if (ees < 0.8 || ees > 8) avvisi.push("Ees fuori dall'intervallo abituale 0,8–8 mmHg/mL: controlla i valori inseriti prima di usarla.");
+    if (pas < 90) avvisi.push("PAS &lt;90 mmHg: il metodo single-beat è meno validato alle pressioni basse — usalo per il trend.");
+    var fc = val("cFc");
+    if (fc !== null && fc > 130) avvisi.push("FC &gt;130 bpm: Ea dipende dalla frequenza, l'affidabilità cala. Controlla prima il ritmo.");
+    if (avvisi.length) {
+      html += '<div class="oc bad" style="grid-column:1/-1"><span class="ok-k">Attenzione</span>' +
+              '<span class="ok-n">' + avvisi.join(" ") + "</span></div>";
+    }
+    box.innerHTML = html;
+
+    var eaCat = ea < 1.5 ? "bassa" : (ea > 2.5 ? "alta" : "media");
+    var eesCat = ees < 2.0 ? "bassa" : "normale";
+    var key;
+    if (eaCat === "alta" && eesCat === "bassa") key = "alta-bassa";
+    else if (eaCat === "alta") key = "alta-normale";
+    else if (eaCat === "bassa" && eesCat === "bassa") key = "bassa-bassa";
+    else if (eaCat === "bassa") key = "bassa-normale";
+    else if (eesCat === "bassa") key = "media-bassa";
+    else key = null;
+    highlightRow(key);
+    calcEmo();
+  }
+
+  function highlightRow(key) {
+    var rows = document.querySelectorAll("#tabCoupling tbody tr");
+    for (var i = 0; i < rows.length; i++) {
+      rows[i].classList.toggle("hl", key !== null && rows[i].getAttribute("data-row") === key);
+    }
+  }
+
+  // ── EGA ──
+  function calcEga() {
+    var box = document.getElementById("outEga");
+    var lat = val("gLat"), pre = val("gLatPre"), scvo2 = val("gScvo2"),
+        a = val("gPcoA"), v = val("gPcoV"), ph = val("gPh");
+    var html = "";
+    if (lat !== null) {
+      html += oc("Lattato", nf(lat, 1) + " mmol/L",
+        lat >= 8 ? "criterio di SCAI E" : (lat > 2 ? "ipoperfusione" : "normale"),
+        lat >= 8 ? "bad" : (lat > 2 ? "warn" : "good"));
+    }
+    if (lat !== null && pre) {
+      var cl = ((pre - lat) / pre) * 100;
+      html += oc("Clearance a 2 h", nf(cl, 1) + " %",
+        cl < 10 ? "insufficiente: rivaluta la diagnosi" : "adeguata (≥10–20%)",
+        cl < 10 ? "bad" : "good");
+    }
+    if (scvo2 !== null) {
+      html += oc("ScvO₂", nf(scvo2, 0) + " %",
+        scvo2 < 65 ? "estrazione massimale: serve più flusso"
+                   : (scvo2 > 75 ? "estrazione ridotta: shunt o distributivo" : "nel range"),
+        scvo2 < 65 ? "bad" : (scvo2 > 75 ? "warn" : "good"));
+    }
+    if (a !== null && v !== null) {
+      var d = v - a;
+      html += oc("ΔpCO₂", nf(d, 1) + " mmHg",
+        d > 6 ? "flusso inadeguato" : "flusso adeguato", d > 6 ? "bad" : "good");
+    }
+    if (ph !== null) {
+      html += oc("pH", nf(ph, 2),
+        ph < 7.2 ? "criterio di SCAI E: le amine perdono efficacia" : "", ph < 7.2 ? "bad" : "good");
+    }
+    box.innerHTML = html || oc("—", "—", "inserisci almeno il lattato");
+  }
+
+  // ── indici emodinamici ──
+  function calcEmo() {
+    var box = document.getElementById("outEmo");
+    if (!box) return;
+    var pas = val("cPas"), pad = val("cPad"), fc = val("cFc"),
+        alt = val("hAlt"), co = val("hCo"), pvc = val("hPvc"), pcwp = val("hPcwp"),
+        paps = val("hPaps"), papd = val("hPapd"), p = peso();
+    var map = (pas !== null && pad !== null) ? (pas + 2 * pad) / 3 : null;
+    var sv = svEco();
+    var fonte = "termodiluizione o dato inserito";
+    if (co === null && sv !== null && fc !== null) { co = (sv * fc) / 1000; fonte = "da eco (LVOT × VTI × FC)"; }
+    var bsa = alt ? Math.sqrt((p * alt) / 3600) : null;
+    var html = "";
+
+    if (map !== null) html += oc("MAP", nf(map, 0) + " mmHg",
+      map < 65 ? "sotto target" : "target ≥65", map < 65 ? "bad" : "good");
+    if (bsa) html += oc("BSA", nf(bsa, 2) + " m²", "Mosteller");
+    if (co !== null) html += oc("Portata cardiaca", nf(co, 2) + " L/min", fonte);
+    if (co !== null && bsa) {
+      var ci = co / bsa;
+      html += oc("Indice cardiaco", nf(ci, 2), "L/min/m² · shock se <2,2", ci < 2.2 ? "bad" : "good");
+    }
+    if (map !== null && co !== null) {
+      var cpo = (map * co) / 451;
+      html += oc("CPO", nf(cpo, 2) + " W",
+        cpo < 0.6 ? "CRITICO: valuta supporto meccanico e shock team" : "v.n. >1 W",
+        cpo < 0.6 ? "bad" : (cpo < 1 ? "warn" : "good"));
+    }
+    if (map !== null && co !== null && co > 0) {
+      var svr = ((map - (pvc === null ? 0 : pvc)) * 80) / co;
+      html += oc("SVR", nf(svr, 0), "dyn·s·cm⁻⁵ · v.n. 800–1200",
+        svr < 800 ? "warn" : (svr > 1400 ? "warn" : "good"));
+    }
+    if (paps !== null && papd !== null && pvc) {
+      var papi = (paps - papd) / pvc;
+      html += oc("PAPi", nf(papi, 2),
+        papi < 1 ? "disfunzione VD severa: non caricare volume" : "v.n. >2",
+        papi < 1 ? "bad" : (papi < 1.5 ? "warn" : "good"));
+    }
+    if (pvc !== null && pcwp) {
+      var rr = pvc / pcwp;
+      html += oc("RAP/PCWP", nf(rr, 2),
+        rr > 0.63 ? "quota destra prevalente" : "prevalenza sinistra", rr > 0.63 ? "warn" : "");
+    }
+    if (pcwp !== null) html += oc("PCWP", nf(pcwp, 0) + " mmHg",
+      pcwp > 18 ? "congestione franca" : (pcwp > 15 ? "congestione" : "non congesto"),
+      pcwp > 15 ? "warn" : "good");
+    box.innerHTML = html || oc("—", "—", "inserisci almeno pressione e portata");
+  }
+
+  // ── binding ──
+  document.getElementById("peso").addEventListener("input", updateDoses);
+  ["cPas","cPad","cLvot","cVti","cFe","cPep","cTsp","cFc"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", calcCoupling);
+  });
+  ["gLat","gLatPre","gScvo2","gPcoA","gPcoV","gPh"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", calcEga);
+  });
+  ["hAlt","hCo","hPvc","hPcwp","hPaps","hPapd"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", calcEmo);
+  });
+
+  updateDoses();
+  calcCoupling();
+  calcEga();
+  applica();
+})();
+</script>
+<script>
+/* ═══ ANCORAGGIO — misura le barre appiccicate in cima e le espone al CSS ═══ */
+(function () {
+  "use strict";
+  var barre = document.querySelectorAll(".bar, .toc, .navcls");
+  var he = document.documentElement;
+  function misura() {
+    var h = 0;
+    for (var i = 0; i < barre.length; i++) {
+      var st = window.getComputedStyle(barre[i]);
+      if (st.position === "sticky" && st.display !== "none") h += barre[i].offsetHeight;
+    }
+    he.style.setProperty("--sticky-h", Math.round(h) + "px");
+  }
+  function vaiAlHash() {
+    if (!location.hash) return;
+    var t = document.getElementById(location.hash.slice(1));
+    if (!t) return;
+    var prec = he.style.scrollBehavior;
+    he.style.scrollBehavior = "auto";
+    t.scrollIntoView();
+    he.style.scrollBehavior = prec;
+  }
+  misura();
+  addEventListener("resize", misura);
+  addEventListener("orientationchange", misura);
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(misura);
+    for (var j = 0; j < barre.length; j++) ro.observe(barre[j]);
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { misura(); vaiAlHash(); });
+  }
+  addEventListener("load", function () { misura(); setTimeout(vaiAlHash, 0); });
+})();
+</script>
+<script data-iphone="web">
+// Solo da un indirizzo https, cioe' dalla pagina pubblicata: aperto come file
+// il tool non cerca ne' manifest ne' service worker, che accanto al file non
+// ci sono. Un errore qui non deve fermare niente: e' un di piu'.
+(function(){
+if(location.protocol!=="https:") return;
+try{
+  var t=document.getElementsByTagName("head")[0];
+  var m=document.createElement("link"); m.rel="manifest"; m.href="manifest.webmanifest";
+  var i=document.createElement("link"); i.rel="apple-touch-icon"; i.href="icona-180.png";
+  t.appendChild(m); t.appendChild(i);
+  if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js")["catch"](function(){});
+}catch(e){}
+})();
+</script>
+<script data-iphone="fine">document.documentElement.className+=" motore-ok";</script>
+</body>
+</html>
