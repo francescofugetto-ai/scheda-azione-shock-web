@@ -35,591 +35,265 @@ document.addEventListener("DOMContentLoaded",function(){
 })();
 </script>
 <title>Shock in UTIC — scheda d'azione</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
   :root {
     --bg:#FAF9F7; --surface:#FFFFFF; --surface-alt:#F3F2EF;
     --border:rgba(11,11,11,0.10); --border-strong:rgba(11,11,11,0.18);
-    --text-primary:#0B0B0B; --text-secondary:#52514E; --text-muted:#898781;
+    --text-primary:#0B0B0B; --text-secondary:#52514E; --text-muted:#76746F;
     --accent-blue:#2A78D6;   --accent-blue-bg:#E6F1FB;   --accent-blue-border:#B5D4F4;
     --accent-amber:#BA7517;  --accent-amber-bg:#FAEEDA;  --accent-amber-border:#FAC775;
     --accent-red:#A32D2D;    --accent-red-bg:#FCEBEB;    --accent-red-border:#F7C1C1;
     --accent-green:#3B6D11;  --accent-green-bg:#EAF3DE;  --accent-green-border:#C0DD97;
-    --accent-teal:#0E7C86;   --accent-teal-bg:#E2F4F5;   --accent-teal-border:#A7DBDE;
     --accent-purple:#534AB7; --accent-purple-bg:#EEEDFE; --accent-purple-border:#CECBF6;
-    --pill-gray-bg:#F1EFE8;  --pill-gray-fg:#444441;
-    --cor-1:#3B8E5A;   --cor-2a:#E0A82E;  --cor-2b:#DE7E3C;  --cor-3nb:#CE6D86;  --cor-3h:#B33A3A;
-    --cat-A:#E6EC97; --cat-B:#F4C64E; --cat-C:#EF9C63; --cat-D:#EE7361; --cat-E:#E86A99;
-    --radius-sm:6px; --radius-md:10px; --radius-lg:14px;
-    --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --cor-1:#3B8E5A; --cor-2a:#E0A82E; --cor-2b:#DE7E3C; --cor-3:#B33A3A;
+    --k0:#2E7D4F; --k0-bg:#E2F3E8; --k0-bd:#A6D9B8;
+    --k1:#2A78D6; --k1-bg:#E3EFFB; --k1-bd:#A9CBF1;
+    --k2:#8A6A00; --k2-bg:#FBF3C8; --k2-bd:#EBD56C;
+    --k3:#B45309; --k3-bg:#FDEBD8; --k3-bd:#F4BD85;
+    --k4:#A32D2D; --k4-bg:#FCE3E3; --k4-bd:#F0A9A9;
+    --grid:rgba(42,120,214,.08);
+    --font:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --display:'IBM Plex Sans Condensed','Arial Narrow',-apple-system,'Segoe UI',sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,Consolas,'Courier New',monospace;
   }
-  body { font-family:var(--font); background:var(--bg); color:var(--text-primary); font-size:14px; line-height:1.7; -webkit-font-smoothing:antialiased; }
-  .page { max-width:900px; margin:0 auto; padding:2.4rem 2rem 5rem; }
-  .proto { background:var(--accent-purple-bg); border:.5px solid var(--accent-purple-border); color:var(--accent-purple); font-size:11.5px; font-weight:600; border-radius:var(--radius-sm); padding:8px 12px; margin-bottom:1.5rem; }
-
-  .kicker { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; }
-  .headline { font-size:27px; font-weight:600; line-height:1.22; margin-bottom:12px; }
-  .meta-row { display:flex; flex-wrap:wrap; gap:6px 8px; margin-bottom:.5rem; font-size:12px; }
-  .meta-chip { background:var(--surface); border:.5px solid var(--border-strong); border-radius:99px; padding:3px 11px; color:var(--text-secondary); }
-  .meta-chip strong { color:var(--text-primary); font-weight:600; }
-  .section-label { font-size:11px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--text-muted); margin:2.8rem 0 10px; }
-  .subsection-label { font-size:16px; font-weight:600; color:var(--text-primary); margin:2.4rem 0 .4rem; padding-bottom:6px; border-bottom:2px solid var(--border-strong); }
-  h2 { font-size:17px; font-weight:600; margin:2rem 0 .5rem; }
-  p { font-size:14px; line-height:1.75; margin-bottom:1rem; }
-  p:last-child { margin-bottom:0; }
-  strong { font-weight:600; }
-  .prov { display:inline-block; font-size:10px; font-weight:600; letter-spacing:.04em; padding:1px 7px; border-radius:99px; margin-right:6px; vertical-align:middle; }
-  .prov-fonte { background:var(--pill-gray-bg); color:var(--pill-gray-fg); }
-  .prov-integr { background:var(--accent-blue-bg); color:#0C447C; }
-  .prov-sintesi { background:var(--accent-purple-bg); color:var(--accent-purple); }
-
-  .glossary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px; margin:1.2rem 0; }
-  .g-card { background:var(--surface); border:.5px solid var(--border-strong); border-radius:var(--radius-md); padding:12px 14px; }
-  .g-term { font-size:12px; font-weight:600; color:var(--accent-blue); margin-bottom:4px; }
-  .g-def { font-size:12px; color:var(--text-secondary); line-height:1.6; }
-
-  .box { padding:14px 16px; margin:1.2rem 0; font-size:13px; line-height:1.65; border-left:3px solid; border-radius:0 var(--radius-sm) var(--radius-sm) 0; }
-  .box ul { list-style:none; padding:0; margin:.3rem 0 0; }
-  .box li { padding:3px 0 3px 16px; position:relative; }
-  .box li::before { content:'–'; position:absolute; left:0; color:var(--text-muted); }
-  .box-accent  { background:var(--accent-blue-bg);  border-color:var(--accent-blue-border); }
-  .box-accent strong  { color:var(--accent-blue); }
-  .box-warn    { background:var(--accent-amber-bg); border-color:var(--accent-amber-border); }
-  .box-warn strong    { color:var(--accent-amber); }
-
-  /* COR/LOE tabella raccomandazioni */
-  .rec-wrap { background:var(--surface); border:.5px solid var(--border-strong); border-radius:var(--radius-lg); padding:1.1rem 1.2rem 1.3rem; margin:1.3rem 0; }
-  .rec-hd { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:.8rem; }
-  .rec-hd .rec-t { font-size:12px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); }
-  .cor-legend { display:flex; flex-wrap:wrap; gap:5px 10px; }
-  .cor-legend span { display:inline-flex; align-items:center; gap:5px; font-size:10.5px; color:var(--text-secondary); }
-  .cor-legend i { width:11px; height:11px; border-radius:3px; display:inline-block; }
-  table.rec { width:100%; border-collapse:collapse; }
-  table.rec td { padding:9px 6px; border-bottom:.5px solid var(--border); vertical-align:top; font-size:13px; line-height:1.55; }
-  table.rec tr:last-child td { border-bottom:none; }
-  td.c-cor { width:52px; } td.c-loe { width:60px; white-space:nowrap; }
-  .cor { display:inline-flex; align-items:center; justify-content:center; min-width:40px; padding:4px 7px; border-radius:6px; font-weight:700; font-size:12px; color:#fff; }
-  .cor-1{background:var(--cor-1);} .cor-2a{background:var(--cor-2a);color:#3A2D00;} .cor-2b{background:var(--cor-2b);} .cor-3nb{background:var(--cor-3nb);} .cor-3h{background:var(--cor-3h);}
-  .loe { display:inline-block; padding:3px 8px; border-radius:99px; font-size:11px; font-weight:600; background:var(--pill-gray-bg); color:var(--pill-gray-fg); border:.5px solid var(--border-strong); }
-
-  /* ═══ CARTELLONE ACTION-PLAN (gantt) ═══ */
-  .gantt-scroll { overflow-x:auto; margin:1.1rem 0; padding-bottom:4px; }
-  .gantt { min-width:820px; }
-  .gantt-head { display:grid; grid-template-columns:repeat(9,1fr); gap:4px; margin-bottom:5px; }
-  .cat { border-radius:6px; padding:8px 6px; font-size:10.5px; font-weight:700; line-height:1.15; color:#2a2200; }
-  .cat small { display:block; font-weight:400; font-size:8.5px; margin-top:3px; color:rgba(0,0,0,.6); }
-  .cat-A{background:var(--cat-A);} .cat-B{background:var(--cat-B);} .cat-C{background:var(--cat-C);}
-  .cat-D{background:var(--cat-D);color:#fff;} .cat-D small{color:rgba(255,255,255,.85);}
-  .cat-E{background:var(--cat-E);color:#fff;} .cat-E small{color:rgba(255,255,255,.85);}
-  .gantt-body { display:grid; grid-template-columns:repeat(9,1fr); grid-template-rows:repeat(8,minmax(34px,auto)); gap:4px; }
-  .act { background:#EDEDEA; border:1.5px solid; border-radius:5px; padding:6px 22px 6px 8px; font-size:10.5px; line-height:1.2; position:relative; display:flex; align-items:center; }
-  .act .cb { position:absolute; top:3px; right:5px; font-size:9.5px; font-weight:700; }
-  .act-1{border-color:var(--cor-1);} .act-1 .cb{color:var(--cor-1);}
-  .act-2a{border-color:var(--cor-2a);} .act-2a .cb{color:#B9880F;}
-  .act-2b{border-color:var(--cor-2b);} .act-2b .cb{color:var(--cor-2b);}
-  .flash { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:8px; margin-top:.8rem; }
-  .flash-item { background:var(--surface); border:.5px solid var(--border-strong); border-radius:var(--radius-sm); padding:8px 11px; font-size:11.5px; line-height:1.5; }
-  .flash-item .fl-drug { font-weight:700; font-size:10.5px; color:var(--accent-teal); display:block; margin-bottom:2px; text-transform:uppercase; letter-spacing:.02em; }
-
-  /* ═══ TABELLONE terapia avanzata ═══ */
-  table.adv { width:100%; border-collapse:separate; border-spacing:0; font-size:12.5px; border-radius:var(--radius-md); overflow:hidden; border:.5px solid var(--border-strong); margin:1.1rem 0; }
-  table.adv th { background:var(--surface-alt); padding:9px 8px; font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--text-secondary); font-weight:600; text-align:center; }
-  table.adv th:first-child { text-align:left; }
-  table.adv td { padding:8px; border-top:.5px solid var(--border); text-align:center; }
-  table.adv td:first-child { text-align:left; font-weight:600; white-space:nowrap; }
-  .na { color:var(--text-muted); font-size:11px; font-style:italic; }
-
-  /* mappa colonna singola */
-  .glance { width:100%; border-collapse:separate; border-spacing:0; margin:1.1rem 0; font-size:13px; border-radius:var(--radius-md); overflow:hidden; border:.5px solid var(--border-strong); }
-  .glance th { background:var(--surface-alt); text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--text-secondary); font-weight:600; padding:9px 12px; }
-  .glance td { padding:9px 12px; border-top:.5px solid var(--border); }
-  .glance .g-cat { font-weight:600; white-space:nowrap; }
-  .glance .g-do { font-size:12.5px; color:var(--text-secondary); }
-
-  /* ═══ DOSE CARD estesa (bolo + infusione) ═══ */
-  .dose-card { border:1px solid var(--accent-teal-border); border-radius:var(--radius-md); margin:1.3rem 0; overflow:hidden; background:var(--surface); }
-  .dose-hd { background:var(--accent-teal); color:#fff; font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:8px 14px; }
-  .dose-body { padding:6px 14px 12px; }
-  .dose-th, .dose-row { display:grid; grid-template-columns:1.5fr 1fr 1.4fr; gap:10px; }
-  .dose-th { font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--text-muted); font-weight:600; padding:8px 0 6px; border-bottom:1px solid var(--border-strong); }
-  .dose-row { padding:10px 0; border-bottom:.5px solid var(--border); align-items:start; }
-  .dose-row:last-child { border-bottom:none; }
-  .dose-drug { font-weight:600; font-size:13px; }
-  .dose-cell { font-size:12.5px; line-height:1.45; }
-  .dose-cell b { color:var(--accent-teal); font-weight:700; }
-  .dose-cell .dash { color:var(--text-muted); }
-  .dose-note { grid-column:1/-1; font-size:11px; color:var(--text-muted); margin-top:4px; padding-top:4px; }
-  @media (max-width:600px){ .dose-th{display:none;} .dose-row{grid-template-columns:1fr;gap:2px;} .dose-cell::before{content:attr(data-l)': ';font-weight:600;color:var(--text-muted);font-size:10px;} }
-
-  /* ═══ BOX EVIDENZE arricchito ═══ */
-  .evi-wrap { border:.5px solid var(--border-strong); border-radius:var(--radius-lg); overflow:hidden; margin:1.3rem 0; }
-  .evi-hd { background:var(--accent-purple-bg); color:var(--accent-purple); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:9px 14px; border-bottom:.5px solid var(--accent-purple-border); }
-  table.evi { width:100%; border-collapse:collapse; font-size:12.5px; background:var(--surface); }
-  table.evi th { text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--text-muted); font-weight:600; padding:8px 12px; border-bottom:1px solid var(--border-strong); }
-  table.evi td { padding:9px 12px; border-bottom:.5px solid var(--border); vertical-align:top; line-height:1.5; }
-  table.evi tr:last-child td { border-bottom:none; }
-  .evi-name { font-weight:600; color:var(--accent-purple); white-space:nowrap; }
-  .evi-name small { display:block; font-weight:400; color:var(--text-muted); font-size:10.5px; }
-  .evi-res b { color:var(--text-primary); font-weight:600; }
-  .evi-lim { display:block; margin-top:5px; font-size:11px; font-style:italic; color:var(--text-muted); }
-  .evi-lim::before { content:'Limiti: '; font-style:normal; font-weight:600; }
-
-  /* ═══ BOX TRAPPOLE ═══ */
-  .pitfall { border-left:3px solid var(--accent-amber); background:var(--accent-amber-bg); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:12px 16px; margin:1.3rem 0; }
-  .pf-title { font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--accent-amber); margin-bottom:8px; }
-  .pf-item { padding:7px 0; border-bottom:.5px dashed var(--accent-amber-border); font-size:12.5px; line-height:1.55; }
-  .pf-item:last-child { border-bottom:none; }
-  .pf-tag { display:inline-block; font-size:9px; font-weight:700; padding:2px 7px; border-radius:99px; margin-right:7px; text-transform:uppercase; letter-spacing:.03em; color:#fff; vertical-align:middle; }
-  .pf-esame{background:var(--accent-purple);} .pf-clin{background:var(--accent-teal);} .pf-dose{background:var(--cor-2b);} .pf-dx{background:var(--accent-blue);}
-
-  /* ═══ KEY POINTS ═══ */
-  .key-points { background:var(--surface); border:.5px solid var(--border-strong); border-radius:var(--radius-lg); padding:1.1rem 1.3rem; margin:1.4rem 0; }
-  .key-points .kp-title { font-size:12px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); margin-bottom:.6rem; }
-  .key-points ul { list-style:none; }
-  .key-points li { font-size:13.5px; line-height:1.6; padding:5px 0 5px 20px; position:relative; }
-  .key-points li::before { content:'▸'; position:absolute; left:0; color:var(--accent-blue); font-weight:600; }
-
-  /* ═══ CASI CLINICI ═══ */
-  .case { background:var(--surface); border:.5px solid var(--border-strong); border-left:3px solid var(--accent-purple); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:14px 16px; margin:1.2rem 0; }
-  .case-hd { font-size:12px; font-weight:600; color:var(--accent-purple); text-transform:uppercase; letter-spacing:.04em; margin-bottom:9px; }
-  .case-pres { font-size:13px; margin-bottom:11px; line-height:1.6; }
-  .case-steps { list-style:none; }
-  .case-steps li { font-size:12.5px; padding:7px 0; border-bottom:.5px dashed var(--border); line-height:1.55; }
-  .case-steps li:last-child { border-bottom:none; }
-  .st-lbl { display:inline-block; min-width:96px; font-weight:600; color:var(--accent-teal); font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; vertical-align:top; }
-  .case-th { background:var(--accent-purple-bg); border-radius:var(--radius-sm); padding:9px 12px; font-size:12.5px; margin-top:10px; line-height:1.55; }
-  .case-th strong { color:var(--accent-purple); }
-
-  .footer-note { margin-top:3rem; padding-top:1.2rem; border-top:.5px solid var(--border-strong); font-size:11.5px; color:var(--text-muted); line-height:1.7; }
-  .footer-note strong { color:var(--text-secondary); }
-
-  /* ═══ INDICE STICKY (LG intera) ═══ */
-  .toc { position:-webkit-sticky;position:sticky; top:0; background:rgba(250,249,247,.94); border-bottom:.5px solid var(--border-strong); padding:10px 0; margin:0 0 1.4rem; z-index:20; display:flex; flex-wrap:wrap; gap:6px; }
-  .toc a { font-size:11px; padding:4px 10px; border-radius:99px; background:var(--surface); border:.5px solid var(--border-strong); color:var(--text-secondary); text-decoration:none; }
-  .toc a:hover { border-color:var(--accent-blue); color:var(--accent-blue); }
-
-  /* ═══ FLOWCHART (ricreata da fonte) ═══ */
-  /* Grammatica: ogni bivio ha uno stelo che scende dal riquadro-domanda, una barra
-     orizzontale che distribuisce, una discesa per ramo con l'etichetta appoggiata sopra.
-     I rami restano SEMPRE affiancati: se non ci stanno, scorre il singolo diagramma. */
-  .flow {
-    --fl:1.5px; --fl-color:#A5A199; --fl-gap:18px;
-    --fl-stem:16px; --fl-hop:15px; --fl-min:186px;
-    display:grid; grid-template-columns:minmax(min-content,1fr);
-    overflow-x:auto; margin:1.5rem 0; padding-bottom:2px;
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:#111418; --surface:#181C22; --surface-alt:#20252D;
+      --border:rgba(255,255,255,.10); --border-strong:rgba(255,255,255,.19);
+      --text-primary:#E7EAEE; --text-secondary:#B8BEC7; --text-muted:#949BA5;
+      --accent-blue:#72AAEE;   --accent-blue-bg:#18283A;   --accent-blue-border:#2E4B6C;
+      --accent-amber:#E3A94F;  --accent-amber-bg:#30250F;  --accent-amber-border:#5D4719;
+      --accent-red:#EF8E8E;    --accent-red-bg:#361B1B;    --accent-red-border:#6B3232;
+      --accent-green:#95C873;  --accent-green-bg:#1C2A13;  --accent-green-border:#3C5626;
+      --accent-purple:#ADA6F2; --accent-purple-bg:#23213B; --accent-purple-border:#454077;
+      --k0:#8FD3A8; --k0-bg:#132B1D; --k0-bd:#2D5A3E;
+      --k1:#8EC0F5; --k1-bg:#16283C; --k1-bd:#2F5378;
+      --k2:#EDD36A; --k2-bg:#2C260C; --k2-bd:#5E5120;
+      --k3:#F3B27A; --k3-bg:#33210F; --k3-bd:#6B4524;
+      --k4:#F29A9A; --k4-bg:#361B1B; --k4-bd:#6B3232;
+      --grid:rgba(114,170,238,.07);
+      color-scheme:dark;
+    }
   }
-  .flow-node { background:var(--surface); border:1.5px solid var(--border-strong); border-radius:var(--radius-md); padding:10px 30px 10px 14px; font-size:12.5px; max-width:540px; margin:0 auto; text-align:center; line-height:1.4; position:relative; }
-  .flow-node.start { border-color:var(--accent-blue); background:var(--accent-blue-bg); font-weight:600; }
-  .flow-node.decision { border-color:var(--accent-amber); background:var(--accent-amber-bg); font-weight:600; }
-  .flow-node.end-ok { border-color:var(--cor-1); background:var(--accent-green-bg); }
-  .flow-node.end-stop { border-color:var(--cor-3h); background:var(--accent-red-bg); }
-  .flow-node .flow-cor { position:absolute; top:5px; right:7px; font-size:10px; font-weight:700; }
-
-  /* connettore del tronco */
-  .flow-arrow { position:relative; width:var(--fl); height:24px; background:var(--fl-color); margin:0 auto; justify-self:center; }
-  .flow-arrow::after { content:''; position:absolute; left:50%; bottom:-1px; transform:translateX(-50%); border-left:4.5px solid transparent; border-right:4.5px solid transparent; border-top:6px solid var(--fl-color); }
-
-  /* ── BIVIO: rami affiancati e agganciati al riquadro-domanda ── */
-  .flow-branches { position:relative; display:flex; flex-wrap:nowrap; gap:var(--fl-gap); justify-content:center; align-items:stretch; margin:0; }
-  .flow-branches::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:var(--fl); height:var(--fl-stem); background:var(--fl-color); }
-  .flow-branch { position:relative; flex:1 1 0; min-width:var(--fl-min); padding-top:calc(var(--fl-stem) + var(--fl-hop)); display:flex; flex-direction:column; }
-  /* barra di distribuzione: i segmenti dei rami si saldano in un'unica linea continua */
-  .flow-branch::before { content:''; position:absolute; top:var(--fl-stem); height:var(--fl); background:var(--fl-color); left:calc(var(--fl-gap) / -2); right:calc(var(--fl-gap) / -2); }
-  .flow-branch:first-child::before { left:50%; }
-  .flow-branch:last-child::before { right:50%; }
-  .flow-branch:only-child::before { display:none; }
-  /* discesa dalla barra all'etichetta (o direttamente al riquadro, se etichetta assente) */
-  .flow-branch::after { content:''; position:absolute; top:var(--fl-stem); left:50%; transform:translateX(-50%); width:var(--fl); height:var(--fl-hop); background:var(--fl-color); }
-  .flow-branch > .flow-node { max-width:none; margin:0; }
-  .flow-branch > .flow-node ~ .flow-node { margin-top:8px; }
-
-  /* etichetta del ramo: chip in linea sul connettore, si allarga se il testo è lungo */
-  .flow-chip, .flow-branch-lbl { font-size:11px; font-weight:600; line-height:1.4; text-align:center; text-transform:none; letter-spacing:0; padding:3px 10px; border-radius:99px; background:var(--surface); border:1px solid var(--border-strong); color:var(--text-secondary); }
-  .flow-branch-lbl { position:relative; display:block; width:fit-content; max-width:100%; margin:0 auto var(--fl-hop); }
-  .flow-branch-lbl::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); width:var(--fl); height:var(--fl-hop); background:var(--fl-color); }
-  .flow-branch-lbl::before { content:''; position:absolute; top:calc(100% + var(--fl-hop) - 5px); left:50%; transform:translateX(-50%); border-left:4.5px solid transparent; border-right:4.5px solid transparent; border-top:6px solid var(--fl-color); }
-  .flow-branch-lbl.yes { background:var(--accent-green-bg); border-color:var(--cor-1); color:var(--accent-green); font-weight:700; }
-  .flow-branch-lbl.no  { background:var(--accent-red-bg);   border-color:var(--cor-3h); color:var(--accent-red);   font-weight:700; }
-  .flow-chip.yes { background:var(--accent-green-bg); border-color:var(--cor-1); color:var(--accent-green); font-weight:700; }
-  .flow-chip.no  { background:var(--accent-red-bg);   border-color:var(--cor-3h); color:var(--accent-red);   font-weight:700; }
-
-  /* ramo che si chiude qui: tappo a T sotto l'ultimo riquadro */
-  .flow-branch.term { padding-bottom:20px; }
-  .flow-branch.term > .flow-node:last-child::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); width:var(--fl); height:12px; background:var(--fl-color); }
-  .flow-branch.term > .flow-node:last-child::before { content:''; position:absolute; top:calc(100% + 12px); left:50%; transform:translateX(-50%); width:22px; height:3px; border-radius:2px; background:var(--fl-color); }
-
-  /* rami che CONVERGONO: barra di raccolta sotto i riquadri, poi il tronco riprende */
-  .flow-branches.merge > .flow-branch { padding-bottom:calc(var(--fl-hop) + 2px); }
-  .flow-branches.merge > .flow-branch > .flow-node:last-child { margin-top:auto; }
-  .flow-branches.merge > .flow-branch > .flow-node:last-child::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); width:var(--fl); height:var(--fl-hop); background:var(--fl-color); }
-  .flow-branches.merge > .flow-branch > .flow-node:last-child::before { content:''; position:absolute; top:calc(100% + var(--fl-hop)); height:var(--fl); background:var(--fl-color); left:calc(var(--fl-gap) / -2); right:calc(var(--fl-gap) / -2); }
-  .flow-branches.merge > .flow-branch:first-child > .flow-node:last-child::before { left:50%; }
-  .flow-branches.merge > .flow-branch:last-child  > .flow-node:last-child::before { right:50%; }
-  .flow-branches.merge > .flow-branch:only-child  > .flow-node:last-child::before { display:none; }
-
-  /* i rami proseguono COLONNA PER COLONNA nel bivio sottostante */
-  .flow-chain { display:flex; flex-wrap:nowrap; gap:var(--fl-gap); margin:0; }
-  .flow-chain > i { position:relative; flex:1 1 0; min-width:var(--fl-min); height:26px; }
-  .flow-chain > i::before { content:''; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%); width:var(--fl); background:var(--fl-color); }
-  .flow-chain > i::after { content:''; position:absolute; left:50%; bottom:-1px; transform:translateX(-50%); border-left:4.5px solid transparent; border-right:4.5px solid transparent; border-top:6px solid var(--fl-color); }
-
-  /* bivio che RICEVE una catena: i connettori arrivano già incolonnati */
-  .flow-branches.chained::before { display:none; }
-  .flow-branches.chained > .flow-branch { padding-top:0; }
-  .flow-branches.chained > .flow-branch::before,
-  .flow-branches.chained > .flow-branch::after { display:none; }
-
-  /* riga di rami che continua quella sopra: nessuno stelo, etichetta di raccordo sulla barra */
-  .flow-branches.sub { margin-top:16px; }
-  .flow-branches.sub::before { display:none; }
-  .flow-branches.sub::after { content:attr(data-tag); position:absolute; top:0; left:50%; transform:translateX(-50%); z-index:2; font-size:10px; font-weight:600; line-height:1.5; color:var(--text-muted); background:var(--bg); padding:0 8px; white-space:nowrap; }
-
-  /* ripresa del tronco: dichiara da QUALE ramo prosegue il flusso */
-  .flow-resume { position:relative; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:5px; margin:0; padding:18px 0 24px; font-size:11px; color:var(--text-muted); }
-  .flow-resume::before { content:''; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%); width:var(--fl); background:var(--fl-color); }
-  .flow-resume::after { content:''; position:absolute; left:50%; bottom:-1px; transform:translateX(-50%); border-left:4.5px solid transparent; border-right:4.5px solid transparent; border-top:6px solid var(--fl-color); }
-  .flow-resume > * { position:relative; z-index:1; }
-  .flow-resume > span { background:var(--bg); padding:0 6px; }
-
-  /* affordance di scorrimento quando il diagramma è più largo della colonna */
-  .flow { scrollbar-width:thin; scrollbar-color:var(--border-strong) transparent; }
-  .flow::-webkit-scrollbar { height:7px; }
-  .flow::-webkit-scrollbar-thumb { background:var(--border-strong); border-radius:99px; }
-  .flow::-webkit-scrollbar-track { background:transparent; }
-  @media print { .flow { overflow:visible; } .flow-branch { break-inside:avoid; } }
-
-  /* ═══ /FLOWCHART ═══ */
-
-  /* ═══ CONTENUTI LARGHI — la pagina non scorre mai lateralmente ═══ */
-  /* Stessa regola della flowchart: ciò che è più largo della colonna scorre
-     dentro di sé invece di trascinare la pagina. Vale a ogni larghezza —
-     una tabella fitta sborda anche su desktop — e si disattiva in stampa. */
-  table { display:block; max-width:100%; overflow:auto; }
-  .fx { overflow-x:auto; }   /* formule lunghe: scorrono nel loro riquadro */
-  @media print { table { display:table; overflow:visible; } }
-
-
-  /* ═══ PRONTUARIO TERAPIE (file separato, stesso look) ═══ */
-  .rx-group { font-size:13px; font-weight:600; color:var(--text-primary); margin:1.6rem 0 .5rem; padding-left:10px; border-left:3px solid var(--accent-teal); }
-  table.rx { width:100%; border-collapse:collapse; font-size:12.5px; background:var(--surface); border:.5px solid var(--border-strong); border-radius:var(--radius-md); overflow:hidden; margin:.6rem 0 1rem; }
-  table.rx th { background:var(--surface-alt); text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--text-secondary); font-weight:600; padding:9px 12px; }
-  table.rx td { padding:10px 12px; border-top:.5px solid var(--border); vertical-align:top; line-height:1.5; }
-  .rx-mol { font-weight:600; color:var(--accent-teal); white-space:nowrap; }
-  .rx-dose b { color:var(--text-primary); font-weight:700; }
-  .rx-ind { color:var(--text-secondary); }
-  .rx-trial { color:var(--accent-purple); font-size:11.5px; }
-
-  /* ═══════════════════════════════════════════════════════════════
-     V2 — ESTENSIONE CARDIOLOGIA PEDIATRICA
-     Palette e componenti del sistema LG invariati. Qui: sfondo bianco,
-     colori emodinamici, forza dell'evidenza senza COR, componenti nuovi.
-     ═══════════════════════════════════════════════════════════════ */
-  :root {
-    --bg:#FFFFFF; --surface:#FFFFFF; --surface-alt:#F7F7F5;
-    --sat-art:#C0392B;   --sat-art-bg:#FBEAE8;
-    --sat-ven:#2A6BB5;   --sat-ven-bg:#E7F0FA;
-    --sat-mix:#7D4B9E;   --sat-mix-bg:#F2EAF8;
-    --sat-flow:#0E7C86;
-    --gantt-cols:9;
-  }
-  body { background:var(--bg); }
-  .toc { background:rgba(255,255,255,.95); }
-  .tw { overflow-x:auto; margin:1.2rem 0; }
-
-  /* ═══ FORZA DELL'EVIDENZA (quando non c'è COR/LOE) ═══
-     Forma quadrata + bordo: mai confondibile con le pill COR arrotondate. */
-  .fz { display:inline-block; font-size:9.5px; font-weight:700; letter-spacing:.05em;
-        text-transform:uppercase; padding:2px 7px; border-radius:3px; border:1px solid;
-        margin-right:6px; white-space:nowrap; vertical-align:middle; }
-  .fz-lg     { background:var(--accent-green-bg);  border-color:var(--accent-green-border);  color:var(--accent-green); }
-  .fz-st     { background:var(--accent-blue-bg);   border-color:var(--accent-blue-border);   color:#0C447C; }
-  .fz-cons   { background:var(--accent-teal-bg);   border-color:var(--accent-teal-border);   color:var(--accent-teal); }
-  .fz-prat   { background:var(--pill-gray-bg);     border-color:var(--border-strong);        color:var(--pill-gray-fg); }
-  .fz-fis    { background:var(--accent-purple-bg); border-color:var(--accent-purple-border); color:var(--accent-purple); }
-  .fz-contr  { background:var(--accent-amber-bg);  border-color:var(--accent-amber-border);  color:var(--accent-amber); }
-  .fz-extra  { background:#FFF; border-color:var(--border-strong); color:var(--text-secondary); }
-  .fz-centro { background:#FFF; border:1px dashed var(--accent-red-border); color:var(--accent-red); }
-  .fz-legend { display:flex; flex-wrap:wrap; gap:6px 10px; font-size:11px; color:var(--text-secondary);
-               background:var(--surface-alt); border:.5px solid var(--border); border-radius:10px;
-               padding:10px 12px; margin:1rem 0; line-height:1.5; }
-
-  /* ═══ SCHEDA A COLPO D'OCCHIO ═══ */
-  .snap { border:1px solid var(--border-strong); border-radius:var(--radius-lg); overflow:hidden; margin:1.4rem 0; }
-  .snap-hd { background:var(--text-primary); color:#fff; font-size:11px; font-weight:600;
-             letter-spacing:.08em; text-transform:uppercase; padding:9px 14px; }
-  .snap-lead { background:var(--surface); padding:13px 14px; font-size:13.5px; line-height:1.6;
-               border-bottom:.5px solid var(--border); }
-  .snap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
-  .snap-cell { background:var(--surface); padding:11px 14px; }
-  .snap-k { font-size:9.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
-            color:var(--text-muted); margin-bottom:6px; }
-  .snap-cell ul { margin:0; padding-left:15px; }
-  .snap-cell li { font-size:12.5px; line-height:1.5; margin-bottom:4px; }
-  .snap-cell li::marker { color:var(--text-muted); }
-  .snap-red .snap-k { color:var(--accent-red); }
-
-  /* ═══ CATENA «IL PERCHÉ»: fisiopatologia → bersaglio → manovra ═══ */
-  .why { border:.5px solid var(--accent-teal-border); border-left:3px solid var(--accent-teal);
-         border-radius:0 var(--radius-md) var(--radius-md) 0; overflow:hidden; margin:1.3rem 0; }
-  .why-hd { background:var(--accent-teal-bg); color:var(--accent-teal); font-size:11px; font-weight:600;
-            letter-spacing:.06em; text-transform:uppercase; padding:9px 14px; }
-  .why-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; padding:10px 14px;
-             border-bottom:.5px dashed var(--border-strong); font-size:12.5px; line-height:1.5; align-items:start; }
-  .why-row:last-child { border-bottom:none; }
-  .why-row > div::before { content:attr(data-l); display:block; font-size:9px; font-weight:700;
-             letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); margin-bottom:3px; }
-  .why-do { font-weight:600; color:var(--accent-teal); }
-
-  /* ═══ TIMELINE storia naturale / timing ═══ */
-  .tl { position:relative; margin:1.4rem 0; padding-left:26px; border-left:2px solid var(--border-strong); }
-  .tl-item { position:relative; padding:0 0 15px 4px; }
-  .tl-item::before { content:''; position:absolute; left:-33px; top:5px; width:10px; height:10px;
-            border-radius:50%; background:var(--accent-blue); box-shadow:0 0 0 3px #fff, 0 0 0 4.5px var(--accent-blue); }
-  .tl-item.crit::before { background:var(--accent-red); box-shadow:0 0 0 3px #fff, 0 0 0 4.5px var(--accent-red); }
-  .tl-item.ok::before   { background:var(--cor-1);      box-shadow:0 0 0 3px #fff, 0 0 0 4.5px var(--cor-1); }
-  .tl-age { font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-blue); }
-  .tl-item.crit .tl-age { color:var(--accent-red); }
-  .tl-item.ok .tl-age   { color:var(--cor-1); }
-  .tl-t { font-size:13px; font-weight:600; margin:1px 0 2px; }
-  .tl-d { font-size:12.5px; color:var(--text-secondary); line-height:1.55; }
-
-  /* ═══ FIGURA SVG originale ═══ */
-  .fig { border:.5px solid var(--border-strong); border-radius:var(--radius-lg); background:var(--surface);
-         padding:14px; margin:1.4rem 0; }
-  .fig svg { width:100%; height:auto; display:block; }
-  .fig-legend { display:flex; flex-wrap:wrap; gap:6px 14px; font-size:11px; color:var(--text-secondary);
-                margin-top:10px; padding-top:9px; border-top:.5px solid var(--border); }
-  .fig-legend i { width:10px; height:10px; border-radius:3px; display:inline-block; margin-right:5px; vertical-align:-1px; }
-  .fig-cap { font-size:11.5px; color:var(--text-muted); margin-top:8px; line-height:1.55; }
-
-  /* ═══ APPROFONDIMENTO richiudibile ═══ */
-  details.deep { border:.5px solid var(--border-strong); border-radius:var(--radius-md);
-                 background:var(--surface-alt); margin:1.1rem 0; }
-  details.deep > summary { cursor:pointer; padding:10px 14px; font-size:12px; font-weight:600;
-                 color:var(--accent-blue); list-style:none; }
-  details.deep > summary::-webkit-details-marker { display:none; }
-  details.deep > summary::before { content:'▸  '; }
-  details.deep[open] > summary::before { content:'▾  '; }
-  details.deep .deep-body { padding:0 14px 13px; font-size:13px; line-height:1.65; }
-  details.deep .deep-body ul { margin:0 0 0 1.1em; }
-  details.deep .deep-body li { margin-bottom:5px; }
-
-  /* ═══ TABELLA generica (classificazioni, DD, valori normali) ═══ */
-  table.grid { width:100%; border-collapse:collapse; font-size:12.5px; background:var(--surface);
-               border:.5px solid var(--border-strong); border-radius:var(--radius-md); overflow:hidden; }
-  table.grid caption { caption-side:top; text-align:left; font-size:11px; font-weight:600; letter-spacing:.05em;
-               text-transform:uppercase; color:var(--text-muted); padding:0 0 7px; }
-  table.grid th { text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.04em;
-               color:var(--text-muted); font-weight:600; padding:8px 11px; background:var(--surface-alt);
-               border-bottom:1px solid var(--border-strong); }
-  table.grid td { padding:8px 11px; border-bottom:.5px solid var(--border); vertical-align:top; line-height:1.5; }
-  table.grid tr:last-child td { border-bottom:none; }
-  table.grid td.k { font-weight:600; color:var(--text-primary); }
-  table.grid .art { color:var(--sat-art); font-weight:600; }
-  table.grid .ven { color:var(--sat-ven); font-weight:600; }
-
-  /* ═══ GANTT parametrizzato (riuso per scenari: fase × manovra) ═══ */
-  .gantt-head, .gantt-body { grid-template-columns:repeat(var(--gantt-cols),1fr); }
-  .act-n    { border-color:var(--border-strong); }
-  .act-fis  { border-color:var(--accent-teal); }
-  .act-stop { border-color:var(--accent-red); }
-
-  /* ═══ MOBILE ═══ */
-  @media (max-width:600px) {
-    .page { padding:1.4rem 1rem 3rem; }
-    .headline { font-size:22px; }
-    .snap-grid { grid-template-columns:1fr; }
-    .why-row { grid-template-columns:1fr; gap:8px; }
-    table.grid { font-size:12px; }
-    table.grid th, table.grid td { padding:7px 8px; }
-  }
-
-  /* ═══ STAMPA (il materiale deve poter diventare manuale) ═══ */
-  @media print {
-    :root { --bg:#FFF; }
-    body { font-size:10.5pt; }
-    .page { max-width:none; padding:0; }
-    .toc { display:none; }
-    details.deep { background:#fff; border-color:#bbb; }
-    details.deep .deep-body { display:block !important; }
-    .fig, .snap, .why, .rec-wrap, .evi-wrap, .pitfall, .key-points, .case, .dose-card, .tl-item {
-      break-inside:avoid; page-break-inside:avoid; }
-    .subsection-label { break-after:avoid; page-break-after:avoid; }
-    a { color:inherit; text-decoration:none; }
-  }
-  /* ═══════════════════════════════════════════════════════════════
-     SKIN SCENARIO — scheda tempo-ordinata, mobile-first, un A4
-     ═══════════════════════════════════════════════════════════════ */
-  .phase { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:2rem 0 .7rem; }
-  .phase-t { font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#fff;
-             background:var(--text-primary); padding:5px 13px; border-radius:99px; }
-  .phase-s { font-size:12px; color:var(--text-secondary); }
-  .phase.p-now .phase-t { background:var(--accent-red); }
-  .phase.p-2h  .phase-t { background:var(--accent-blue); }
-  .phase.p-esc .phase-t { background:var(--accent-amber); }
-  .step { display:grid; grid-template-columns:30px 1fr; gap:12px; align-items:start;
-          border:.5px solid var(--border-strong); border-radius:var(--radius-md);
-          padding:12px 14px; margin:8px 0; background:var(--surface); }
-  .step-n { width:28px; height:28px; border-radius:50%; background:var(--text-primary); color:#fff;
-            font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; }
-  .step-t { font-size:14px; font-weight:600; margin-bottom:3px; line-height:1.35; }
-  .step-d { font-size:12.5px; color:var(--text-secondary); line-height:1.55; }
-  .step-dose { margin-top:7px; font-size:12.5px; background:var(--surface-alt);
-               border-left:3px solid var(--accent-teal); padding:6px 10px; border-radius:0 6px 6px 0; }
-  .step-dose b { color:var(--text-primary); }
-  .step.esc .step-n { background:var(--accent-amber); }
-  .step.stop { border-color:var(--accent-red-border); background:var(--accent-red-bg); }
-  .step.stop .step-n { background:var(--accent-red); }
-  .recog { border:1px solid var(--accent-red-border); background:var(--accent-red-bg);
-           border-radius:var(--radius-lg); padding:13px 16px; margin:1.3rem 0; }
-  .recog-t { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
-             color:var(--accent-red); margin-bottom:7px; }
-  .recog ul { margin:0; padding-left:16px; }
-  .recog li { font-size:13px; line-height:1.55; margin-bottom:4px; }
-  .oneline { border-left:3px solid var(--accent-teal); background:var(--accent-teal-bg);
-             padding:11px 14px; border-radius:0 var(--radius-md) var(--radius-md) 0;
-             font-size:13.5px; line-height:1.6; margin:1.2rem 0; }
-  .xref { font-size:12px; color:var(--text-secondary); background:var(--surface-alt);
-          border:.5px dashed var(--border-strong); border-radius:var(--radius-md);
-          padding:10px 13px; margin:1.2rem 0; line-height:1.6; }
-  @media (max-width:600px) {
-    .step { grid-template-columns:26px 1fr; gap:10px; padding:10px 11px; }
-    .step-n { width:24px; height:24px; font-size:12px; }
-    .step-t { font-size:13.5px; }
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     ESTENSIONE SHOCK ADULTO — quadrante, coupling, target
-     ═══════════════════════════════════════════════════════════════ */
-  .quad-wrap { border:1px solid var(--border-strong); border-radius:var(--radius-lg); overflow:hidden; margin:1.5rem 0; background:var(--surface); }
-  .quad-hd { background:var(--text-primary); color:#fff; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:10px 14px; }
-  .quad-axes { display:grid; grid-template-columns:34px 1fr 1fr; gap:1px; background:var(--border); }
-  .ax-lbl { font-size:10px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--text-muted); text-align:center; padding:8px 4px; background:var(--surface-alt); }
-  .ax-corner { background:var(--surface-alt); }
-  .ax-side { display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--text-muted); background:var(--surface-alt); writing-mode:vertical-rl; transform:rotate(180deg); padding:10px 0; }
-  .qc { background:var(--surface); padding:13px 14px; display:block; text-decoration:none; color:inherit; border-top:3px solid; }
-  .qc:hover { background:var(--surface-alt); }
-  .qc-t { font-size:13.5px; font-weight:700; margin-bottom:2px; }
-  .qc-sub { font-size:10.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); margin-bottom:7px; }
-  .qc ul { margin:0; padding-left:15px; }
-  .qc li { font-size:12px; line-height:1.5; margin-bottom:3px; color:var(--text-secondary); }
-  .qc .qc-do { color:var(--text-primary); font-weight:600; }
-  .q-a { border-top-color:var(--cor-1); } .q-a .qc-t { color:var(--accent-green); }
-  .q-b { border-top-color:var(--accent-blue); } .q-b .qc-t { color:var(--accent-blue); }
-  .q-c { border-top-color:var(--accent-red); } .q-c .qc-t { color:var(--accent-red); }
-  .q-l { border-top-color:var(--accent-amber); } .q-l .qc-t { color:var(--accent-amber); }
-
-  .fx { background:var(--surface-alt); border:.5px solid var(--border-strong); border-radius:var(--radius-md); padding:11px 14px; margin:1rem 0; font-size:13px; line-height:1.9; }
-  .fx code, code.f { font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace; font-size:12.5px; background:#fff; border:.5px solid var(--border); border-radius:4px; padding:2px 6px; white-space:nowrap; display:inline-block; }
-  .fx .fx-n { font-size:11px; color:var(--text-muted); display:block; margin-top:4px; line-height:1.5; }
-
-  .tgt { display:grid; grid-template-columns:repeat(auto-fit,minmax(155px,1fr)); gap:8px; margin:1.1rem 0; }
-  .tgt-i { background:var(--surface); border:.5px solid var(--border-strong); border-left:3px solid var(--accent-green); border-radius:0 var(--radius-sm) var(--radius-sm) 0; padding:9px 12px; }
-  .tgt-i .t-k { font-size:9.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); display:block; }
-  .tgt-i .t-v { font-size:14px; font-weight:700; color:var(--accent-green); }
-  .tgt-i .t-n { font-size:11px; color:var(--text-secondary); display:block; line-height:1.45; margin-top:2px; }
-  .tgt-i.bad { border-left-color:var(--accent-red); } .tgt-i.bad .t-v { color:var(--accent-red); }
-
-  .split { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:1.2rem 0; }
-  .sp-card { background:var(--surface); border:.5px solid var(--border-strong); border-radius:var(--radius-md); padding:12px 14px; }
-  .sp-hd { font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; margin-bottom:7px; }
-  .sp-card ul { margin:0; padding-left:15px; } .sp-card li { font-size:12.5px; line-height:1.55; margin-bottom:4px; }
-  @media (max-width:600px){ .split{grid-template-columns:1fr;} .quad-axes{grid-template-columns:0 1fr 1fr;} .ax-side{display:none;} }
-
-  .now { background:var(--accent-green-bg); border:.5px solid var(--accent-green-border); color:var(--accent-green); font-size:11px; font-weight:700; border-radius:3px; padding:2px 7px; text-transform:uppercase; letter-spacing:.04em; }
-  .soon { background:var(--accent-purple-bg); border:.5px solid var(--accent-purple-border); color:var(--accent-purple); font-size:11px; font-weight:700; border-radius:3px; padding:2px 7px; text-transform:uppercase; letter-spacing:.04em; }
-
-  .tw table.grid caption { padding-left:6px; }
-
-  /* ═══ SCHEDA D'AZIONE — componenti ═══ */
-  body { font-size:14.5px; }
-  .bar { position:-webkit-sticky;position:sticky; top:0; z-index:40; background:rgba(255,255,255,.97);
-         border-bottom:1px solid var(--border-strong); padding:10px 0; margin-bottom:1.2rem;
-         display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; }
-  .bar label { font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); }
-  .bar input[type=number] { width:78px; font:600 15px var(--font); padding:6px 8px; border:1px solid var(--border-strong);
-         border-radius:8px; text-align:center; background:var(--surface); }
-  .bar .peso-eco { font-size:12px; color:var(--accent-teal); font-weight:600; }
-  .sp { flex:1 1 auto; }
-  .btn { font:600 12px var(--font); padding:7px 13px; border-radius:99px; border:1px solid var(--border-strong);
-         background:var(--surface); color:var(--text-secondary); cursor:pointer; }
-  .btn:hover { border-color:var(--accent-blue); color:var(--accent-blue); }
-  .btn.on { background:var(--text-primary); color:#fff; border-color:var(--text-primary); }
-
-  .ask { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:1.1rem 0; }
-  .ask-c { border:.5px solid var(--border-strong); border-radius:var(--radius-md); padding:11px 14px; background:var(--surface); }
-  .ask-q { font-size:13.5px; font-weight:700; margin-bottom:6px; }
-  .ask-c ul { margin:0; padding-left:15px; } .ask-c li { font-size:12.5px; line-height:1.5; margin-bottom:2px; color:var(--text-secondary); }
-  .ask-c b { color:var(--text-primary); }
-
-  .qsel { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:1rem 0; }
-  .qbtn { text-align:left; border:2px solid var(--border-strong); border-radius:var(--radius-md); background:var(--surface);
-          padding:13px 15px; cursor:pointer; font:inherit; transition:.12s; }
-  .qbtn:hover { transform:translateY(-1px); box-shadow:0 3px 10px rgba(0,0,0,.07); }
-  .qbtn .qh { font-size:15px; font-weight:700; margin-bottom:2px; }
-  .qbtn .qs { font-size:11.5px; color:var(--text-secondary); line-height:1.45; }
-  .qbtn.a { border-color:var(--cor-1); } .qbtn.a .qh { color:var(--accent-green); }
-  .qbtn.b { border-color:var(--accent-blue); } .qbtn.b .qh { color:var(--accent-blue); }
-  .qbtn.l { border-color:var(--accent-amber); } .qbtn.l .qh { color:var(--accent-amber); }
-  .qbtn.c { border-color:var(--accent-red); } .qbtn.c .qh { color:var(--accent-red); }
-  .qbtn.sel { box-shadow:0 0 0 3px var(--text-primary) inset; }
-  .qbtn.dim { opacity:.35; }
-
-  .panel { display:none; }
-  .panel.on { display:block; animation:fade .18s ease-out; }
-  @keyframes fade { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
-
-  .stage { display:flex; align-items:center; gap:10px; margin:2.1rem 0 .6rem; }
-  .stage-n { width:30px; height:30px; border-radius:50%; background:var(--text-primary); color:#fff;
-             font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
-  .stage-t { font-size:17px; font-weight:700; }
-  .stage-w { font-size:11.5px; color:var(--text-muted); background:var(--surface-alt); border-radius:99px; padding:3px 10px; }
-
-  .calc { border:1px solid var(--accent-teal-border); border-radius:var(--radius-md); background:var(--accent-teal-bg);
-          padding:12px 14px; margin:1.1rem 0; }
-  .calc-hd { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-teal); margin-bottom:9px; }
-  .calc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:8px; }
-  .cf { display:flex; flex-direction:column; gap:3px; }
-  .cf span { font-size:10px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--text-muted); }
-  .cf input { font:600 14px var(--font); padding:6px 8px; border:1px solid var(--border-strong); border-radius:7px;
-              background:#fff; width:100%; }
-  .out { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:8px; margin-top:11px; }
-  .oc { background:#fff; border:.5px solid var(--border-strong); border-left:3px solid var(--accent-teal);
-        border-radius:0 7px 7px 0; padding:7px 11px; }
-  .oc .ok-k { font-size:9.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); display:block; }
-  .oc .ok-v { font-size:16px; font-weight:700; color:var(--accent-teal); }
-  .oc .ok-n { font-size:11px; color:var(--text-secondary); display:block; line-height:1.4; }
-  .oc.bad { border-left-color:var(--accent-red); } .oc.bad .ok-v { color:var(--accent-red); }
-  .oc.good { border-left-color:var(--cor-1); } .oc.good .ok-v { color:var(--accent-green); }
-  .oc.warn { border-left-color:var(--cor-2b); } .oc.warn .ok-v { color:var(--cor-2b); }
-
-  tr.hl > td { background:var(--accent-amber-bg) !important; box-shadow:inset 3px 0 0 var(--accent-amber); }
-  .dose-live { font-weight:700; color:var(--accent-teal); white-space:nowrap; }
-  .nodo { border:1px solid var(--accent-red-border); background:var(--accent-red-bg); border-radius:var(--radius-md);
-          padding:11px 15px; margin:1rem 0; }
-  .nodo-t { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-red); margin-bottom:6px; }
-  .nodo ul { margin:0; padding-left:16px; } .nodo li { font-size:13px; line-height:1.55; margin-bottom:3px; }
-
-  .foot { position:-webkit-sticky;position:sticky; bottom:0; background:rgba(255,255,255,.97);
-          border-top:1px solid var(--border-strong); padding:9px 0; margin-top:2rem; font-size:12px;
-          display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; z-index:30; }
-  .foot b { color:var(--accent-red); }
-
-  @media (max-width:640px){ .ask,.qsel{grid-template-columns:1fr;} .bar{gap:8px;} }
-  @media print {
-    .bar,.foot,.btn { display:none !important; }
-    .panel { display:block !important; page-break-before:always; }
-    .qbtn.dim { opacity:1; }
-  }
-
-
-  /* ═══ ANCORAGGIO — il salto si ferma sull'intestazione, non sotto la barra ═══ */
+  /* ancoraggio: la barra appiccicata non copre l'intestazione a cui si salta */
   :root { --sticky-h:0px; --sticky-gap:12px; }
   html { scroll-behavior:smooth; scroll-padding-top:calc(var(--sticky-h) + var(--sticky-gap)); }
   @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
-  @media print { html { scroll-padding-top:0; } }
+
+  body { font-family:var(--font); background:var(--bg); color:var(--text-primary); font-size:14.5px; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .page { max-width:960px; margin:0 auto; padding:0 16px 4rem; }
+  strong, b { font-weight:600; }
+  p { margin-bottom:.6rem; } p:last-child { margin-bottom:0; }
+  .sp { flex:1 1 auto; }
+
+  /* ── testata ── */
+  .hero { margin:0 -16px 0; padding:2.2rem 16px 1.3rem; border-bottom:1px solid var(--border);
+          background-color:var(--bg);
+          background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+          background-size:22px 22px; }
+  .kicker { font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-blue); margin-bottom:8px; }
+  .headline { font-family:var(--display); font-size:30px; font-weight:700; line-height:1.12; margin-bottom:10px; }
+  .lede { font-size:14.5px; color:var(--text-secondary); max-width:760px; margin-bottom:12px; }
+  .lede strong, .lede em { color:var(--text-primary); }
+  .meta-row { display:flex; flex-wrap:wrap; gap:6px 8px; font-size:12px; }
+  .meta-chip { background:var(--surface); border:1px solid var(--border-strong); border-radius:99px; padding:2px 10px; color:var(--text-secondary); overflow-wrap:anywhere; }
+  .meta-chip strong { color:var(--text-primary); }
+
+  /* ── barra appiccicata ── */
+  .bar { position:-webkit-sticky; position:sticky; top:0; z-index:30; background:var(--bg); border-bottom:1px solid var(--border-strong);
+         margin:0 -16px 1.2rem; padding:8px 16px; display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; }
+  .bar .lbl { font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); }
+  .bar input[type=number] { width:78px; min-height:40px; font-weight:600; }
+  .peso-eco { font-size:12px; color:var(--accent-blue); font-weight:600; }
+  .prog { font-family:var(--mono); font-size:11.5px; font-weight:600; letter-spacing:.02em; color:var(--text-secondary);
+          background:var(--surface); border:1px solid var(--border-strong); border-radius:99px; padding:3px 10px; white-space:nowrap; }
+  .btn { font:600 12.5px var(--font); padding:6px 14px; min-height:40px; border-radius:99px; border:1px solid var(--border-strong);
+         background:var(--surface); color:var(--text-secondary); cursor:pointer; display:inline-flex; align-items:center; justify-content:center; text-align:center; line-height:1.25; }
+  .btn:hover { border-color:var(--accent-blue); color:var(--accent-blue); }
+  .btn:focus-visible { outline:2px solid var(--accent-blue); outline-offset:2px; }
+  .btn.on { background:var(--text-primary); color:var(--bg); border-color:var(--text-primary); }
+  .btn.pri { background:var(--accent-blue); color:var(--bg); border-color:var(--accent-blue); }
+  .btn.pri:hover { color:var(--bg); filter:brightness(1.08); }
+  .solojs { display:none; }
+  html.js:not(.motore-ko) .solojs { display:inline-flex; }
+  input[type=number] { font:500 15px var(--font); color:var(--text-primary); background:var(--surface); border:1px solid var(--border-strong); border-radius:8px; padding:6px 9px; text-align:center; }
+  input[type=number]:focus-visible { outline:2px solid var(--accent-blue); outline-offset:1px; }
+
+  /* ── stadi ── */
+  .stage { display:flex; align-items:baseline; gap:10px; margin:2rem 0 .7rem; padding-bottom:6px; border-bottom:2px solid var(--border-strong); }
+  .stage-n { font-family:var(--mono); font-size:12px; font-weight:600; color:#FFFFFF; background:var(--accent-blue); border-radius:6px; padding:1px 7px; flex:0 0 auto; }
+  .stage-t { font-family:var(--display); font-size:20px; font-weight:700; line-height:1.2; }
+  .stage-w { margin-left:auto; font-size:11.5px; color:var(--text-muted); text-align:right; }
+  .card { background:var(--surface); border:1px solid var(--border-strong); border-radius:12px; padding:14px 16px; margin-bottom:12px; }
+  .card h3 { font-size:13px; font-weight:600; letter-spacing:.02em; margin-bottom:8px; color:var(--text-secondary); }
+
+  /* ── colori dei quadranti, dai token ── */
+  [data-q="a"], [data-p="a"] { --q:var(--k0); --q-bg:var(--k0-bg); --q-bd:var(--k0-bd); }
+  [data-q="b"], [data-p="b"] { --q:var(--k1); --q-bg:var(--k1-bg); --q-bd:var(--k1-bd); }
+  [data-q="l"], [data-p="l"] { --q:var(--k3); --q-bg:var(--k3-bg); --q-bd:var(--k3-bd); }
+  [data-q="c"], [data-p="c"] { --q:var(--k4); --q-bg:var(--k4-bg); --q-bd:var(--k4-bd); }
+  .panel[data-p] .stage-n { background:var(--q); color:var(--bg); }
+  .panel[data-p] .stage-t { color:var(--q); }
+
+  /* ── stadio 1: le due domande e la scelta ── */
+  .ask { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0 0 12px; }
+  .ask-c { border:1px solid var(--border-strong); border-radius:12px; padding:12px 14px; background:var(--surface); }
+  .ask-q { font-size:14px; font-weight:600; margin-bottom:6px; }
+  .ask-c ul { margin:0; padding-left:16px; }
+  .ask-c li { font-size:13.5px; line-height:1.5; margin-bottom:3px; color:var(--text-secondary); }
+  .ask-c b { color:var(--text-primary); }
+  .qsel { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 12px; }
+  .qbtn { text-align:left; border:2px solid var(--q-bd); border-left:6px solid var(--q); border-radius:12px; background:var(--surface);
+          padding:12px 14px; min-height:64px; cursor:pointer; font:inherit; color:var(--text-primary); transition:background-color .12s, box-shadow .12s, opacity .12s; }
+  .qbtn:hover { background:var(--q-bg); }
+  .qbtn:focus-visible { outline:2px solid var(--accent-blue); outline-offset:2px; }
+  .qbtn .qh { font-family:var(--display); font-size:18px; font-weight:700; line-height:1.2; color:var(--q); margin-bottom:2px; }
+  .qbtn .qs { font-size:12.5px; color:var(--text-secondary); line-height:1.45; }
+  .qbtn.sel { background:var(--q-bg); border-color:var(--q); box-shadow:0 0 0 1px var(--q) inset; }
+  .qbtn.dim { opacity:.45; }
+  html.studio .qbtn.dim { opacity:1; }
+
+  /* ── riquadri di testo ── */
+  .box, .oneline { border-left:3px solid var(--accent-amber); background:var(--accent-amber-bg); border-radius:0 8px 8px 0;
+                   padding:9px 12px; margin:12px 0; font-size:13.5px; line-height:1.6; }
+  .box-accent, .oneline { border-left-color:var(--accent-blue); background:var(--accent-blue-bg); }
+  .box strong, .oneline strong { color:var(--text-primary); }
+  .prov { display:inline-block; font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:.05em; border-radius:4px;
+          padding:0 6px; margin-right:6px; vertical-align:1px; background:var(--surface); border:1px solid var(--border-strong); color:var(--text-secondary); }
+  .nodo { border:1px solid var(--accent-red-border); background:var(--accent-red-bg); border-radius:12px; padding:11px 15px; margin:12px 0; }
+  .nodo-t { font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-red); margin-bottom:6px; }
+  .nodo ul { margin:0; padding-left:16px; } .nodo li { font-size:13.5px; line-height:1.55; margin-bottom:3px; }
+  .recog { border:1px solid var(--accent-red-border); background:var(--accent-red-bg); border-radius:12px; padding:12px 15px; margin:12px 0; }
+  .recog-t { font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-red); margin-bottom:7px; }
+  .recog ul { margin:0; padding-left:16px; } .recog li { font-size:13.5px; line-height:1.55; margin-bottom:4px; }
+  .xref { font-size:12.5px; color:var(--text-secondary); background:var(--surface-alt); border:1px dashed var(--border-strong);
+          border-radius:10px; padding:10px 13px; margin:12px 0; line-height:1.6; }
+  .xref strong { color:var(--text-primary); }
+
+  /* ── passi del quadrante ── */
+  .panel { display:block; }
+  .step { display:grid; grid-template-columns:30px minmax(0,1fr); gap:6px 12px; align-items:start;
+          background:var(--surface); border:1px solid var(--border-strong); border-radius:12px; padding:14px 16px; margin:10px 0; }
+  .panel[data-p] .step:not(.stop) { border-left:4px solid var(--q); }
+  .step-n { width:28px; height:28px; border-radius:50%; background:var(--text-primary); color:var(--bg);
+            font-family:var(--mono); font-weight:600; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .step-t { font-size:15px; font-weight:600; margin-bottom:3px; line-height:1.35; }
+  .step-d { font-size:13.5px; color:var(--text-secondary); line-height:1.55; overflow-wrap:anywhere; }
+  .step-d strong { color:var(--text-primary); }
+  .step-dose { margin-top:8px; font-size:13.5px; background:var(--surface-alt); border-left:3px solid var(--accent-blue);
+               padding:6px 10px; border-radius:0 8px 8px 0; overflow-wrap:anywhere; }
+  .step-dose b { color:var(--text-primary); }
+  .step.esc .step-n { background:var(--k3); }
+  .step.stop { border-color:var(--accent-red-border); background:var(--accent-red-bg); }
+  .step.stop .step-n { background:var(--accent-red); }
+  .dose-live { font-family:var(--mono); font-weight:600; font-size:.95em; color:var(--accent-blue); white-space:nowrap; }
+
+  /* ── calcolatori ── */
+  .calc { border:1px solid var(--border-strong); border-radius:12px; background:var(--surface); padding:12px 14px; margin:12px 0; }
+  .calc-hd { font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-blue); margin-bottom:9px; }
+  .calc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(118px,1fr)); gap:8px; }
+  .cf { display:flex; flex-direction:column; gap:3px; min-width:0; }
+  .cf span { font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:.03em; text-transform:uppercase; color:var(--text-muted); }
+  .cf input { width:100%; min-height:40px; font-weight:600; }
+  .out { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:8px; margin-top:11px; }
+  .oc { background:var(--surface-alt); border:1px solid var(--border); border-left:3px solid var(--accent-blue); border-radius:0 8px 8px 0; padding:7px 11px; min-width:0; }
+  .oc .ok-k { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); display:block; }
+  .oc .ok-v { font-family:var(--display); font-size:19px; font-weight:700; color:var(--accent-blue); }
+  .oc .ok-n { font-size:12px; color:var(--text-secondary); display:block; line-height:1.4; overflow-wrap:anywhere; }
+  .oc.bad { border-left-color:var(--k4); } .oc.bad .ok-v { color:var(--k4); }
+  .oc.good { border-left-color:var(--k0); } .oc.good .ok-v { color:var(--k0); }
+  .oc.warn { border-left-color:var(--k3); } .oc.warn .ok-v { color:var(--k3); }
+
+  /* ── tabelle: scorrono nel loro contenitore, mai la pagina ── */
+  .tw { overflow-x:auto; margin:12px 0; border:1px solid var(--border-strong); border-radius:12px; background:var(--surface); }
+  table.grid { width:100%; min-width:560px; border-collapse:collapse; font-size:13px; }
+  table.grid caption { caption-side:top; text-align:left; font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.05em;
+                       text-transform:uppercase; color:var(--text-muted); padding:10px 12px 6px; }
+  table.grid th { text-align:left; font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.04em;
+                  color:var(--text-muted); font-weight:600; padding:8px 11px; background:var(--surface-alt); border-bottom:1px solid var(--border-strong); }
+  table.grid td { padding:8px 11px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.5; }
+  table.grid tr:last-child td { border-bottom:none; }
+  table.grid td.k { font-weight:600; color:var(--text-primary); }
+  tr.hl > td { background:var(--accent-amber-bg); box-shadow:inset 3px 0 0 var(--accent-amber); }
+
+  /* ── bersagli ── */
+  .tgt { display:grid; grid-template-columns:repeat(auto-fit,minmax(155px,1fr)); gap:8px; margin:12px 0; }
+  .tgt-i { background:var(--surface); border:1px solid var(--border-strong); border-left:3px solid var(--k0); border-radius:0 8px 8px 0; padding:9px 12px; }
+  .tgt-i .t-k { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); display:block; }
+  .tgt-i .t-v { font-family:var(--display); font-size:17px; font-weight:700; color:var(--k0); }
+  .tgt-i .t-n { font-size:12px; color:var(--text-secondary); display:block; line-height:1.45; margin-top:2px; }
+
+  /* ── il percorso guidato: riga riassuntiva, pulsanti, riepilogo ── */
+  .riga { display:none; width:100%; min-height:44px; align-items:center; gap:4px 10px; flex-wrap:wrap; text-align:left;
+          background:transparent; border:0; font:inherit; color:var(--text-primary); cursor:pointer; padding:0; }
+  .riga:focus-visible { outline:2px solid var(--accent-blue); outline-offset:3px; border-radius:6px; }
+  .r-ico { flex:0 0 auto; width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
+           font-weight:700; font-size:14px; background:var(--k0-bg); color:var(--k0); border:1px solid var(--k0-bd); }
+  .riga.saltato .r-ico { background:var(--surface-alt); color:var(--text-muted); border-color:var(--border-strong); }
+  .r-st { font-family:var(--mono); font-size:11.5px; font-weight:600; color:var(--k0); white-space:nowrap; }
+  .riga.saltato .r-st { color:var(--text-muted); }
+  .r-t { flex:1 1 180px; min-width:0; font-size:14px; font-weight:600; line-height:1.35; }
+  .riga.saltato .r-t { color:var(--text-secondary); }
+  .r-ch { flex:0 0 auto; font-size:12px; color:var(--text-muted); }
+  .azioni { display:none; flex-wrap:wrap; gap:8px; margin-top:10px; padding-top:10px; border-top:1px dashed var(--border-strong); grid-column:1 / -1; }
+  .step > .riga { grid-column:1 / -1; }
+  .azioni .btn { flex:0 1 auto; min-height:44px; font-size:13.5px; padding:8px 18px; }
+  .pc { margin:0; }
+  .pc > .riga { background:var(--surface); border:1px solid var(--border-strong); border-radius:12px; padding:8px 14px; }
+  .riepilogo { display:none; margin-top:16px; border-color:var(--accent-blue-border); }
+  .riepilogo .r-q { font-size:14px; margin-bottom:6px; }
+  .r-lista { list-style:none; margin:0 0 12px; }
+  .r-lista li { display:flex; flex-wrap:wrap; gap:2px 10px; padding:6px 0; border-bottom:1px dashed var(--border); font-size:13.5px; }
+  .r-lista li:last-child { border-bottom:none; }
+  .r-lista .r-st { min-width:128px; }
+  .r-lista li.saltato .r-st { color:var(--text-muted); }
+
+  @media screen {
+    /* Nascosto solo se JavaScript c'e' e il motore e' vivo: senza, tutto resta leggibile. */
+    html.js:not(.motore-ko):not(.studio) .panel:not(.on) { display:none; }
+    html.js:not(.motore-ko):not(.studio) .passo:not(.attuale):not(.chiuso) { display:none; }
+    html.js:not(.motore-ko):not(.studio) .passo.chiuso > .riga { display:flex; }
+    html.js:not(.motore-ko):not(.studio) .passo.chiuso:not(.aperto) > :not(.riga) { display:none; }
+    html.js:not(.motore-ko):not(.studio) .step.passo.chiuso:not(.aperto) { padding:8px 14px; }
+    html.js:not(.motore-ko):not(.studio) .step.passo.chiuso > .riga { margin:0; }
+    html.js:not(.motore-ko):not(.studio) .passo.chiuso.aperto > .riga { padding-bottom:8px; border-bottom:1px dashed var(--border-strong); margin-bottom:6px; }
+    html.js:not(.motore-ko):not(.studio) .pc.chiuso.aperto > .riga { border-radius:12px 12px 0 0; margin-bottom:10px; }
+    html.js:not(.motore-ko):not(.studio) .passo.attuale > .azioni,
+    html.js:not(.motore-ko):not(.studio) .passo.aperto > .azioni { display:flex; }
+    html.js:not(.motore-ko):not(.studio) .riepilogo.on { display:block; }
+    html.js:not(.motore-ko):not(.studio):not(.q-scelto) .foot { display:none; }
+    /* spazio sotto il passo aperto: cosi' puo' sempre salire fin sotto la barra */
+    html.js:not(.motore-ko):not(.studio).q-scelto .footer-note { margin-top:calc(2.4rem + 55vh); }
+  }
+
+  /* ── piede ── */
+  .footer-note { margin-top:2.4rem; padding-top:1rem; border-top:1px solid var(--border-strong); font-size:12px; color:var(--text-muted); line-height:1.7; }
+  .footer-note strong { color:var(--text-secondary); }
+  .foot { position:-webkit-sticky; position:sticky; bottom:0; z-index:30; background:var(--bg); border-top:1px solid var(--border-strong);
+          margin:2rem -16px 0; padding:8px 16px; font-size:12.5px; display:flex; flex-wrap:wrap; gap:4px 14px; align-items:center; color:var(--text-secondary); }
+  .foot b { color:var(--accent-red); }
+  #footPeso { font-family:var(--mono); font-weight:600; color:var(--text-primary); }
+
+  @media (max-width:640px) {
+    .headline { font-size:25px; }
+    .stage-w { display:none; }
+    .ask, .qsel { grid-template-columns:1fr; }
+    .peso-eco { display:none; }
+    .step { grid-template-columns:26px minmax(0,1fr); gap:6px 10px; padding:12px 12px; }
+    .step-n { width:26px; height:26px; font-size:12px; }
+    .azioni .btn { flex:1 1 140px; }
+    .foot { font-size:12px; }
+  }
+  @media print {
+    .bar, .foot, .btn, .riga, .azioni, .riepilogo { display:none !important; }
+    .panel { display:block !important; }
+    .qbtn.dim { opacity:1; }
+    .tw { overflow:visible; }
+    table.grid { min-width:0; }
+    html { scroll-padding-top:0; }
+  }
 </style>
 <style data-iphone="stile">
 /* L'avviso e' visibile per costruzione: lo nasconde solo la classe che la
@@ -651,22 +325,27 @@ html.js.motore-ko #nomotore{display:block}
  <span class="nmerr" id="nmerr"></span>
 </div>
 <div class="page">
-
+<header class="hero">
   <div class="kicker">Scheda d'azione · Terapia intensiva cardiologica</div>
-  <div class="headline">Shock — dal quadrante alla terapia, in ordine di tempo</div>
-
-  <div class="bar">
-    <label for="peso">Peso</label>
-    <input type="number" id="peso" value="75" min="30" max="200" step="1" inputmode="decimal">
-    <span class="peso-eco" id="pesoEco">tutte le velocità sono calcolate per 75 kg</span>
-    <span class="sp"></span>
-    <button class="btn" id="btnAll" type="button">Mostra tutti i quadranti</button>
-    <button class="btn" id="btnReset" type="button">Azzera</button>
-  </div>
-
-  <div class="oneline"><strong>Come si usa.</strong> Rispondi alle due domande, clicca la casella, e leggi solo quel percorso.
+  <h1 class="headline">Shock — dal quadrante alla terapia, in ordine di tempo</h1>
+  <p class="lede"><strong>Come si usa.</strong> Rispondi alle due domande, clicca la casella, e leggi solo quel percorso.
   Le dosi sono già convertite in mL/h per il peso indicato sopra. Il coupling e gli indici emodinamici arrivano dopo:
-  servono a <em>confermare o correggere</em> quello che hai già impostato, non a farti aspettare.</div>
+  servono a <em>confermare o correggere</em> quello che hai già impostato, non a farti aspettare.</p>
+  <div class="meta-row">
+    <span class="meta-chip"><strong>Percorso</strong> un passo per volta — «Fatto» o «Salta» apre il successivo</span>
+    <span class="meta-chip"><strong>Mostra tutto</strong> apre ogni quadrante, per ripassare</span>
+  </div>
+</header>
+
+<div class="bar" id="bar">
+  <label class="lbl" for="peso">Peso</label>
+  <input type="number" id="peso" value="75" min="30" max="200" step="1" inputmode="decimal">
+  <span class="peso-eco" id="pesoEco">tutte le velocità sono calcolate per 75 kg</span>
+  <span class="prog solojs" id="prog" aria-live="polite">Scegli il quadrante</span>
+  <span class="sp"></span>
+  <button class="btn solojs" id="btnAll" type="button" aria-pressed="false">Mostra tutto</button>
+  <button class="btn solojs" id="btnReset" type="button">Azzera</button>
+</div>
 
   <!-- ══════════ STEP 1 ══════════ -->
   <div class="stage"><div class="stage-n">1</div><div><div class="stage-t">Due domande</div></div><span class="stage-w">30 secondi · mani e sonda</span></div>
@@ -722,22 +401,22 @@ html.js.motore-ko #nomotore{display:block}
   <div class="panel" data-p="a">
     <div class="stage"><div class="stage-n">2</div><div><div class="stage-t">Adesso — WARM–DRY</div></div><span class="stage-w">primi 15 minuti</span></div>
 
-    <div class="step"><div class="step-n">1</div><div>
+    <div class="step passo"><div class="step-n">1</div><div>
       <div class="step-t">Fluidi, ma guidati</div>
       <div class="step-d">Cristalloide bilanciato (Ringer lattato o Plasma-Lyte). Misura il VTI aortico prima e dopo: se non guadagna ≥10%, smetti. Fermati comunque se compaiono linee B.</div>
       <div class="step-dose"><b>250–500 mL in 10–15 min</b>, ripetibile · in alternativa <b>leg raising passivo</b> (reversibile, positivo se VTI o CO +≥10%)</div></div></div>
 
-    <div class="step"><div class="step-n">2</div><div>
+    <div class="step passo"><div class="step-n">2</div><div>
       <div class="step-t">Noradrenalina precoce — non aspettare il fallimento dei fluidi</div>
       <div class="step-d">Target MAP ≥65 mmHg. Avviabile in periferica (vena ≥20 G, avambraccio o braccio, controllo orario) mentre posizioni il CVC.</div>
       <div class="step-dose"><b>0,05–0,5 µg/kg/min</b> — con 8 mg in 50 mL: <span class="dose-live" data-drug="noradrenalina" data-dose="0.05-0.5"></span></div></div></div>
 
-    <div class="step"><div class="step-n">3</div><div>
+    <div class="step passo"><div class="step-n">3</div><div>
       <div class="step-t">Se il fabbisogno sale: seconda linea</div>
       <div class="step-d">Quando la noradrenalina supera ~0,25–0,3 µg/kg/min, aggiungi vasopressina a dose fissa invece di continuare a salire con la catecolamina.</div>
       <div class="step-dose">Vasopressina <b>0,03 U/min</b> fissa — con 20 U in 50 mL: <span class="dose-live" data-drug="vasopressina" data-dose="0.03"></span></div></div></div>
 
-    <div class="step"><div class="step-n">4</div><div>
+    <div class="step passo"><div class="step-n">4</div><div>
       <div class="step-t">La causa, nella stessa ora</div>
       <div class="step-d"><strong>Sepsi</strong>: 2 emocolture poi antibiotico entro 1 ora, source control appena possibile. <strong>Anafilassi</strong>: adrenalina IM subito, ripetibile ogni 5–15 min. <strong>Crisi surrenalica</strong>: preleva il cortisolo e tratta senza aspettare. <strong>Neurogeno</strong>: vasopressore e target pressorio dedicato.</div>
       <div class="step-dose">Adrenalina <b>0,5 mg IM</b> (0,01 mg/kg, max 0,5 mg) coscia antero-laterale · Idrocortisone <b>100 mg EV</b> poi <b>50 mg ogni 6 h</b></div></div></div>
@@ -758,17 +437,17 @@ html.js.motore-ko #nomotore{display:block}
       Se compaiono marezzatura, oliguria o lattato in salita, sei passato a COLD–WET: cambia percorso.
     </div>
 
-    <div class="step"><div class="step-n">1</div><div>
+    <div class="step passo"><div class="step-n">1</div><div>
       <div class="step-t">Pressione positiva subito</div>
       <div class="step-d">Riduce precarico e post-carico del VS e toglie lavoro ai muscoli respiratori. Rivaluta a 1 ora: se non migliora, intuba senza insistere.</div>
       <div class="step-dose">CPAP <b>7,5–10 cmH₂O</b>, FiO₂ titolata su SpO₂ <b>92–96%</b> (88–92% nel ritentore)</div></div></div>
 
-    <div class="step"><div class="step-n">2</div><div>
+    <div class="step passo"><div class="step-n">2</div><div>
       <div class="step-t">Vasodilatatore — è la leva principale</div>
       <div class="step-d">Qui il problema non è il volume totale ma la ridistribuzione con Ea altissima. Mantieni PAS &gt;100 mmHg. Controindicata con inibitori della PDE-5 nelle 24–48 h, nell'IMA destro e nella stenosi aortica severa.</div>
       <div class="step-dose">Nitroglicerina <b>10–20 µg/min</b>, incrementi di 10–20 µg/min ogni 3–5 min fino a <b>200 µg/min</b> — con 50 mg in 50 mL: <span class="dose-live" data-drug="nitroglicerina" data-dose="10-200"></span></div></div></div>
 
-    <div class="step"><div class="step-n">3</div><div>
+    <div class="step passo"><div class="step-n">3</div><div>
       <div class="step-t">Diuretico dell'ansa</div>
       <div class="step-d">Verifica la risposta con il <strong>sodio urinario a 2 ore</strong>: sotto 50–70 mEq/L la dose è insufficiente, raddoppiala. Se serve, aggiungi acetazolamide 500 mg EV o metolazone 2,5–5 mg.</div>
       <div class="step-dose">Furosemide <b>20–40 mg EV</b> se naive · <b>1–2,5 volte la dose orale abituale</b> se già in terapia · infusione <b>5–20 mg/h</b></div></div></div>
@@ -785,22 +464,22 @@ html.js.motore-ko #nomotore{display:block}
   <div class="panel" data-p="l">
     <div class="stage"><div class="stage-n">2</div><div><div class="stage-t">Adesso — COLD–DRY</div></div><span class="stage-w">primi 15 minuti</span></div>
 
-    <div class="step"><div class="step-n">1</div><div>
+    <div class="step passo"><div class="step-n">1</div><div>
       <div class="step-t">Riempi — è l'unico quadrante in cui il volume è la prima leva</div>
       <div class="step-d">Testa prima e dopo ogni bolo. Fermati quando il guadagno di VTI scende sotto il 10% o compaiono linee B.</div>
       <div class="step-dose"><b>250–500 mL</b> di cristalloide bilanciato in 10–15 min, ripetibile</div></div></div>
 
-    <div class="step"><div class="step-n">2</div><div>
+    <div class="step passo"><div class="step-n">2</div><div>
       <div class="step-t">Vasopressore come ponte, mentre riempi</div>
       <div class="step-d">Non sostituisce il volume: serve a non lasciare il paziente ipoteso durante la rianimazione volemica.</div>
       <div class="step-dose">Noradrenalina <b>0,05–0,5 µg/kg/min</b> — con 8 mg in 50 mL: <span class="dose-live" data-drug="noradrenalina" data-dose="0.05-0.5"></span></div></div></div>
 
-    <div class="step stop"><div class="step-n">!</div><div>
+    <div class="step stop passo"><div class="step-n">!</div><div>
       <div class="step-t">Se emorragico: l'emostasi viene prima di tutto</div>
       <div class="step-d">Due accessi ≥18 G o introduttore. Rapporto 1:1:1 (plasma : piastrine : emazie) o guidato da tromboelastografia. Minimizza i cristalloidi. Ipotensione permissiva fino al controllo della fonte, salvo trauma cranico. Nel cardiopatico ischemico soglia trasfusionale più alta (orientativamente 8–10 g/dL).</div>
       <div class="step-dose">Acido tranexamico <b>1 g EV in 10 min, poi 1 g in 8 h</b> · Calcio <b>1 g CaCl₂</b> o <b>3 g calcio gluconato</b> ogni 3–4 unità</div></div></div>
 
-    <div class="step esc"><div class="step-n">3</div><div>
+    <div class="step esc passo"><div class="step-n">3</div><div>
       <div class="step-t">PVC alta con polmoni asciutti? Non è ipovolemia: è il ventricolo destro</div>
       <div class="step-d">Cambia strategia: bolo di prova massimo 250 mL, poi supporto destro. Mantieni la sincronia atrioventricolare, riduci le resistenze polmonari (ossigeno, niente ipercapnia, PEEP minima efficace). Vasopressina preferita alla noradrenalina perché non aumenta le resistenze polmonari.</div>
       <div class="step-dose">Dobutamina <b>2–20 µg/kg/min</b>: <span class="dose-live" data-drug="dobutamina" data-dose="2-20"></span> · Vasopressina <b>0,03 U/min</b>: <span class="dose-live" data-drug="vasopressina" data-dose="0.03"></span></div></div></div>
@@ -817,32 +496,32 @@ html.js.motore-ko #nomotore{display:block}
   <div class="panel" data-p="c">
     <div class="stage"><div class="stage-n">2</div><div><div class="stage-t">Adesso — COLD–WET</div></div><span class="stage-w">primi 15 minuti</span></div>
 
-    <div class="step stop"><div class="step-n">✗</div><div>
+    <div class="step stop passo"><div class="step-n">✗</div><div>
       <div class="step-t">Niente boli di fluidi</div>
       <div class="step-d">Il ventricolo è già sulla parte piatta della curva di Frank-Starling: ogni mL aggiunge congestione e pressione venosa renale senza aggiungere gittata.</div></div></div>
 
-    <div class="step"><div class="step-n">1</div><div>
+    <div class="step passo"><div class="step-n">1</div><div>
       <div class="step-t">Una pressione di perfusione minima, poi fermati</div>
       <div class="step-d">Noradrenalina di scelta: meno aritmie della dopamina e meno shock refrattario dell'adrenalina. Oltre MAP 65–70 mmHg stai comprando post-carico, non perfusione: verifica sempre il VTI dopo ogni incremento.</div>
       <div class="step-dose"><b>0,05–0,5 µg/kg/min</b> — con 8 mg in 50 mL: <span class="dose-live" data-drug="noradrenalina" data-dose="0.05-0.5"></span></div></div></div>
 
-    <div class="step"><div class="step-n">2</div><div>
+    <div class="step passo"><div class="step-n">2</div><div>
       <div class="step-t">Inotropo — dose minima efficace, tempo minimo</div>
       <div class="step-d">Dobutamina di prima scelta; titola sul VTI, non sulla pressione. Levosimendan o milrinone se il paziente è betabloccato o se serve inodilatazione, senza bolo se ipoteso (il milrinone si riduce se il filtrato è basso).</div>
       <div class="step-dose">Dobutamina <b>2–20 µg/kg/min</b>: <span class="dose-live" data-drug="dobutamina" data-dose="2-20"></span><br>
         Levosimendan <b>0,05–0,2 µg/kg/min per 24 h</b>: <span class="dose-live" data-drug="levosimendan" data-dose="0.05-0.2"></span><br>
         Milrinone <b>0,125–0,75 µg/kg/min</b>: <span class="dose-live" data-drug="milrinone" data-dose="0.125-0.75"></span></div></div></div>
 
-    <div class="step"><div class="step-n">3</div><div>
+    <div class="step passo"><div class="step-n">3</div><div>
       <div class="step-t">Rimuovi la causa, nella stessa ora</div>
       <div class="step-d">Coronarografia immediata se genesi ischemica, con PCI della <strong>sola lesione colpevole</strong>. Cardioversione se l'aritmia è il motore. Chirurgia se complicanza meccanica (soffio nuovo, edema polmonare fulminante, tamponamento). Pericardiocentesi se tamponamento.</div></div></div>
 
-    <div class="step esc"><div class="step-n">4</div><div>
+    <div class="step esc passo"><div class="step-n">4</div><div>
       <div class="step-t">Decongestiona appena la perfusione lo permette</div>
       <div class="step-d">La congestione venosa è ciò che uccide rene e fegato: la pressione di perfusione renale è MAP − PVC. Ridurre la PVC di 5 mmHg può valere più di 5 µg/kg/min di dobutamina.</div>
       <div class="step-dose">Furosemide <b>20–40 mg EV</b> (naive) o <b>1–2,5× la dose orale</b> · infusione <b>5–20 mg/h</b> · sodio urinario a 2 h</div></div></div>
 
-    <div class="step esc"><div class="step-n">5</div><div>
+    <div class="step esc passo"><div class="step-n">5</div><div>
       <div class="step-t">Se non risponde: è stadio SCAI D</div>
       <div class="step-d">CPO &lt;0,6 W dopo ottimizzazione, lattato che non scende, due vasoattivi in aumento. Attiva lo shock team e — se Impella ed ECMO non sono in sede — <strong>contatta l'hub adesso</strong>: in stadio E il trasporto è spesso già impraticabile.</div></div></div>
 
@@ -858,6 +537,7 @@ html.js.motore-ko #nomotore{display:block}
   <!-- ══════════ STEP 3 · COUPLING ══════════ -->
   <div class="panel pcommon">
     <div class="stage"><div class="stage-n">3</div><div><div class="stage-t">Coupling ventricolo-arterioso</div></div><span class="stage-w">5–15 minuti · eco + linea arteriosa</span></div>
+    <div class="pc passo">
 
     <div class="oneline"><strong>A che serve adesso.</strong> Hai già impostato la terapia sul quadrante. Il coupling dice se stai
     spingendo la leva giusta: <strong>Ea</strong> è il carico che il ventricolo ha davanti, <strong>Ees</strong> è quanto riesce a
@@ -912,11 +592,13 @@ html.js.motore-ko #nomotore{display:block}
       <strong>PAS &lt;90 mmHg</strong> e con <strong>FC &gt;130 bpm</strong>. I diversi metodi single-beat non sono
       intercambiabili: per confrontare due momenti usa sempre lo stesso.
     </div>
+    </div>
   </div>
 
   <!-- ══════════ STEP 4 · EGA ══════════ -->
   <div class="panel pcommon">
     <div class="stage"><div class="stage-n">4</div><div><div class="stage-t">EGA arterioso e venoso centrale</div></div><span class="stage-w">subito, poi a 2 e 6 ore</span></div>
+    <div class="pc passo">
 
     <div class="oneline"><strong>Prelievo doppio, sempre.</strong> Arterioso e venoso centrale nello stesso momento: la coppia
     distingue in tre minuti un problema di <em>portata</em> da un problema di <em>distribuzione</em>, e lo fa prima che arrivi
@@ -953,11 +635,13 @@ html.js.motore-ko #nomotore{display:block}
       <strong>Calcio ionizzato &lt;1,10 mmol/L</strong> (riduce inotropismo e risposta ai vasopressori) · acidosi severa ·
       ipossiemia · ipovolemia non riconosciuta · tamponamento. Salire con il vasopressore su una di queste è tempo perso.
     </div>
+    </div>
   </div>
 
   <!-- ══════════ STEP 5 · INDICI ══════════ -->
   <div class="panel pcommon">
     <div class="stage"><div class="stage-n">5</div><div><div class="stage-t">Indici emodinamici — la conferma che arriva dopo</div></div><span class="stage-w">15–60 minuti e oltre</span></div>
+    <div class="pc passo">
 
     <div class="oneline"><strong>Servono a confermare o smentire</strong> la casella che hai già scelto, e a decidere
     l'escalation. Non aspettarli per trattare: nessuno di questi numeri cambia le prime tre mosse.</div>
@@ -1000,11 +684,13 @@ html.js.motore-ko #nomotore{display:block}
       <strong>CI normale con lattato alto e ScvO₂ alta</strong> → il problema è la distribuzione, non la portata.
       In tutti e tre i casi la casella va rifatta, non forzata.
     </div>
+    </div>
   </div>
 
   <!-- ══════════ RIVALUTAZIONE ══════════ -->
   <div class="panel pcommon">
     <div class="stage"><div class="stage-n">6</div><div><div class="stage-t">Ricontrolla</div></div><span class="stage-w">1 h · 6 h · 24 h</span></div>
+    <div class="pc passo">
     <div class="tgt">
       <div class="tgt-i"><span class="t-k">MAP</span><span class="t-v">≥65 mmHg</span><span class="t-n">stabile senza incrementi del vasopressore</span></div>
       <div class="tgt-i"><span class="t-k">Lattato</span><span class="t-v">↓ ≥10–20% / 2 h</span><span class="t-n">normale entro 24 h</span></div>
@@ -1033,6 +719,13 @@ html.js.motore-ko #nomotore{display:block}
     meccaniche, depurazione extracorporea, terapia ancillare, trappole per fenotipo e casi clinici stanno nella
     <em>monografia Shock in UTIC</em>, che resta la fonte di verità. Le dosi qui riportate coincidono alla lettera con quelle
     della monografia e del calcolatore della skill.</div>
+    </div>
+    <div class="riepilogo card" id="riepilogo" aria-live="polite">
+      <h3>Riepilogo del percorso</h3>
+      <p class="r-q" id="riepQ"></p>
+      <ol class="r-lista" id="riepLista"></ol>
+      <button class="btn pri" id="btnRicomincia" type="button">Ricomincia</button>
+    </div>
   </div>
 
   <div class="footer-note">
@@ -1084,7 +777,7 @@ html.js.motore-ko #nomotore{display:block}
   function nf(v, d) {
     if (v === null || v === undefined || !isFinite(v)) return "—";
     var s = v.toFixed(d === undefined ? 1 : d);
-    s = s.replace(/\.?0+$/, "");
+    if (s.indexOf(".") >= 0) s = s.replace(/\.?0+$/, "");
     return s.replace(".", ",");
   }
   function val(id) {
@@ -1122,43 +815,200 @@ html.js.motore-ko #nomotore{display:block}
     calcEmo();
   }
 
-  // ── selezione del quadrante ──
-  var sel = null, mostraTutti = false;
-  function applica() {
+  // ── percorso guidato: un passo per volta ──
+  // Stato solo in memoria: niente localStorage, sessionStorage o cookie.
+  var he = document.documentElement;
+  var sel = null, studio = false, voci = [], esiti = [], aperti = [];
+
+  function ora() {
+    var d = new Date(), h = d.getHours(), m = d.getMinutes();
+    return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+  }
+  function pannelloDi(el) {
+    var n = el;
+    while (n && !(n.classList && n.classList.contains("panel"))) n = n.parentNode;
+    return n;
+  }
+  function titoloDi(el) {
+    var t = el.querySelector(".step-t");
+    if (!t) { var p = pannelloDi(el); t = p ? p.querySelector(".stage-t") : null; }
+    return t ? t.textContent.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "") : "";
+  }
+  function nomeQuadrante(q) {
+    var h = document.querySelector('.qbtn[data-q="' + q + '"] .qh');
+    return h ? h.textContent : q;
+  }
+  function frontiera() {
+    for (var i = 0; i < voci.length; i++) if (!esiti[i]) return i;
+    return voci.length;
+  }
+
+  function vai(el) {
+    if (!el) return;
+    var bar = document.getElementById("bar");
+    var alto = bar ? bar.offsetHeight : 0;
+    var y = el.getBoundingClientRect().top + (window.pageYOffset || he.scrollTop || 0) - alto - 12;
+    if (y < 0) y = 0;
+    var ridotto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!ridotto && "scrollBehavior" in he.style) window.scrollTo({ top: y, behavior: "smooth" });
+    else window.scrollTo(0, y);
+  }
+  // dove portare lo sguardo: il primo passo di un pannello si legge dalla sua intestazione
+  function bersaglio(i) {
+    if (i >= voci.length) return document.getElementById("riepilogo");
+    var el = voci[i], p = pannelloDi(el);
+    return (p && p.querySelector(".passo") === el) ? p : el;
+  }
+
+  function scriviRiga(el, es, aperto) {
+    var r = el.querySelector(".riga");
+    if (!r) return;
+    r.classList.toggle("saltato", !!es && es.e === "saltato");
+    r.setAttribute("aria-expanded", aperto ? "true" : "false");
+    r.querySelector(".r-ico").textContent = es && es.e === "saltato" ? "↷" : "✓";
+    r.querySelector(".r-st").textContent = !es ? "" : (es.e === "saltato" ? "saltato" : "fatto alle " + es.ora);
+    r.querySelector(".r-ch").textContent = aperto ? "▾ chiudi" : "▸ riapri";
+  }
+
+  function render() {
+    var f = frontiera(), i;
+    he.classList.toggle("studio", studio);
+    he.classList.toggle("q-scelto", sel !== null);
+
     var btns = document.querySelectorAll(".qbtn");
-    for (var i = 0; i < btns.length; i++) {
+    for (i = 0; i < btns.length; i++) {
       var q = btns[i].getAttribute("data-q");
-      btns[i].classList.toggle("sel", !mostraTutti && q === sel);
-      btns[i].classList.toggle("dim", !mostraTutti && sel !== null && q !== sel);
+      btns[i].classList.toggle("sel", q === sel);
+      btns[i].classList.toggle("dim", sel !== null && q !== sel);
+      btns[i].setAttribute("aria-pressed", q === sel ? "true" : "false");
     }
     var pans = document.querySelectorAll(".panel[data-p]");
-    for (var j = 0; j < pans.length; j++) {
-      pans[j].classList.toggle("on", mostraTutti || pans[j].getAttribute("data-p") === sel);
+    for (i = 0; i < pans.length; i++) pans[i].classList.toggle("on", pans[i].getAttribute("data-p") === sel);
+
+    var tutti = document.querySelectorAll(".passo");
+    for (i = 0; i < tutti.length; i++) {
+      tutti[i].classList.remove("attuale"); tutti[i].classList.remove("chiuso"); tutti[i].classList.remove("aperto");
+    }
+    for (i = 0; i < voci.length; i++) {
+      if (esiti[i]) {
+        voci[i].classList.add("chiuso");
+        if (aperti[i]) voci[i].classList.add("aperto");
+      } else if (i === f) {
+        voci[i].classList.add("attuale");
+      }
+      scriviRiga(voci[i], esiti[i], !!aperti[i]);
     }
     var comuni = document.querySelectorAll(".panel.pcommon");
-    for (var k = 0; k < comuni.length; k++) {
-      comuni[k].classList.toggle("on", mostraTutti || sel !== null);
+    for (i = 0; i < comuni.length; i++) {
+      var c = comuni[i].querySelector(".passo"), k = voci.indexOf(c);
+      comuni[i].classList.toggle("on", k >= 0 && k <= f);
     }
-    document.getElementById("btnAll").classList.toggle("on", mostraTutti);
+
+    var prog = document.getElementById("prog");
+    if (studio) prog.textContent = "Modo studio";
+    else if (sel === null) prog.textContent = "Scegli il quadrante";
+    else if (f < voci.length) prog.textContent = "Passo " + (f + 1) + " di " + voci.length;
+    else prog.textContent = "Completato · " + voci.length + " di " + voci.length;
+
+    var all = document.getElementById("btnAll");
+    all.classList.toggle("on", studio);
+    all.setAttribute("aria-pressed", studio ? "true" : "false");
+
+    var riep = document.getElementById("riepilogo");
+    var fine = sel !== null && voci.length > 0 && f >= voci.length;
+    riep.classList.toggle("on", fine);
+    if (fine) {
+      document.getElementById("riepQ").textContent = "Quadrante: " + nomeQuadrante(sel);
+      var ol = document.getElementById("riepLista");
+      while (ol.firstChild) ol.removeChild(ol.firstChild);
+      for (i = 0; i < voci.length; i++) {
+        var li = document.createElement("li"), st = document.createElement("span"), tt = document.createElement("span");
+        var salt = esiti[i].e === "saltato";
+        if (salt) li.className = "saltato";
+        st.className = "r-st";
+        st.textContent = (salt ? "↷ saltato alle " : "✓ fatto alle ") + esiti[i].ora;
+        tt.textContent = (i + 1) + ". " + titoloDi(voci[i]);
+        li.appendChild(st); li.appendChild(tt); ol.appendChild(li);
+      }
+    }
   }
+
+  function scegli(q) {
+    var cambia = q !== sel;
+    studio = false;
+    if (cambia) {
+      sel = q;
+      voci = [];
+      var passi = document.querySelectorAll('.panel[data-p="' + q + '"] .passo');
+      var comuni = document.querySelectorAll(".panel.pcommon .passo");
+      for (var i = 0; i < passi.length; i++) voci.push(passi[i]);
+      for (var j = 0; j < comuni.length; j++) voci.push(comuni[j]);
+      esiti = []; aperti = [];
+    }
+    render();
+    vai(cambia ? document.querySelector('.panel[data-p="' + q + '"]') : bersaglio(frontiera()));
+  }
+
+  function chiudi(el, esito) {
+    var i = voci.indexOf(el);
+    if (i < 0) return;
+    var eraAttuale = i === frontiera();
+    esiti[i] = { e: esito, ora: ora() };
+    aperti[i] = false;
+    render();
+    if (eraAttuale) vai(bersaglio(frontiera()));
+  }
+
+  function azzera() {
+    sel = null; studio = false; voci = []; esiti = []; aperti = [];
+    render();
+    vai(document.body);
+  }
+
+  // riga riassuntiva e pulsanti: li aggiunge il motore, perche' senza motore non servono
+  (function prepara() {
+    var passi = document.querySelectorAll(".passo");
+    for (var i = 0; i < passi.length; i++) {
+      var el = passi[i], ultimo = !!(pannelloDi(el) && pannelloDi(el).querySelector("#riepilogo"));
+      var stadio = !el.classList.contains("step");
+      var r = document.createElement("button");
+      r.type = "button"; r.className = "riga"; r.setAttribute("aria-expanded", "false");
+      var a1 = document.createElement("span"); a1.className = "r-ico";
+      var a2 = document.createElement("span"); a2.className = "r-st";
+      var a3 = document.createElement("span"); a3.className = "r-t"; a3.textContent = titoloDi(el);
+      var a4 = document.createElement("span"); a4.className = "r-ch";
+      r.appendChild(a1); r.appendChild(a2); r.appendChild(a3); r.appendChild(a4);
+      el.insertBefore(r, el.firstChild);
+
+      var az = document.createElement("div"); az.className = "azioni";
+      var bf = document.createElement("button"); bf.type = "button"; bf.className = "btn pri fatto";
+      bf.textContent = !stadio ? "Fatto" : (ultimo ? "Fatto — riepilogo" : "Fatto — avanti");
+      var bs = document.createElement("button"); bs.type = "button"; bs.className = "btn salta";
+      bs.textContent = stadio ? "Salta — dato non disponibile" : "Salta — non fattibile";
+      az.appendChild(bf); az.appendChild(bs);
+      el.appendChild(az);
+
+      (function (el) {
+        r.addEventListener("click", function () {
+          var k = voci.indexOf(el);
+          if (k < 0 || !esiti[k]) return;
+          aperti[k] = !aperti[k]; render();
+        });
+        bf.addEventListener("click", function () { chiudi(el, "fatto"); });
+        bs.addEventListener("click", function () { chiudi(el, "saltato"); });
+      })(el);
+    }
+  })();
 
   var qbtns = document.querySelectorAll(".qbtn");
   for (var b = 0; b < qbtns.length; b++) {
-    qbtns[b].addEventListener("click", function () {
-      mostraTutti = false;
-      sel = this.getAttribute("data-q");
-      applica();
-      var p = document.querySelector('.panel[data-p="' + sel + '"]');
-      if (p) p.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
+    qbtns[b].addEventListener("click", function () { scegli(this.getAttribute("data-q")); });
   }
   document.getElementById("btnAll").addEventListener("click", function () {
-    mostraTutti = !mostraTutti; applica();
+    studio = !studio; render();
   });
-  document.getElementById("btnReset").addEventListener("click", function () {
-    sel = null; mostraTutti = false; applica();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+  document.getElementById("btnReset").addEventListener("click", azzera);
+  document.getElementById("btnRicomincia").addEventListener("click", azzera);
 
   // ── coupling ventricolo-arterioso (Chen, JACC 2001) ──
   var CHEN = [0.35695, -7.2266, 74.249, -307.39, 684.54, -856.92, 571.95, -159.1];
@@ -1346,7 +1196,7 @@ html.js.motore-ko #nomotore{display:block}
   updateDoses();
   calcCoupling();
   calcEga();
-  applica();
+  render();
 })();
 </script>
 <script>
